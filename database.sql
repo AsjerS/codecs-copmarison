@@ -26,38 +26,56 @@ INSERT INTO categories (category_id, category_name) VALUES
 CREATE TABLE licenses (
     license_id      INTEGER PRIMARY KEY,
     license_name    TEXT NOT NULL UNIQUE,
-    hex_colour      TEXT, emoji           TEXT
+    hex_colour      TEXT,
+    emoji           TEXT
 );
 INSERT INTO licenses (license_id, license_name, hex_colour, emoji) VALUES
-    (1, 'Free (Public Domain)', '#63BE7B', '🟢'), (2, 'Free (Permissive)', '#70AD47', '🟢'),
-    (3, 'Royalty-Bearing (Simple)', '#FFC000', '🟡'), (4, 'Royalty-Bearing', '#ED7D31', '🟠'),
-    (5, 'Royalty-Bearing (Complex)', '#C00000', '🔴'), (6, 'Proprietary', '#ED7D31', '🟠');
+    (1, 'Free (Public Domain)', '#63BE7B', '🟢'),
+    (2, 'Free (Permissive)', '#70AD47', '🟢'),
+    (3, 'Royalty-Bearing (Simple)', '#FFC000', '🟡'),
+    (4, 'Royalty-Bearing', '#ED7D31', '🟠'),
+    (5, 'Royalty-Bearing (Complex)', '#C00000', '🔴'),
+    (6, 'Proprietary', '#ED7D31', '🟠');
 
 CREATE TABLE qualitative_ratings (
     rating_id       INTEGER PRIMARY KEY,
     rating_name     TEXT NOT NULL UNIQUE,
-    hex_colour      TEXT, emoji           TEXT, sort_order      INTEGER
+    hex_colour      TEXT,
+    emoji           TEXT,
+    sort_order      INTEGER
 );
 INSERT INTO qualitative_ratings (rating_id, rating_name, hex_colour, emoji, sort_order) VALUES
-    (1, 'Excellent', '#63BE7B', '🟢', 1), (2, 'Good', '#CBDC81', '🟡', 2),
-    (3, 'Normal', '#FDC07C', '🟠', 3), (4, 'Poor', '#F8696B', '🔴', 4);
+    (1, 'Excellent', '#63BE7B', '🟢', 1),
+    (2, 'Good', '#CBDC81', '🟡', 2),
+    (3, 'Normal', '#FDC07C', '🟠', 3),
+    (4, 'Poor', '#F8696B', '🔴', 4);
 
 CREATE TABLE level_ratings (
     level_id        INTEGER PRIMARY KEY,
     level_name      TEXT NOT NULL UNIQUE,
-    interpretation  TEXT, hex_colour      TEXT, emoji           TEXT, sort_order      INTEGER
+    interpretation  TEXT,
+    hex_colour      TEXT,
+    emoji           TEXT,
+    sort_order      INTEGER
 );
 INSERT INTO level_ratings (level_id, level_name, interpretation, hex_colour, emoji, sort_order) VALUES
-    (1, 'Very Low (DESC)', 'DESC', '#63BE7B', '🟢', 1), (2, 'Low (DESC)', 'DESC', '#CBDC81', '🟡', 2),
-    (3, 'Medium (DESC)', 'DESC', '#FDC07C', '🟠', 3), (4, 'High (DESC)', 'DESC', '#F8696B', '🔴', 4),
-    (5, 'Very Low (ASC)', 'ASC', '#F8696B', '🔴', 1), (6, 'Low (ASC)', 'ASC', '#FDC07C', '🟠', 2),
-    (7, 'Medium (ASC)', 'ASC', '#CBDC81', '🟡', 3), (8, 'High (ASC)', 'ASC', '#63BE7B', '🟢', 4);
+    (1, 'Very Low', 'DESC', '#63BE7B', '🟢', 1),
+    (2, 'Low', 'DESC', '#CBDC81', '🟡', 2),
+    (3, 'Medium', 'DESC', '#FDC07C', '🟠', 3),
+    (4, 'High', 'DESC', '#F8696B', '🔴', 4),
+    (5, 'Very Low', 'ASC', '#F8696B', '🔴', 1),
+    (6, 'Low', 'ASC', '#FDC07C', '🟠', 2),
+    (7, 'Medium', 'ASC', '#CBDC81', '🟡', 3),
+    (8, 'High', 'ASC', '#63BE7B', '🟢', 4);
 
 CREATE TABLE chroma_subsampling (
     chroma_id       INTEGER PRIMARY KEY,
     chroma_name     TEXT NOT NULL UNIQUE
 );
-INSERT INTO chroma_subsampling (chroma_id, chroma_name) VALUES (1, '4:2:0'), (2, '4:2:2'), (3, '4:4:4');
+INSERT INTO chroma_subsampling (chroma_id, chroma_name) VALUES
+    (1, '4:2:0'),
+    (2, '4:2:2'),
+    (3, '4:4:4');
 
 -- =============================================================================
 -- CORE DATA TABLES
@@ -125,7 +143,7 @@ INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_s
 
 --- Standard: MKV ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (11, 2, 2002);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (11, 'MKV', 1), (11, 'Matroska', 0);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (11, 'MKV', 1), (11, 'Matroska', 1);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
     VALUES (11, 'Default', 1, 'A flexible container that can hold virtually any track type, prized by enthusiasts.', 75);
 
@@ -137,7 +155,7 @@ INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_s
 
 --- Standard: MOV ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (13, 6, 1991);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (13, 'MOV', 1);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (13, 'MOV', 1), (13, 'QuickTime', 1);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
     VALUES (13, 'Default', 1, 'Apple''s container format, a standard in professional video production.', 80);
 
@@ -688,41 +706,78 @@ INSERT INTO profiles (
 -- Category: 3D Model (ID: 10)
 -- -----------------------------------------------------------------------------
 
---- Standard: glTF ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (100, 2, 2015);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (100, 'glTF', 1), (100, 'GLB', 0);
-INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
-    VALUES (100, 'Default', 10, '"The JPEG of 3D," the modern standard for web and AR/VR.', 85);
-
---- Standard: FBX ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (101, 6, 2006);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (101, 'FBX', 1);
-INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
-    VALUES (101, 'Default', 10, 'The de facto industry standard for exchanging animated 3D assets between applications.', 95);
+--- Standard: STL ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (104, 1, 1987);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (104, 'STL', 1);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, has_texture_support, has_animation_support, file_size_lossless
+) VALUES (
+    104, 'Binary', 10, 'The most used, though inefficient, standard for 3D printing.',
+    99, 0, 0, 100
+);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, has_texture_support, has_animation_support, file_size_lossless
+) VALUES (
+    104, 'ASCII', 10, 'A human-readable but inefficient text-based version of the STL format.',
+    99, 0, 0, 400
+);
 
 --- Standard: OBJ ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (102, 2, 1990);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (102, 'OBJ', 1);
-INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
-    VALUES (102, 'Default', 10, 'A simple, text-based format for static 3D models, universally supported.', 98);
-
---- Standard: USD ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (103, 2, 2016);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (103, 'USD', 1), (103, 'USDZ', 0);
-INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
-    VALUES (103, 'Default', 10, '"The HTML of the Metaverse," a framework for composing and collaborating on complex 3D scenes.', 50);
-
---- Standard: STL ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (104, 1, 1987);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (104, 'STL', 1);
-INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
-    VALUES (104, 'Default', 10, 'The universal, though inefficient, standard for 3D printing geometry.', 99);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, has_texture_support, has_animation_support, file_size_lossless
+) VALUES (
+    102, 'Default', 10, 'Text-based and verbose; files are significantly larger than binary equivalents for the same geometry.',
+    98, 1, 0, 140
+);
 
 --- Standard: 3MF ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (105, 2, 2015);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (105, '3MF', 1);
-INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
-    VALUES (105, 'Default', 10, 'An open standard designed as a modern, feature-rich replacement for STL in 3D printing.', 60);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, has_texture_support, has_animation_support, file_size_lossless
+) VALUES (
+    105, 'Default', 10, 'Uses ZIP compression, resulting in much smaller files than STL for the same model.',
+    60, 1, 0, 40
+);
+
+--- Standard: glTF ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (100, 2, 2015);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (100, 'glTF', 1), (100, 'GLB', 0);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, has_texture_support, has_animation_support, file_size_lossless
+) VALUES (
+    100, 'Default', 10, 'Highly optimized binary format (GLB) for web delivery; often the smallest for geometry.',
+    85, 1, 1, 35
+);
+
+--- Standard: FBX ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (101, 6, 2006);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (101, 'FBX', 1);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, has_texture_support, has_animation_support, file_size_lossless
+) VALUES (
+    101, 'Default', 10, 'Binary format with scene overhead; efficient but not as compact as web-focused formats for pure geometry.',
+    95, 1, 1, 60
+);
+
+--- Standard: USD ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (103, 2, 2016);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (103, 'USD', 1), (103, 'USDZ', 0);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, has_texture_support, has_animation_support, file_size_lossless
+) VALUES (
+    103, 'Default', 10, '"The HTML of the Metaverse," a framework for composing and collaborating on complex 3D scenes.',
+    50, 1, 1, 60
+);
 
 
 COMMIT;

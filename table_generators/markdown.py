@@ -169,10 +169,6 @@ def generate_markdown_guide():
                 display_name += f" ({profile_name})"
             row['display_name'] = display_name
 
-            for key in ['latency', 'editing_performance']:
-                if row.get(key) and '(' in row[key]:
-                    row[key] = row[key].split(' (')[0]
-
         headers = [HEADER_MAPPING.get(col, col) for col in active_columns]
         
         full_markdown += "| " + " | ".join(headers) + " |\n"
