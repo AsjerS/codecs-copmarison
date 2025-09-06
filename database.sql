@@ -36,6 +36,7 @@ INSERT INTO licenses (license_id, license_name, hex_colour, emoji) VALUES
     (4, 'Royalty-Bearing', '#ED7D31', '🟠'),
     (5, 'Royalty-Bearing (Complex)', '#C00000', '🔴'),
     (6, 'Proprietary', '#ED7D31', '🟠');
+    (7, 'Free (Source Available)', '#FFC000', '🟡')
 
 CREATE TABLE qualitative_ratings (
     rating_id       INTEGER PRIMARY KEY,
@@ -217,7 +218,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
 ) VALUES (
     23, 'Default', 2, 'The royalty-free future of web video, backed by major tech companies.',
-    65, 5, 60, 40,
+    70, 5, 60, 40,
     1, 12, 3, 4
 );
 
@@ -516,8 +517,8 @@ INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels
 ) VALUES (
-    71, 'Default', 7, 'The de facto open standard for lossless audio archiving and audiophile listening.',
-    90, 95, 60, 24, '8'
+    71, 'Default', 7, 'The de facto open standard for copmressed lossless audio. Note: most existing decoders only support up to 24-bit decoding',
+    90, 95, 60, 32, '8'
 );
 
 --- Standard: ALAC ---
@@ -532,7 +533,7 @@ INSERT INTO profiles (
 );
 
 --- Standard: Monkey's Audio ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (73, 6, 2001);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (73, 7, 2001);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (73, 'Monkey''s Audio', 1), (73, 'APE', 0);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
