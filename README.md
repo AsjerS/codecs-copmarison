@@ -23,6 +23,8 @@ There is a ton of data in the database that's unused in the version on this page
 
 Note: this is a heavily stripped down version of the comparison, only containing the codecs you're most likely to find on the web.
 
+There is a version with all codecs existing in the database named `full_version.md`, though this is mostly just for easily previewing what data there is in the database without installing anything.
+
 ### Container
 
 | Name | Description | Support (%) | License | Year |
