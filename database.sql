@@ -20,7 +20,8 @@ INSERT INTO categories (category_id, category_name) VALUES
     (7, 'Audio // Lossless'),
     (8, 'Image'),
     (9, 'Animated Image'),
-    (10, '3D Model');
+    (10, '3D Model'),
+    (11, 'Audio // Home Theater');
 
 
 CREATE TABLE licenses (
@@ -35,8 +36,8 @@ INSERT INTO licenses (license_id, license_name, hex_colour, emoji) VALUES
     (3, 'Royalty-Bearing (Simple)', '#FFC000', '🟡'),
     (4, 'Royalty-Bearing', '#ED7D31', '🟠'),
     (5, 'Royalty-Bearing (Complex)', '#C00000', '🔴'),
-    (6, 'Proprietary', '#ED7D31', '🟠');
-    (7, 'Free (Source Available)', '#FFC000', '🟡')
+    (6, 'Proprietary', '#ED7D31', '🟠'),
+    (7, 'Free (Source Available)', '#FFC000', '🟡');
 
 CREATE TABLE qualitative_ratings (
     rating_id       INTEGER PRIMARY KEY,
@@ -53,7 +54,7 @@ INSERT INTO qualitative_ratings (rating_id, rating_name, hex_colour, emoji, sort
 
 CREATE TABLE level_ratings (
     level_id        INTEGER PRIMARY KEY,
-    level_name      TEXT NOT NULL UNIQUE,
+    level_name      TEXT NOT NULL,
     interpretation  TEXT,
     hex_colour      TEXT,
     emoji           TEXT,
@@ -69,14 +70,20 @@ INSERT INTO level_ratings (level_id, level_name, interpretation, hex_colour, emo
     (7, 'Medium', 'ASC', '#CBDC81', '🟡', 3),
     (8, 'High', 'ASC', '#63BE7B', '🟢', 4);
 
-CREATE TABLE chroma_subsampling (
-    chroma_id       INTEGER PRIMARY KEY,
-    chroma_name     TEXT NOT NULL UNIQUE
+CREATE TABLE color_models (
+    color_model_id      INTEGER PRIMARY KEY,
+    color_model_name    TEXT NOT NULL UNIQUE
 );
-INSERT INTO chroma_subsampling (chroma_id, chroma_name) VALUES
-    (1, '4:2:0'),
-    (2, '4:2:2'),
-    (3, '4:4:4');
+INSERT INTO color_models (color_model_id, color_model_name) VALUES
+    (1, 'YUV 4:2:0'),
+    (2, 'YUV 4:2:2'),
+    (3, 'YUV 4:4:4'),
+    (4, 'RGB'),
+    (5, 'Indexed'),
+    (6, 'YCbCr'),
+    (7, 'XYB'),
+    (8, 'Vector'),
+    (9, 'CMYK');
 
 -- =============================================================================
 -- CORE DATA TABLES
@@ -105,23 +112,25 @@ CREATE TABLE profiles (
     profile_name            TEXT,
     category_id             INTEGER NOT NULL,   -- enum
     notes                   TEXT,
+    file_size_lossy         INTEGER,
+    file_size_lossless      INTEGER,
     ecosystem_support       INTEGER,
     encoding_speed          INTEGER,
     decoding_speed          INTEGER,
     has_alpha_channel       INTEGER CHECK (has_alpha_channel IN (0,1)),
     color_bit_depth         INTEGER,
     audio_bit_depth         INTEGER,
-    chroma_subsampling_id   INTEGER,            -- enum
+    color_model_id          INTEGER,            -- enum
     latency_level_id        INTEGER,            -- enum
     editing_performance_id  INTEGER,            -- enum
-    file_size_lossy         INTEGER,
-    file_size_lossless      INTEGER,
     max_audio_channels      TEXT,
     subtitle_is_image       INTEGER CHECK (subtitle_is_image IN (0,1)),
+    has_texture_support     INTEGER CHECK (has_texture_support IN (0,1)),
+    has_animation_support   INTEGER CHECK (has_animation_support IN (0,1)),
 
     FOREIGN KEY (standard_id) REFERENCES standards (standard_id),
     FOREIGN KEY (category_id) REFERENCES categories (category_id)
-    FOREIGN KEY (chroma_subsampling_id) REFERENCES chroma_subsampling (chroma_id),
+    FOREIGN KEY (color_model_id) REFERENCES color_models (color_model_id),
     FOREIGN KEY (latency_level_id) REFERENCES level_ratings (level_id),
     FOREIGN KEY (editing_performance_id) REFERENCES qualitative_ratings (rating_id)
 );
@@ -144,7 +153,7 @@ INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_s
 
 --- Standard: MKV ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (11, 2, 2002);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (11, 'MKV', 1), (11, 'Matroska', 1);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (11, 'MKV', 1), (11, 'Matroska', 0);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
     VALUES (11, 'Default', 1, 'A flexible container that can hold virtually any track type, prized by enthusiasts.', 75);
 
@@ -156,7 +165,7 @@ INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_s
 
 --- Standard: MOV ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (13, 6, 1991);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (13, 'MOV', 1), (13, 'QuickTime', 1);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (13, 'MOV', 1), (13, 'QuickTime', 0);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
     VALUES (13, 'Default', 1, 'Apple''s container format, a standard in professional video production.', 80);
 
@@ -176,7 +185,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (20, 'H.264', 
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     20, 'Default', 2, 'The universal compatibility king for over a decade.',
     99, 100, 100, 100,
@@ -189,7 +198,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (21, 'H.265', 
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     21, 'Default', 2, 'Dominant in premium 4K media, but with complex licensing.',
     75, 20, 80, 50,
@@ -202,7 +211,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (22, 'VP9', 1)
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     22, 'Default', 2, 'Google''s successful open alternative to HEVC, the backbone of YouTube.',
     85, 25, 80, 55,
@@ -215,7 +224,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (23, 'AV1', 1)
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     23, 'Default', 2, 'The royalty-free future of web video, backed by major tech companies.',
     70, 5, 60, 40,
@@ -228,7 +237,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (24, 'H.266', 
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     24, 'Default', 2, 'A successor to HEVC, its adoption is limited by licensing and the rise of AV1.',
     5, 2, 40, 35,
@@ -241,11 +250,24 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (25, 'MPEG-2',
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     25, 'Default', 2, 'The workhorse of standard-definition digital video (DVDs, DVB).',
     70, 150, 150, 180,
     0, 8, 2, 4
+);
+
+--- Standard: VP8 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (26, 2, 2008);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (26, 'VP8', 1);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
+) VALUES (
+    26, 'Default', 2, 'The original royalty-free codec for WebM, now primarily used as a baseline for WebRTC.',
+    70, 120, 130, 115,
+    1, 8, 1, 4
 );
 
 -- -----------------------------------------------------------------------------
@@ -258,7 +280,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (30, 'Apple Pr
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     30, '422 HQ', 3, 'The dominant intermediate codec in Mac-centric professional workflows.',
     70, 25,
@@ -267,7 +289,7 @@ INSERT INTO profiles (
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     30, '4444 XQ', 3, 'The highest-quality version of ProRes, supporting an alpha channel.',
     60, 55,
@@ -280,7 +302,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (31, 'Avid DNx
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     31, 'HQX', 3, 'The cross-platform industry standard for professional editing, especially in broadcast.',
     70, 25,
@@ -289,7 +311,7 @@ INSERT INTO profiles (
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     31, 'LB', 3, 'A low-bandwidth version of DNxHR for offline editing and proxies.',
     70, 8,
@@ -302,7 +324,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (32, 'GoPro Ci
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     32, 'Default', 3, 'A high-quality intermediate codec, popular in GoPro and VFX workflows.',
     50, 20,
@@ -319,7 +341,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (40, 'Uncompre
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     40, '10-bit 4:4:4', 4, 'A raw, uncompressed video stream, used as a baseline for archival codecs.',
     100,
@@ -332,7 +354,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (41, 'FFV1', 1
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     41, 'Default', 4, 'The open standard for video archiving, prized for its data integrity features like checksums.',
     40, 45,
@@ -343,7 +365,7 @@ INSERT INTO profiles (
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     20, 'Lossless', 4, 'Lossless profile of H.264, offering poor compression but using ubiquitous hardware.',
     42,
@@ -354,7 +376,7 @@ INSERT INTO profiles (
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     21, 'Lossless', 4, 'Lossless profile of H.265, offering good compression with potential for hardware support.',
     40,
@@ -365,7 +387,7 @@ INSERT INTO profiles (
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     22, 'Lossless', 4, 'Lossless profile of VP9, offering a good open-source alternative for archival.',
     38,
@@ -376,7 +398,7 @@ INSERT INTO profiles (
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id, editing_performance_id
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     23, 'Lossless', 4, 'Lossless profile of AV1, offering the best compression ratio for archival video.',
     35,
@@ -473,28 +495,6 @@ INSERT INTO profiles (
     4, 16, '255'
 );
 
---- Standard: Dolby Digital ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (64, 6, 1992);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (64, 'Dolby Digital', 1), (64, 'AC-3', 0);
-INSERT INTO profiles (
-    standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossy,
-    latency_level_id, audio_bit_depth, max_audio_channels
-) VALUES (
-    64, 'Default', 6, 'The standard for surround sound on DVDs and broadcast television.',
-    80, 90, 90,
-    4, 16, '5.1'
-);
-INSERT INTO profiles (
-    standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossy,
-    latency_level_id, audio_bit_depth, max_audio_channels
-) VALUES (
-    64, 'Plus', 6, 'An enhanced version of AC-3 used by most modern streaming services.',
-    70, 95, 80,
-    4, 24, '15.1'
-);
-
 -- -----------------------------------------------------------------------------
 -- Category: Audio // Lossless (ID: 7)
 -- -----------------------------------------------------------------------------
@@ -504,10 +504,10 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (70, 1, 199
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (70, 'WAV', 1), (70, 'PCM', 0);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels
+    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id
 ) VALUES (
     70, 'Uncompressed', 7, 'The universal standard for uncompressed, raw PCM audio data, used as a baseline.',
-    99, 100, 100, 32, '65536'
+    99, 100, 100, 32, '65536', 4
 );
 
 --- Standard: FLAC ---
@@ -515,10 +515,10 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (71, 2, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (71, 'FLAC', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels
+    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id
 ) VALUES (
     71, 'Default', 7, 'The de facto open standard for copmressed lossless audio. Note: most existing decoders only support up to 24-bit decoding',
-    90, 95, 60, 32, '8'
+    90, 95, 60, 32, '8', 4
 );
 
 --- Standard: ALAC ---
@@ -526,10 +526,10 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (72, 2, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (72, 'ALAC', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels
+    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id
 ) VALUES (
     72, 'Default', 7, 'Apple''s native lossless format, open-sourced in 2011.',
-    60, 95, 65, 32, '8'
+    60, 95, 65, 32, '8', 4
 );
 
 --- Standard: Monkey's Audio ---
@@ -537,10 +537,10 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (73, 7, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (73, 'Monkey''s Audio', 1), (73, 'APE', 0);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels
+    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id
 ) VALUES (
     73, 'Default', 7, 'A proprietary codec known for its very high compression ratios, popular in niche audiophile circles.',
-    30, 70, 55, 24, '32'
+    30, 70, 55, 24, '32', 4
 );
 
 -- -----------------------------------------------------------------------------
@@ -553,11 +553,11 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (80, 'JPEG', 1
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     80, 'Default', 8, 'The universal standard for photographic images on the web.',
     99, 100, 100, 100, 200,
-    0, 8, 1
+    0, 8, 6
 );
 
 --- Standard: PNG ---
@@ -566,11 +566,11 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (81, 'PNG', 1)
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     81, 'Default', 8, 'The standard for lossless web graphics and transparency, used as a baseline.',
     99, 30, 80, 100,
-    1, 16, 3
+    1, 8, 4
 );
 
 --- Standard: WebP ---
@@ -579,11 +579,11 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (82, 'WebP', 1
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     82, 'Default', 8, 'Google''s versatile format to replace JPEG and PNG, offering better compression.',
     97, 90, 100, 70, 75,
-    1, 8, 3
+    1, 8, 1
 );
 
 --- Standard: AVIF ---
@@ -592,7 +592,7 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (83, 'AVIF', 1
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     83, 'Default', 8, 'State-of-the-art compression based on AV1, offering superior quality and features.',
     85, 10, 70, 50, 70,
@@ -605,20 +605,20 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (84, 'JPEG XL'
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     84, 'Default', 8, 'A technically superior next-gen format, but its adoption was stalled by browser politics.',
     10, 90, 100, 40, 65,
-    1, 16, 3
+    1, 16, 7
 );
 
 --- Standard: HEIF ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (85, 6, 2015);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (85, 5, 2015);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (85, 'HEIF', 1), (85, 'HEIC', 0);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     85, 'Default', 8, 'The container format used by Apple devices, typically with an HEVC-encoded image.',
     65, 30, 90, 50, 70,
@@ -631,11 +631,11 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (86, 'SVG', 1)
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     86, 'Default', 8, 'An XML-based vector format. Performance and file size are not directly comparable to raster formats.',
     98,
-    1, 8, 3
+    1, 8, 8
 );
 
 --- Standard: TIFF ---
@@ -644,11 +644,11 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (87, 'TIFF', 1
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
-    has_alpha_channel, color_bit_depth, chroma_subsampling_id
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     87, 'Default', 8, 'The standard for high-quality print, archiving, and professional photography masters.',
     60, 20, 70, 110,
-    1, 16, 3
+    1, 16, 4
 );
 
 -- -----------------------------------------------------------------------------
@@ -661,11 +661,11 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (90, 'GIF', 1)
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, decoding_speed, file_size_lossless,
-    has_alpha_channel, color_bit_depth
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     90, 'Default', 9, 'The universal standard for short animations, limited to a 256-color palette.',
     99, 100, 100,
-    1, 2
+    1, 8, 5
 );
 
 --- Standard: APNG ---
@@ -674,33 +674,33 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (91, 'APNG', 1
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, decoding_speed, file_size_lossless,
-    has_alpha_channel, color_bit_depth
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     91, 'Default', 9, 'An extension of PNG for lossless animations with full color and alpha support, used as a baseline.',
     95, 80, 65,
-    1, 16
+    1, 8, 4
 );
 
 --- Profile: Animated WebP ---
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, decoding_speed, file_size_lossy, file_size_lossless,
-    has_alpha_channel, color_bit_depth
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     82, 'Animated', 9, 'Offers smaller file sizes than GIF with better color and alpha support.',
     97, 90, 25, 45,
-    1, 8
+    1, 8, 4
 );
 
 --- Profile: Animated AVIF ---
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, decoding_speed, file_size_lossy, file_size_lossless,
-    has_alpha_channel, color_bit_depth
+    has_alpha_channel, color_bit_depth, color_model_id
 ) VALUES (
     83, 'Animated', 9, 'State-of-the-art compression for animations, offering massive savings over GIF.',
     85, 70, 15, 40,
-    1, 12
+    1, 12, 3
 );
 
 -- -----------------------------------------------------------------------------
@@ -778,6 +778,92 @@ INSERT INTO profiles (
 ) VALUES (
     103, 'Default', 10, '"The HTML of the Metaverse," a framework for composing and collaborating on complex 3D scenes.',
     50, 1, 1, 60
+);
+
+-- -----------------------------------------------------------------------------
+-- Category: Audio // Home Theater (ID: 11)
+-- -----------------------------------------------------------------------------
+
+--- Standard: Dolby Digital ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (64, 6, 1992);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (64, 'Dolby Digital', 1), (64, 'AC-3', 0);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels
+) VALUES (
+    64, 'Default', 11, 'The standard for surround sound on DVDs and broadcast television.',
+    80, 90, 90,
+    4, 16, '5.1'
+);
+--- Profile: Dolby Digital Plus ---
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels
+) VALUES (
+    64, 'Plus', 11, 'An enhanced version of AC-3 used by streaming services and as a core for TrueHD.',
+    70, 95, 80,
+    4, 24, '15.1'
+);
+
+--- Standard: Dolby TrueHD ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (74, 6, 2006);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (74, 'Dolby TrueHD', 1);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, decoding_speed, file_size_lossless,
+    latency_level_id, audio_bit_depth, max_audio_channels
+) VALUES (
+    74, 'Default', 11, 'A lossless audio codec that directly competes with DTS-HD MA on Blu-ray discs.',
+    75, 90, 55,
+    4, 24, '8'
+);
+--- Profile: Dolby Atmos ---
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, decoding_speed, file_size_lossless,
+    latency_level_id, audio_bit_depth, max_audio_channels
+) VALUES (
+    74, 'Atmos', 11, 'Object-based immersive audio, typically delivered within a Dolby TrueHD stream on Blu-ray.',
+    65, 85, 58,
+    4, 24, '7.1 + Objects'
+);
+
+--- Standard: DTS ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (75, 6, 1993);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (75, 'DTS', 1);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels
+) VALUES (
+    75, 'Core', 11, 'The standard lossy surround format from DTS, competing with Dolby Digital. Often used as a fallback track.',
+    75, 90, 95,
+    4, 24, '5.1'
+);
+
+--- Standard: DTS-HD Master Audio ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (76, 6, 2004);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (76, 'DTS-HD Master Audio', 1), (76, 'DTS-HD MA', 0);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, decoding_speed, file_size_lossless,
+    latency_level_id, audio_bit_depth, max_audio_channels
+) VALUES (
+    76, 'Default', 11, 'The primary lossless audio codec from DTS. The most common advanced format on Blu-ray.',
+    80, 90, 58,
+    4, 24, '8'
+);
+--- Profile: DTS:X ---
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, decoding_speed, file_size_lossless,
+    latency_level_id, audio_bit_depth, max_audio_channels
+) VALUES (
+    76, 'DTS:X', 11, 'DTS''s object-based immersive audio format, competing with Dolby Atmos.',
+    60, 85, 60,
+    4, 24, '7.1 + Objects'
 );
 
 

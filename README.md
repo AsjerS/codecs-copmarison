@@ -5,91 +5,74 @@ A detailed comparison of most major codecs for video, audio, image, and more. So
 ## File Explanation
 
 - **`database.sql`**: The script used to generate the database in SQLite, where all the data is stored initially.
-- **`codecs.db`**: The actual database, generated with `sqlite3 codecs.db < database.sql`.
 - **`table_generators/markdown.py`**: The script that generates a customizable Markdown version of the comparison from `codecs.db`.
 
-## Simplified Markdown version
+## Build Your Own
+
+To make your own version of the table, follow these steps:
+
+1. Install SQLite and Python on your system.
+2. Copy this repository: `git clone https://github.com/AsjerS/codecs-copmarison.git`.
+3. CD into the repository, and generate `codecs.db` with `sqlite3 codecs.db < databse.sql`.
+4. CD into `table_generators/`, and edit the `markdown.py` configuration to your liking.
+5. Run `markdown.py`.
+
+There is a ton of data in the database that's unused in the version on this page, so you could make your own table however you'd like. When I find the time for it I might also make a GUI application for generating these tables.
+
+## Markdown Version
+
+Note: this is a heavily stripped down version of the comparison, only containing the codecs you're most likely to find on the web.
 
 ### Container
 
-| Name | Description | License | Support (%) |
-|:---|:---|:---|:---|
-| MP4 | The most compatible and widely used container format for digital video. | 🟢 Free (Permissive) | 🟢 99 |
-| MKV | A flexible container that can hold virtually any track type, prized by enthusiasts. | 🟢 Free (Permissive) | 🟡 75 |
-| WebM | A container specifically designed for royalty-free web codecs like VP9 and AV1. | 🟢 Free (Permissive) | 🟢 90 |
-| MOV | Apple's container format, a standard in professional video production. | 🟠 Proprietary | 🟡 80 |
-| AVI | A legacy container from Microsoft, now outdated but still found in older archives. | 🟢 Free (Public Domain) | 🟡 65 |
+| Name | Description | Support (%) | License | Year |
+|:---|:---|:---|:---|:---|
+| MP4 | The most compatible and widely used container format for digital video. | 🟢 99 | 🟢 Free (Permissive) | 2001 |
+| MKV | A flexible container that can hold virtually any track type, prized by enthusiasts. | 🟡 75 | 🟢 Free (Permissive) | 2002 |
+| WebM | A container specifically designed for royalty-free web codecs like VP9 and AV1. | 🟢 90 | 🟢 Free (Permissive) | 2010 |
+| MOV | Apple's container format, a standard in professional video production. | 🟡 80 | 🟠 Proprietary | 1991 |
+| AVI | A legacy container from Microsoft, now outdated but still found in older archives. | 🟡 65 | 🟢 Free (Public Domain) | 1992 |
 
 ### Video // Delivery
 
-| Name | License | Support (%) | Encode Speed (%) | Decode Speed (%) | Lossy Size (%) |
+| Name | Lossy Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License |
 |:---|:---|:---|:---|:---|:---|
-| H.264 / AVC | 🟡 Royalty-Bearing (Simple) | 🟢 99 | 🟢 100 | 🟢 100 | 🔴 100 |
-| H.265 / HEVC | 🔴 Royalty-Bearing (Complex) | 🟡 75 | 🔴 20 | 🟡 80 | 🟡 50 |
-| VP9 | 🟢 Free (Permissive) | 🟢 85 | 🔴 25 | 🟡 80 | 🟡 55 |
-| AV1 | 🟢 Free (Permissive) | 🟡 65 | 🔴 5 | 🟠 60 | 🟢 40 |
-| H.266 / VVC | 🟠 Royalty-Bearing | 🔴 5 | 🔴 2 | 🔴 40 | 🟢 35 |
-| MPEG-2 | 🟢 Free (Public Domain) | 🟡 70 | 🔵 150 | 🔵 150 | ⚫ 180 |
-
-### Subtitle
-
-| Name | Description | Type | License | Support (%) |
-|:---|:---|:---|:---|:---|
-| SRT | The most universal and basic text-based subtitle format. | Text | 🟢 Free (Public Domain) | 🟢 99 |
-| ASS | A powerful text format offering advanced styling, positioning, and effects. | Text | 🟢 Free (Permissive) | 🟡 70 |
-| WebVTT | The modern standard for subtitles on the web, designed for HTML5 video. | Text | 🟢 Free (Permissive) | 🟢 95 |
-| VobSub | Image-based subtitle format used on DVDs. Cannot be scaled or edited like text. | Image | 🟠 Proprietary | 🟡 70 |
-| PGS | High-resolution image-based subtitle format used on Blu-ray Discs. | Image | 🟠 Proprietary | 🟡 65 |
+| H.264 / AVC | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 100 | 🟡 Royalty-Bearing (Simple) |
+| H.265 / HEVC | 🟡 50 | 🟡 75 | 🟡 80 | 🔴 20 | 🔴 Royalty-Bearing (Complex) |
+| VP9 | 🟡 55 | 🟢 85 | 🟡 80 | 🔴 25 | 🟢 Free (Permissive) |
+| AV1 | 🟢 40 | 🟡 70 | 🟠 60 | 🔴 5 | 🟢 Free (Permissive) |
+| H.266 / VVC | 🟢 35 | 🔴 5 | 🔴 40 | 🔴 2 | 🟠 Royalty-Bearing |
+| MPEG-2 | ⚫ 180 | 🟡 70 | 🔵 150 | 🔵 150 | 🟢 Free (Public Domain) |
+| VP8 | ⚫ 115 | 🟡 70 | 🔵 130 | 🔵 120 | 🟢 Free (Permissive) |
 
 ### Audio // Lossy
 
-| Name | License | Support (%) | Decode Speed (%) | Latency | Lossy Size (%) | Max Channels |
+| Name | Lossy Size (%) | Support (%) | Decode Speed (%) | License | Max Channels | Latency |
 |:---|:---|:---|:---|:---|:---|:---|
-| Opus | 🟢 Free (Permissive) | 🟢 90 | 🟢 100 | 🟢 Very Low | 🟡 50 | 255 |
-| MP3 | 🟢 Free (Public Domain) | 🟢 99 | 🟢 100 | 🔴 High | 🔴 100 | 2 |
-| AAC | 🟡 Royalty-Bearing (Simple) | 🟢 95 | 🟢 100 | 🟠 Medium | 🟠 65 | 48 |
-| Vorbis | 🟢 Free (Permissive) | 🟡 75 | 🟢 100 | 🔴 High | 🟠 80 | 255 |
-| Dolby Digital | 🟠 Proprietary | 🟡 80 | 🟢 90 | 🔴 High | 🔴 90 | 5.1 |
-| Dolby Digital (Plus) | 🟠 Proprietary | 🟡 70 | 🟢 95 | 🔴 High | 🟠 80 | 15.1 |
+| Opus | 🟡 50 | 🟢 90 | 🟢 100 | 🟢 Free (Permissive) | 255 | 🟢 Very Low |
+| MP3 | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 Free (Public Domain) | 2 | 🔴 High |
+| AAC | 🟠 65 | 🟢 95 | 🟢 100 | 🟡 Royalty-Bearing (Simple) | 48 | 🟠 Medium |
+| Vorbis | 🟠 80 | 🟡 75 | 🟢 100 | 🟢 Free (Permissive) | 255 | 🔴 High |
 
 ### Audio // Lossless
 
-| Name | License | Support (%) | Decode Speed (%) | Lossless Size (%) | Audio Depth (bits) | Max Channels |
+| Name | Lossless Size (%) | Support (%) | Decode Speed (%) | License | Max Channels | Audio Depth (bits) |
 |:---|:---|:---|:---|:---|:---|:---|
-| WAV (Uncompressed) | 🟢 Free (Public Domain) | 🟢 99 | 🟢 100 | 🔴 100 | 32 | 65536 |
-| FLAC | 🟢 Free (Permissive) | 🟢 90 | 🟢 95 | 🟡 60 | 24 | 8 |
-| ALAC | 🟢 Free (Permissive) | 🟠 60 | 🟢 95 | 🟠 65 | 32 | 8 |
-| Monkey's Audio | 🟠 Proprietary | 🔴 30 | 🟡 70 | 🟡 55 | 24 | 32 |
+| WAV (Uncompressed) | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 Free (Public Domain) | 65536 | 32 |
+| FLAC | 🟡 60 | 🟢 90 | 🟢 95 | 🟢 Free (Permissive) | 8 | 32 |
+| ALAC | 🟠 65 | 🟠 60 | 🟢 95 | 🟢 Free (Permissive) | 8 | 32 |
+| Monkey's Audio | 🟡 55 | 🔴 30 | 🟡 70 | 🟡 Free (Source Available) | 32 | 24 |
 
 ### Image
 
-| Name | License | Support (%) | Encode Speed (%) | Decode Speed (%) | Alpha? | Lossy Size (%) | Lossless Size (%) |
+| Name | Lossy Size (%) | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Alpha? |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| JPEG | 🟢 Free (Public Domain) | 🟢 99 | 🟢 100 | 🟢 100 | No | 🔴 100 | ⚫ 200 |
-| PNG | 🟢 Free (Permissive) | 🟢 99 | 🔴 30 | 🟡 80 | Yes | N/A | 🔴 100 |
-| WebP | 🟢 Free (Permissive) | 🟢 97 | 🟢 90 | 🟢 100 | Yes | 🟠 70 | 🟠 75 |
-| AVIF | 🟢 Free (Permissive) | 🟢 85 | 🔴 10 | 🟡 70 | Yes | 🟡 50 | 🟠 70 |
-| JPEG XL | 🟢 Free (Permissive) | 🔴 10 | 🟢 90 | 🟢 100 | Yes | 🟢 40 | 🟠 65 |
-| HEIF | 🟠 Proprietary | 🟡 65 | 🔴 30 | 🟢 90 | Yes | 🟡 50 | 🟠 70 |
-| SVG | 🟢 Free (Permissive) | 🟢 98 | N/A | N/A | Yes | N/A | N/A |
-| TIFF | 🟠 Proprietary | 🟠 60 | 🔴 20 | 🟡 70 | Yes | N/A | ⚫ 110 |
+| JPEG | 🔴 100 | ⚫ 200 | 🟢 99 | 🟢 100 | 🟢 100 | 🟢 Free (Public Domain) | No |
+| PNG | N/A | 🔴 100 | 🟢 99 | 🟡 80 | 🔴 30 | 🟢 Free (Permissive) | Yes |
+| WebP | 🟠 70 | 🟠 75 | 🟢 97 | 🟢 100 | 🟢 90 | 🟢 Free (Permissive) | Yes |
+| AVIF | 🟡 50 | 🟠 70 | 🟢 85 | 🟡 70 | 🔴 10 | 🟢 Free (Permissive) | Yes |
+| JPEG XL | 🟢 40 | 🟠 65 | 🔴 10 | 🟢 100 | 🟢 90 | 🟢 Free (Permissive) | Yes |
+| HEIF | 🟡 50 | 🟠 70 | 🟡 65 | 🟢 90 | 🔴 30 | 🔴 Royalty-Bearing (Complex) | Yes |
+| SVG | N/A | N/A | 🟢 98 | N/A | N/A | 🟢 Free (Permissive) | Yes |
+| TIFF | N/A | ⚫ 110 | 🟠 60 | 🟡 70 | 🔴 20 | 🟠 Proprietary | Yes |
 
-### Animated Image
-
-| Name | License | Support (%) | Decode Speed (%) | Color Depth (bits) | Lossy Size (%) | Lossless Size (%) |
-|:---|:---|:---|:---|:---|:---|:---|
-| WebP (Animated) | 🟢 Free (Permissive) | 🟢 97 | 🟢 90 | 8 | 🟢 25 | 🟡 45 |
-| AVIF (Animated) | 🟢 Free (Permissive) | 🟢 85 | 🟡 70 | 12 | 🟢 15 | 🟢 40 |
-| GIF | 🟢 Free (Public Domain) | 🟢 99 | 🟢 100 | 2 | N/A | 🔴 100 |
-| APNG | 🟢 Free (Permissive) | 🟢 95 | 🟡 80 | 16 | N/A | 🟠 65 |
-
-### 3D Model
-
-| Name | Description | License | Year | Support (%) |
-|:---|:---|:---|:---|:---|
-| glTF | "The JPEG of 3D," the modern standard for web and AR/VR. | 🟢 Free (Permissive) | 2015 | 🟢 85 |
-| FBX | The de facto industry standard for exchanging animated 3D assets between applications. | 🟠 Proprietary | 2006 | 🟢 95 |
-| OBJ | A simple, text-based format for static 3D models, universally supported. | 🟢 Free (Permissive) | 1990 | 🟢 98 |
-| USD | "The HTML of the Metaverse," a framework for composing and collaborating on complex 3D scenes. | 🟢 Free (Permissive) | 2016 | 🟠 50 |
-| STL | The universal, though inefficient, standard for 3D printing geometry. | 🟢 Free (Public Domain) | 1987 | 🟢 99 |
-| 3MF | An open standard designed as a modern, feature-rich replacement for STL in 3D printing. | 🟢 Free (Permissive) | 2015 | 🟠 60 |

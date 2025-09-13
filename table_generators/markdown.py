@@ -8,81 +8,194 @@ TITLE = "# Codecs Comparison - Markdown"
 
 # ==============================================================================
 # VIEW CONFIGURATION
-# For each category, define the list of columns you want to display, in order.
-# An empty list [] or a missing category will hide that table from the output.
+# This dictionary controls which columns are displayed for each category and in
+# what order. Simply reorder the column names to change the table layout.
+# Below that is a comment with all configuration options for reference.
 # ==============================================================================
 
 VIEW_CONFIG = {
     'Container': [
-        'display_name', 'notes', 'license_name', 'ecosystem_support'
+        'display_name',
+        'notes',
+        'ecosystem_support',
+        'license_name',
+        'release_year',
     ],
     'Video // Delivery': [
-        'display_name', 'license_name', 'ecosystem_support', 'encoding_speed', 'decoding_speed', 'file_size_lossy',
-    ],
-    'Subtitle': [
-        'display_name', 'notes', 'subtitle_is_image', 'license_name', 'ecosystem_support'
+        'display_name',
+        'file_size_lossy',
+        'ecosystem_support',
+        'decoding_speed',
+        'encoding_speed',
+        'license_name',
     ],
     'Audio // Lossy': [
-        'display_name', 'license_name', 'ecosystem_support', 'decoding_speed', 'latency', 'file_size_lossy', 'max_audio_channels'
+        'display_name',
+        'file_size_lossy',
+        'ecosystem_support',
+        'decoding_speed',
+        'license_name',
+        'max_audio_channels',
+        'latency',
     ],
     'Audio // Lossless': [
-        'display_name', 'license_name', 'ecosystem_support', 'decoding_speed', 'file_size_lossless', 'audio_bit_depth', 'max_audio_channels'
+        'display_name',
+        'file_size_lossless',
+        'ecosystem_support',
+        'decoding_speed',
+        'license_name',
+        'max_audio_channels',
+        'audio_bit_depth',
     ],
     'Image': [
-        'display_name', 'license_name', 'ecosystem_support', 'encoding_speed', 'decoding_speed', 'has_alpha_channel', 'file_size_lossy', 'file_size_lossless'
+        'display_name',
+        'file_size_lossy',
+        'file_size_lossless',
+        'ecosystem_support',
+        'decoding_speed',
+        'encoding_speed',
+        'license_name',
+        'has_alpha_channel',
     ],
-    'Animated Image': [
-        'display_name', 'license_name', 'ecosystem_support', 'decoding_speed', 'color_bit_depth', 'file_size_lossy', 'file_size_lossless'
-    ],
-    '3D Model': [
-        'display_name', 'notes', 'license_name', 'release_year', 'ecosystem_support'
-    ]
 }
 
-""" FULL CONFIG TEMPLATE
+""" THEORETICAL FULL VIEW_CONFIG
+This commented-out block contains all possible columns for each category.
+You can copy and paste from here into the active VIEW_CONFIG above to customize
+the generated tables.
+
 VIEW_CONFIG = {
     'Container': [
-        'display_name', 'notes', 'license_name', 'release_year', 'ecosystem_support'
+        'display_name',
+        'notes',
+        'ecosystem_support',
+        'license_name',
+        'release_year',
     ],
     'Video // Delivery': [
-        'display_name', 'notes', 'license_name', 'release_year', 'ecosystem_support',
-        'encoding_speed', 'decoding_speed', 'has_alpha_channel', 'color_bit_depth',
-        'chroma_name', 'file_size_lossy', 'file_size_lossless', 'editing_performance'
+        'display_name',
+        'notes',
+        'file_size_lossy',
+        'file_size_lossless',
+        'ecosystem_support',
+        'decoding_speed',
+        'encoding_speed',
+        'license_name',
+        'release_year',
+        'editing_performance',
+        'has_alpha_channel',
+        'color_model_name',
+        'color_bit_depth',
     ],
     'Video // Intermediate': [
-        'display_name', 'notes', 'license_name', 'release_year', 'ecosystem_support',
-        'editing_performance', 'has_alpha_channel', 'color_bit_depth', 'chroma_name',
-        'file_size_lossless'
+        'display_name',
+        'notes',
+        'file_size_lossless',
+        'ecosystem_support',
+        'decoding_speed',
+        'encoding_speed',
+        'license_name',
+        'release_year',
+        'editing_performance',
+        'has_alpha_channel',
+        'color_model_name',
+        'color_bit_depth',
     ],
     'Video // Archival': [
-        'display_name', 'notes', 'license_name', 'editing_performance', 'has_alpha_channel',
-        'color_bit_depth', 'chroma_name', 'file_size_lossless'
+        'display_name',
+        'notes',
+        'file_size_lossless',
+        'ecosystem_support',
+        'decoding_speed',
+        'encoding_speed',
+        'license_name',
+        'release_year',
+        'editing_performance',
+        'has_alpha_channel',
+        'color_model_name',
+        'color_bit_depth',
     ],
     'Subtitle': [
-        'display_name', 'notes', 'subtitle_is_image', 'license_name', 'release_year',
-        'ecosystem_support'
+        'display_name',
+        'notes',
+        'ecosystem_support',
+        'license_name',
+        'release_year',
+        'subtitle_is_image',
     ],
     'Audio // Lossy': [
-        'display_name', 'notes', 'license_name', 'release_year', 'ecosystem_support',
-        'decoding_speed', 'latency', 'file_size_lossy', 'audio_bit_depth', 'max_audio_channels'
+        'display_name',
+        'notes',
+        'file_size_lossy',
+        'ecosystem_support',
+        'decoding_speed',
+        'license_name',
+        'release_year',
+        'max_audio_channels',
+        'audio_bit_depth',
+        'latency',
     ],
     'Audio // Lossless': [
-        'display_name', 'notes', 'license_name', 'release_year', 'ecosystem_support',
-        'decoding_speed', 'file_size_lossless', 'audio_bit_depth', 'max_audio_channels'
+        'display_name',
+        'notes',
+        'file_size_lossless',
+        'ecosystem_support',
+        'decoding_speed',
+        'license_name',
+        'release_year',
+        'max_audio_channels',
+        'audio_bit_depth',
+        'latency',
     ],
     'Image': [
-        'display_name', 'notes', 'license_name', 'release_year', 'ecosystem_support',
-        'encoding_speed', 'decoding_speed', 'has_alpha_channel', 'color_bit_depth',
-        'file_size_lossy', 'file_size_lossless', 'chroma_subsampling_id'
+        'display_name',
+        'notes',
+        'file_size_lossy',
+        'file_size_lossless',
+        'ecosystem_support',
+        'decoding_speed',
+        'encoding_speed',
+        'license_name',
+        'release_year',
+        'has_alpha_channel',
+        'color_model_name',
+        'color_bit_depth',
     ],
     'Animated Image': [
-        'display_name', 'notes', 'license_name', 'release_year', 'ecosystem_support',
-        'decoding_speed', 'has_alpha_channel', 'color_bit_depth', 'file_size_lossy',
-        'file_size_lossless'
+        'display_name',
+        'notes',
+        'file_size_lossy',
+        'file_size_lossless',
+        'ecosystem_support',
+        'decoding_speed',
+        'encoding_speed',
+        'license_name',
+        'release_year',
+        'has_alpha_channel',
+        'color_model_name',
+        'color_bit_depth',
     ],
     '3D Model': [
-        'display_name', 'notes', 'license_name', 'release_year', 'ecosystem_support'
-    ]
+        'display_name',
+        'notes',
+        'file_size_lossless',
+        'ecosystem_support',
+        'license_name',
+        'release_year',
+    ],
+    'Audio // Home Theater': [
+        'display_name',
+        'notes',
+        'file_size_lossy',
+        'file_size_lossless',
+        'ecosystem_support',
+        'decoding_speed',
+        'license_name',
+        'release_year',
+        'max_audio_channels',
+        'audio_bit_depth',
+        'latency',
+    ],
 }
 """
 
@@ -94,7 +207,7 @@ HEADER_MAPPING = {
     'ecosystem_support': 'Support (%)',
     'encoding_speed': 'Encode Speed (%)', 'decoding_speed': 'Decode Speed (%)',
     'has_alpha_channel': 'Alpha?', 'color_bit_depth': 'Color Depth (bits)',
-    'audio_bit_depth': 'Audio Depth (bits)', 'chroma_name': 'Chroma',
+    'audio_bit_depth': 'Audio Depth (bits)', 'color_model_name': 'Color Model',
     'file_size_lossy': 'Lossy Size (%)', 'file_size_lossless': 'Lossless Size (%)',
     'latency': 'Latency', 'editing_performance': 'Editing Performance',
     'max_audio_channels': 'Max Channels', 'subtitle_is_image': 'Type'
@@ -127,13 +240,12 @@ def generate_markdown_guide():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    full_markdown = f"{TITLE}"
+    full_markdown = f"{TITLE}\n\n"
 
-    # Iterate through the categories defined in the config to control table order
     for category_name, active_columns in VIEW_CONFIG.items():
-        if not active_columns: continue # Skip if the column list is empty
+        if not active_columns: continue
 
-        full_markdown += f"## {category_name}\n\n"
+        full_markdown += f"### {category_name}\n\n"
         
         query = """
             SELECT
@@ -141,7 +253,7 @@ def generate_markdown_guide():
                 (SELECT GROUP_CONCAT(name, ' / ') FROM format_aliases fa WHERE fa.standard_id = s.standard_id AND fa.is_primary = 1) AS primary_aliases,
                 p.*,
                 l.license_name, l.emoji AS license_emoji,
-                cs.chroma_name,
+                cm.color_model_name,
                 lr.level_name AS latency, lr.emoji AS latency_emoji,
                 qr.rating_name AS editing_performance, qr.emoji AS editing_performance_emoji
             FROM profiles p
@@ -150,7 +262,7 @@ def generate_markdown_guide():
             LEFT JOIN licenses l ON s.license_id = l.license_id
             LEFT JOIN qualitative_ratings qr ON p.editing_performance_id = qr.rating_id
             LEFT JOIN level_ratings lr ON p.latency_level_id = lr.level_id
-            LEFT JOIN chroma_subsampling cs ON p.chroma_subsampling_id = cs.chroma_id
+            LEFT JOIN color_models cm ON p.color_model_id = cm.color_model_id
             WHERE c.category_name = ?
             ORDER BY s.standard_id, p.profile_id
         """
