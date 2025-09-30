@@ -1,5 +1,3 @@
-# Codecs Comparison - Markdown
-
 ### Container
 
 | Name | Description | Support (%) | License | Year |
@@ -21,6 +19,11 @@
 | H.266 / VVC | A successor to HEVC, its adoption is limited by licensing and the rise of AV1. | 🟢 35 | N/A | 🔴 5 | 🔴 40 | 🔴 2 | 🟠 Royalty-Bearing | 2020 | 🔴 Poor | No | YUV 4:4:4 | 10 |
 | MPEG-2 | The workhorse of standard-definition digital video (DVDs, DVB). | ⚫ 180 | N/A | 🟡 70 | 🔵 150 | 🔵 150 | 🟢 Free (Public Domain) | 1995 | 🔴 Poor | No | YUV 4:2:2 | 8 |
 | VP8 | The original royalty-free codec for WebM, now primarily used as a baseline for WebRTC. | ⚫ 115 | N/A | 🟡 70 | 🔵 130 | 🔵 120 | 🟢 Free (Permissive) | 2008 | 🔴 Poor | Yes | YUV 4:2:0 | 8 |
+| Theora | The original open-source video codec from the creators of Vorbis and FLAC. Now a legacy format, superseded by VP8/VP9. | ⚫ 130 | N/A | 🔴 40 | 🔵 120 | 🔵 110 | 🟢 Free (Permissive) | 2004 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| MPEG-1 | The original standard for digital video, famous for Video CDs (VCDs). Now completely obsolete due to its very poor compression. | ⚫ 300 | N/A | 🟠 60 | 🔵 200 | 🔵 200 | 🟢 Free (Public Domain) | 1993 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| VC-1 | Developed by Microsoft and standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format. | ⚫ 105 | N/A | 🟡 65 | 🟢 100 | 🔵 110 | 🟡 Royalty-Bearing (Simple) | 2006 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| MPEG-4 Part 2 (DivX) | A popular proprietary codec from the 2000s, based on MPEG-4 Part 2. Common in older hardware players. | ⚫ 120 | N/A | 🟡 70 | 🔵 110 | 🔵 115 | 🟠 Royalty-Bearing | 1999 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| MPEG-4 Part 2 (XviD) | The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264. | ⚫ 115 | N/A | 🟡 70 | 🔵 110 | 🔵 115 | 🟢 Free (Permissive) | 2001 | 🔴 Poor | No | YUV 4:2:0 | 8 |
 
 ### Video // Intermediate
 
@@ -31,17 +34,18 @@
 | Avid DNxHR (HQX) | The cross-platform industry standard for professional editing, especially in broadcast. | 🟢 25 | 🟡 70 | N/A | N/A | 🟡 Royalty-Bearing (Simple) | 2014 | 🟢 Excellent | Yes | YUV 4:4:4 | 12 |
 | Avid DNxHR (LB) | A low-bandwidth version of DNxHR for offline editing and proxies. | 🟢 8 | 🟡 70 | N/A | N/A | 🟡 Royalty-Bearing (Simple) | 2014 | 🟢 Excellent | Yes | YUV 4:2:0 | 8 |
 | GoPro CineForm | A high-quality intermediate codec, popular in GoPro and VFX workflows. | 🟢 20 | 🟠 50 | N/A | N/A | 🟠 Proprietary | 2004 | 🟢 Excellent | Yes | YUV 4:4:4 | 12 |
+| Motion JPEG | A video format consisting of a sequence of individual JPEG images. Mostly used by cinemas and older cameras. | 🟢 40 | 🟠 60 | N/A | N/A | 🟢 Free (Public Domain) | 1995 | 🟢 Excellent | No | YCbCr | 8 |
 
 ### Video // Archival
 
 | Name | Description | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Editing Performance | Alpha? | Color Model | Color Depth (bits) |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| H.264 / AVC (Lossless) | Lossless profile of H.264, offering poor compression but using ubiquitous hardware. | 🟡 42 | N/A | N/A | N/A | 🟡 Royalty-Bearing (Simple) | 2003 | 🔴 Poor | No | YUV 4:2:2 | 10 |
-| H.265 / HEVC (Lossless) | Lossless profile of H.265, offering good compression with potential for hardware support. | 🟢 40 | N/A | N/A | N/A | 🔴 Royalty-Bearing (Complex) | 2013 | 🔴 Poor | No | YUV 4:4:4 | 10 |
-| VP9 (Lossless) | Lossless profile of VP9, offering a good open-source alternative for archival. | 🟢 38 | N/A | N/A | N/A | 🟢 Free (Permissive) | 2013 | 🔴 Poor | Yes | YUV 4:4:4 | 12 |
-| AV1 (Lossless) | Lossless profile of AV1, offering the best compression ratio for archival video. | 🟢 35 | N/A | N/A | N/A | 🟢 Free (Permissive) | 2018 | 🔴 Poor | Yes | YUV 4:4:4 | 12 |
-| Uncompressed Video (10-bit 4:4:4) | A raw, uncompressed video stream, used as a baseline for archival codecs. | 🔴 100 | N/A | N/A | N/A | N/A | N/A | 🟡 Good | Yes | YUV 4:4:4 | 10 |
-| FFV1 | The open standard for video archiving, prized for its data integrity features like checksums. | 🟡 45 | 🔴 40 | N/A | N/A | 🟢 Free (Permissive) | 2003 | 🔴 Poor | Yes | YUV 4:4:4 | 16 |
+| H.264 / AVC (Lossless) | Lossless profile of H.264. Support for this specific profile is mostly software-based. | 🟡 42 | 🟠 60 | 🟡 80 | 🔵 120 | 🟡 Royalty-Bearing (Simple) | 2003 | 🔴 Poor | No | YUV 4:2:2 | 10 |
+| H.265 / HEVC (Lossless) | Lossless profile of H.265. Offers good compression with mostly software-based decoding. | 🟢 40 | 🟠 50 | 🟠 60 | 🟠 50 | 🔴 Royalty-Bearing (Complex) | 2013 | 🔴 Poor | No | YUV 4:4:4 | 10 |
+| VP9 (Lossless) | Lossless profile of VP9. A good open-source alternative for archival. | 🟢 38 | 🟠 55 | 🟡 70 | 🔴 40 | 🟢 Free (Permissive) | 2013 | 🔴 Poor | Yes | YUV 4:4:4 | 12 |
+| AV1 (Lossless) | Lossless profile of AV1. Offers the best compression ratio for archival video but is very slow. | 🟢 35 | 🟠 50 | 🟠 50 | 🔴 15 | 🟢 Free (Permissive) | 2018 | 🔴 Poor | Yes | YUV 4:4:4 | 12 |
+| Uncompressed Video (10-bit 4:4:4) | A raw, uncompressed video stream. Offers perfect quality and editing speed but with massive file sizes. | 🔴 100 | 🟡 80 | 🔵 500 | 🔵 500 | N/A | N/A | 🟢 Excellent | Yes | YUV 4:4:4 | 10 |
+| FFV1 | The open standard for video archiving, prized for its data integrity features like checksums. | 🟡 45 | 🔴 40 | 🔵 150 | 🔵 150 | 🟢 Free (Permissive) | 2003 | 🔴 Poor | Yes | YUV 4:4:4 | 16 |
 
 ### Subtitle
 
@@ -116,4 +120,3 @@
 | DTS (Core) | The standard lossy surround format from DTS, competing with Dolby Digital. Often used as a fallback track. | 🔴 95 | N/A | 🟡 75 | 🟢 90 | 🟠 Proprietary | 1993 | 5.1 | 24 | 🔴 High |
 | DTS-HD Master Audio | The primary lossless audio codec from DTS. The most common advanced format on Blu-ray. | N/A | 🟡 58 | 🟡 80 | 🟢 90 | 🟠 Proprietary | 2004 | 8 | 24 | 🔴 High |
 | DTS-HD Master Audio (DTS:X) | DTS's object-based immersive audio format, competing with Dolby Atmos. | N/A | 🟡 60 | 🟠 60 | 🟢 85 | 🟠 Proprietary | 2004 | 7.1 + Objects | 24 | 🔴 High |
-

@@ -147,13 +147,13 @@ CREATE TABLE profiles (
 
 --- Standard: MP4 ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (10, 2, 2001);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (10, 'MP4', 1);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (10, 'MP4', 1), (10, 'M4A', 0);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
     VALUES (10, 'Default', 1, 'The most compatible and widely used container format for digital video.', 99);
 
 --- Standard: MKV ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (11, 2, 2002);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (11, 'MKV', 1), (11, 'Matroska', 0);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (11, 'MKV', 1), (11, 'MKA', 0), (11, 'Matroska', 0);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support)
     VALUES (11, 'Default', 1, 'A flexible container that can hold virtually any track type, prized by enthusiasts.', 75);
 
@@ -270,6 +270,72 @@ INSERT INTO profiles (
     1, 8, 1, 4
 );
 
+--- Standard: Theora ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (27, 2, 2004);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (27, 'Theora', 1);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
+) VALUES (
+    27, 'Default', 2, 'The original open-source video codec from the creators of Vorbis and FLAC. Now a legacy format, superseded by VP8/VP9.',
+    40, 110, 120, 130,
+    0, 8, 1, 4
+);
+
+--- Standard: MPEG-1 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (28, 1, 1993);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (28, 'MPEG-1', 1);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
+) VALUES (
+    28, 'Default', 2, 'The original standard for digital video, famous for Video CDs (VCDs). Now completely obsolete due to its very poor compression.',
+    60, 200, 200, 300,
+    0, 8, 1, 4
+);
+
+--- Standard: VC-1 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (29, 3, 2006);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (29, 'VC-1', 1), (29, 'WMV9', 0);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
+) VALUES (
+    29, 'Default', 2, 'Developed by Microsoft and standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format.',
+    65, 110, 100, 105,
+    0, 8, 1, 4
+);
+
+--- Standard: MPEG-4 Part 2 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (210, 4, 1999);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (210, 'MPEG-4 Part 2', 1), (210, 'ASP', 0);
+--- Profile: DivX ---
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
+) VALUES (
+    210, 'DivX', 2, 'A popular proprietary codec from the 2000s, based on MPEG-4 Part 2. Common in older hardware players.',
+    70, 115, 110, 120,
+    0, 8, 1, 4
+);
+
+--- Standard: MPEG-4 Part 2 (Free) ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (211, 2, 2001);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (211, 'MPEG-4 Part 2', 1);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
+) VALUES (
+    211, 'XviD', 2, 'The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264.',
+    70, 115, 110, 115,
+    0, 8, 1, 4
+);
+
 -- -----------------------------------------------------------------------------
 -- Category: Video // Intermediate (ID: 3)
 -- -----------------------------------------------------------------------------
@@ -331,6 +397,19 @@ INSERT INTO profiles (
     1, 12, 3, 1
 );
 
+--- Standard: Motion JPEG ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (33, 1, 1995);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (33, 'Motion JPEG', 1), (33, 'MJPEG', 0);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, file_size_lossless,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
+) VALUES (
+    33, 'Default', 3, 'A video format consisting of a sequence of individual JPEG images. Mostly used by cinemas and older cameras.',
+    60, 40,
+    0, 8, 6, 1
+);
+
 -- -----------------------------------------------------------------------------
 -- Category: Video // Archival (ID: 4)
 -- -----------------------------------------------------------------------------
@@ -340,12 +419,12 @@ INSERT INTO standards (standard_id) VALUES (40);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (40, 'Uncompressed Video', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
-    40, '10-bit 4:4:4', 4, 'A raw, uncompressed video stream, used as a baseline for archival codecs.',
-    100,
-    1, 10, 3, 2
+    40, '10-bit 4:4:4', 4, 'A raw, uncompressed video stream. Offers perfect quality and editing speed but with massive file sizes.',
+    80, 500, 500, 100,
+    1, 10, 3, 1
 );
 
 --- Standard: FFV1 ---
@@ -353,55 +432,55 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (41, 2, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (41, 'FFV1', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
     41, 'Default', 4, 'The open standard for video archiving, prized for its data integrity features like checksums.',
-    40, 45,
+    40, 150, 150, 45,
     1, 16, 3, 4
 );
 
 --- Profile: H.264 Lossless ---
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
-    20, 'Lossless', 4, 'Lossless profile of H.264, offering poor compression but using ubiquitous hardware.',
-    42,
+    20, 'Lossless', 4, 'Lossless profile of H.264. Support for this specific profile is mostly software-based.',
+    60, 120, 80, 42,
     0, 10, 2, 4
 );
 
 --- Profile: H.265 Lossless ---
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
-    21, 'Lossless', 4, 'Lossless profile of H.265, offering good compression with potential for hardware support.',
-    40,
+    21, 'Lossless', 4, 'Lossless profile of H.265. Offers good compression with mostly software-based decoding.',
+    50, 50, 60, 40,
     0, 10, 3, 4
 );
 
 --- Profile: VP9 Lossless ---
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
-    22, 'Lossless', 4, 'Lossless profile of VP9, offering a good open-source alternative for archival.',
-    38,
+    22, 'Lossless', 4, 'Lossless profile of VP9. A good open-source alternative for archival.',
+    55, 40, 70, 38,
     1, 12, 3, 4
 );
 
 --- Profile: AV1 Lossless ---
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id
 ) VALUES (
-    23, 'Lossless', 4, 'Lossless profile of AV1, offering the best compression ratio for archival video.',
-    35,
+    23, 'Lossless', 4, 'Lossless profile of AV1. Offers the best compression ratio for archival video but is very slow.',
+    50, 15, 50, 35,
     1, 12, 3, 4
 );
 
