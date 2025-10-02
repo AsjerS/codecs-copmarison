@@ -15,10 +15,16 @@ To make your own version of the table, follow these steps:
 2. Copy this repository: `git clone https://github.com/AsjerS/codecs-copmarison.git`.
 3. CD into the repository, and generate `codecs.db` with `sqlite3 codecs.db < databse.sql`.
 4. CD into `table_generators/`, and edit the `webtables.py` configuration to your liking.
-5. Run `webtables.py`, with one of the following commands:
-    - for a simple Markdown table: `python webtables.py --format simple-md`
-    - for a Markdown table with extra formatting for GitHub: `python webtables.py --format github-md`
-    - for an HTML table: `python webtables.py --format html`
+5. Run `webtables.py` with your flags of choice, explained here:
+- Controlling types of tables:
+    - for a simple Markdown table: `--format simple-md` (or `-f simple-md`)
+    - for a Markdown table with extra formatting for GitHub: `-format github-md`
+    - for an HTML table: `--format html`
+- Selecting the amount of data:
+    - for just the essential data: `--relevance 1` (or `-r 1`)
+    - for all the data you're most likely to encounter: `--relevance 2`
+    - for everything in the database, including extremely niche data: `--relevance 3`
+- Choosing whether you want to show all aliases of codecs: `--show-aliases` (or `-a`)
 
 There is a ton of data in the database that's unused in the version on this page, so you could make your own table however you'd like. When I find the time for it I might also make a GUI application for generating these tables.
 
