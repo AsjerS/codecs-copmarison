@@ -268,7 +268,6 @@ def get_data_for_categories(relevance_threshold=3, show_all_aliases=False):
 # RENDERING
 # ==============================================================================
 
-# --- MODIFIED: This function now takes a 'tooltip_style' argument ---
 def render_as_markdown(all_data, tooltip_style=None):
     full_markdown = ""
     for category_name, rows in all_data.items():
