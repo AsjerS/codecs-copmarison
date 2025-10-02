@@ -18,7 +18,8 @@ To make your own version of the table, follow these steps:
 5. Run `webtables.py` with your flags of choice, explained here:
 - Controlling types of tables:
     - for a simple Markdown table: `--format simple-md` (or `-f simple-md`)
-    - for a Markdown table with extra formatting for GitHub: `-format github-md`
+    - for a Markdown version with HTML tooltips: `--format tooltip-md`
+    - for a Markdown table with tooltips for GitHub: `-format tooltip-github-md`
     - for an HTML table: `--format html`
 - Selecting the amount of data:
     - for just the essential data: `--relevance 1` (or `-r 1`)

@@ -238,26 +238,13 @@ def get_data_for_categories(relevance_threshold=3, show_all_aliases=False):
     else:
         alias_subquery = "(SELECT GROUP_CONCAT(name, ' / ') FROM format_aliases fa WHERE fa.standard_id = s.standard_id AND fa.is_primary = 1)"
 
-
     for category_name, active_columns in VIEW_CONFIG.items():
         if not active_columns: continue
-
+        
         query = f"""
-            SELECT 
-                s.release_year, 
-                {alias_subquery} AS display_aliases,
-                p.*, l.license_name, l.emoji AS license_emoji, 
-                cm.color_model_name, lr.level_name AS latency, lr.emoji AS latency_emoji, 
-                qr.rating_name AS editing_performance, qr.emoji AS editing_performance_emoji
-            FROM profiles p 
-            JOIN standards s ON p.standard_id = s.standard_id 
-            JOIN categories c ON p.category_id = c.category_id 
-            LEFT JOIN licenses l ON s.license_id = l.license_id 
-            LEFT JOIN qualitative_ratings qr ON p.editing_performance_id = qr.rating_id 
-            LEFT JOIN level_ratings lr ON p.latency_level_id = lr.level_id 
-            LEFT JOIN color_models cm ON p.color_model_id = cm.color_model_id
-            WHERE c.category_name = ? AND p.relevance <= ?
-            ORDER BY s.standard_id, p.profile_id
+            SELECT s.release_year, {alias_subquery} AS display_aliases, p.*, l.license_name, l.emoji AS license_emoji, cm.color_model_name, lr.level_name AS latency, lr.emoji AS latency_emoji, qr.rating_name AS editing_performance, qr.emoji AS editing_performance_emoji
+            FROM profiles p JOIN standards s ON p.standard_id = s.standard_id JOIN categories c ON p.category_id = c.category_id LEFT JOIN licenses l ON s.license_id = l.license_id LEFT JOIN qualitative_ratings qr ON p.editing_performance_id = qr.rating_id LEFT JOIN level_ratings lr ON p.latency_level_id = lr.level_id LEFT JOIN color_models cm ON p.color_model_id = cm.color_model_id
+            WHERE c.category_name = ? AND p.relevance <= ? ORDER BY s.standard_id, p.profile_id
         """
         
         cursor.execute(query, (category_name, relevance_threshold))
@@ -277,7 +264,12 @@ def get_data_for_categories(relevance_threshold=3, show_all_aliases=False):
     conn.close()
     return processed_data
 
-def render_as_markdown(all_data, use_tooltips=False):
+# ==============================================================================
+# RENDERING
+# ==============================================================================
+
+# --- MODIFIED: This function now takes a 'tooltip_style' argument ---
+def render_as_markdown(all_data, tooltip_style=None):
     full_markdown = ""
     for category_name, rows in all_data.items():
         active_columns = VIEW_CONFIG.get(category_name)
@@ -298,13 +290,19 @@ def render_as_markdown(all_data, use_tooltips=False):
                     if col_name == 'subtitle_is_image': cell_value = 'Image' if cell_value == 1 else 'Text'
                     else: cell_value = 'Yes' if cell_value == 1 else ('No' if cell_value == 0 else 'N/A')
                 processed_cell = str(cell_value) if cell_value is not None else 'N/A'
-                if col_name == 'display_name' and use_tooltips and 'notes' not in active_columns and row.get('notes'):
+
+                if col_name == 'display_name' and tooltip_style and 'notes' not in active_columns and row.get('notes'):
                     safe_notes = row['notes'].replace('"', '&quot;')
-                    processed_cell = f'<abbr title="{safe_notes}">{processed_cell}</abbr>'
+                    if tooltip_style == 'html':
+                        processed_cell = f'<abbr title="{safe_notes}">{processed_cell}</abbr>'
+                    elif tooltip_style == 'github':
+                        processed_cell = f'[{processed_cell}](# "{safe_notes}")'
+                
                 row_data.append(f"{emoji_prefix}{processed_cell}")
             full_markdown += "| " + " | ".join(row_data) + " |\n"
         full_markdown += "\n"
     return full_markdown
+
 def render_as_html(all_data):
     html_parts = ["""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Codec Comparison Guide</title><style>body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 2em; color: #333; } h1, h3 { color: #111; } table { border-collapse: collapse; width: 100%; margin-bottom: 2em; box-shadow: 0 2px 3px rgba(0,0,0,0.1); } th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; vertical-align: top; } thead { background-color: #f2f2f2; font-weight: bold; } tbody tr:nth-child(even) { background-color: #f9f9f9; } abbr { text-decoration: underline dotted; cursor: help; }</style></head><body><h1>Codec Comparison Guide</h1>"""]
     for category_name, rows in all_data.items():
@@ -335,7 +333,6 @@ def render_as_html(all_data):
     html_parts.append("</body></html>")
     return "\n".join(html_parts)
 
-
 # ==============================================================================
 # EXECUTION
 # ==============================================================================
@@ -347,22 +344,22 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '-f', '--format',
-        choices=['simple-md', 'github-md', 'html'],
+        choices=['simple-md', 'tooltip-md', 'tooltip-github-md', 'html'],
         default='simple-md',
-        help="The output format to generate (default: github-md). Choose from simple-md, github-md, html"
+        help="The output format to generate:\n"
+             "  simple-md:         Plain Markdown, no tooltips (default).\n"
+             "  tooltip-md:        Markdown with HTML <abbr> tooltips.\n"
+             "  tooltip-github-md: Markdown with GitHub-specific link tooltips.\n"
+             "  html:              A full, standalone HTML page."
     )
     parser.add_argument(
         '-r', '--relevance',
         type=int,
         choices=[1, 2, 3],
         default=2,
-        help="Filter by relevance level:\n"
-             "  1: Essential formats only.\n"
-             "  2: Essential and common formats.\n"
-             "  3: All formats, including niche/legacy (default)."
+        help="Filter by relevance level (default: 2)."
     )
-    args = parser.parse_args()
-        parser.add_argument(
+    parser.add_argument(
         '-a', '--show-aliases',
         action='store_true',
         help="Show all non-primary aliases in the 'Name' column."
@@ -376,14 +373,19 @@ if __name__ == "__main__":
         )
 
         if args.format == 'simple-md':
-            output = render_as_markdown(all_category_data, use_tooltips=False)
+            output = render_as_markdown(all_category_data, tooltip_style=None)
             with open(MD_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
             print(f"Success! Simple Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
 
-        elif args.format == 'github-md':
-            output = render_as_markdown(all_category_data, use_tooltips=True)
+        elif args.format == 'tooltip-md':
+            output = render_as_markdown(all_category_data, tooltip_style='html')
             with open(MD_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
-            print(f"Success! GitHub Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
+            print(f"Success! Tooltip Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
+        
+        elif args.format == 'tooltip-github-md':
+            output = render_as_markdown(all_category_data, tooltip_style='github')
+            with open(MD_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
+            print(f"Success! GitHub Tooltip Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
             
         elif args.format == 'html':
             output = render_as_html(all_category_data)
