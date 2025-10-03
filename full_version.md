@@ -10,31 +10,31 @@
 
 ### Video // Delivery
 
-| Name | Description | Lossy Size (%) | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Editing Performance | Alpha? | Color Model | Color Depth (bits) |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| H.264 / AVC | The universal compatibility king for over a decade. | 🔴 100 | N/A | 🟢 99 | 🟢 100 | 🟢 100 | 🟡 Royalty-Bearing (Simple) | 2003 | 🔴 Poor | No | YUV 4:2:0 | 10 |
-| H.265 / HEVC | Dominant in premium 4K media, but with complex licensing. | 🟡 50 | N/A | 🟡 75 | 🟡 80 | 🔴 20 | 🔴 Royalty-Bearing (Complex) | 2013 | 🔴 Poor | No | YUV 4:4:4 | 10 |
-| VP9 | Google's successful open alternative to HEVC, the backbone of YouTube. | 🟡 55 | N/A | 🟢 85 | 🟡 80 | 🔴 25 | 🟢 Free (Permissive) | 2013 | 🔴 Poor | Yes | YUV 4:4:4 | 12 |
-| AV1 | The royalty-free future of web video, backed by major tech companies. | 🟢 40 | N/A | 🟡 70 | 🟠 60 | 🔴 5 | 🟢 Free (Permissive) | 2018 | 🔴 Poor | Yes | YUV 4:4:4 | 12 |
-| H.266 / VVC | A successor to HEVC, its adoption is limited by licensing and the rise of AV1. | 🟢 35 | N/A | 🔴 5 | 🔴 40 | 🔴 2 | 🟠 Royalty-Bearing | 2020 | 🔴 Poor | No | YUV 4:4:4 | 10 |
-| MPEG-2 | The workhorse of standard-definition digital video (DVDs, DVB). | ⚫ 180 | N/A | 🟡 70 | 🔵 150 | 🔵 150 | 🟢 Free (Public Domain) | 1995 | 🔴 Poor | No | YUV 4:2:2 | 8 |
-| VP8 | The original royalty-free codec for WebM, now primarily used as a baseline for WebRTC. | ⚫ 115 | N/A | 🟡 70 | 🔵 130 | 🔵 120 | 🟢 Free (Permissive) | 2008 | 🔴 Poor | Yes | YUV 4:2:0 | 8 |
-| Theora | The original open-source video codec from the creators of Vorbis and FLAC. Now a legacy format, superseded by VP8/VP9. | ⚫ 130 | N/A | 🔴 40 | 🔵 120 | 🔵 110 | 🟢 Free (Permissive) | 2004 | 🔴 Poor | No | YUV 4:2:0 | 8 |
-| MPEG-1 | The original standard for digital video, famous for Video CDs (VCDs). Now completely obsolete due to its very poor compression. | ⚫ 300 | N/A | 🟠 60 | 🔵 200 | 🔵 200 | 🟢 Free (Public Domain) | 1993 | 🔴 Poor | No | YUV 4:2:0 | 8 |
-| VC-1 | Developed by Microsoft and standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format. | ⚫ 105 | N/A | 🟡 65 | 🟢 100 | 🔵 110 | 🟡 Royalty-Bearing (Simple) | 2006 | 🔴 Poor | No | YUV 4:2:0 | 8 |
-| MPEG-4 Part 2 (DivX) | A popular proprietary codec from the 2000s, based on MPEG-4 Part 2. Common in older hardware players. | ⚫ 120 | N/A | 🟡 70 | 🔵 110 | 🔵 115 | 🟠 Royalty-Bearing | 1999 | 🔴 Poor | No | YUV 4:2:0 | 8 |
-| MPEG-4 Part 2 (XviD) | The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264. | ⚫ 115 | N/A | 🟡 70 | 🔵 110 | 🔵 115 | 🟢 Free (Permissive) | 2001 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| Name | Description | Lossy Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Editing Performance | Alpha? | Color Model | Color Depth (bits) |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| H.264 / AVC | The universal compatibility king for over a decade. | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 100 | 🟡 Royalty-Bearing (Simple) | 2003 | 🔴 Poor | No | YUV 4:2:0 | 10 |
+| H.265 / HEVC | Dominant in premium 4K media, but with complex licensing. | 🟡 50 | 🟡 75 | 🟡 80 | 🔴 20 | 🔴 Royalty-Bearing (Complex) | 2013 | 🔴 Poor | No | YUV 4:4:4 | 10 |
+| VP9 | Google's successful open alternative to HEVC, the backbone of YouTube. | 🟡 55 | 🟢 85 | 🟡 80 | 🔴 25 | 🟢 Free (Permissive) | 2013 | 🔴 Poor | Yes | YUV 4:4:4 | 12 |
+| AV1 | The royalty-free future of web video, backed by major tech companies. | 🟢 40 | 🟡 70 | 🟠 60 | 🔴 5 | 🟢 Free (Permissive) | 2018 | 🔴 Poor | Yes | YUV 4:4:4 | 12 |
+| H.266 / VVC | A successor to HEVC, its adoption is limited by licensing and the rise of AV1. | 🟢 35 | 🔴 5 | 🔴 40 | 🔴 2 | 🟠 Royalty-Bearing | 2020 | 🔴 Poor | No | YUV 4:4:4 | 10 |
+| MPEG-2 | The workhorse of standard-definition digital video (DVDs, DVB). | ⚫ 180 | 🟡 70 | 🔵 150 | 🔵 150 | 🟢 Free (Public Domain) | 1995 | 🔴 Poor | No | YUV 4:2:2 | 8 |
+| VP8 | The original royalty-free codec for WebM, now primarily used as a baseline for WebRTC. | ⚫ 115 | 🟡 70 | 🔵 130 | 🔵 120 | 🟢 Free (Permissive) | 2008 | 🔴 Poor | Yes | YUV 4:2:0 | 8 |
+| Theora | The original open-source video codec from the creators of Vorbis and FLAC. Now a legacy format, superseded by VP8/VP9. | ⚫ 130 | 🔴 40 | 🔵 120 | 🔵 110 | 🟢 Free (Permissive) | 2004 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| MPEG-1 | The original standard for digital video, famous for Video CDs (VCDs). Now completely obsolete due to its very poor compression. | ⚫ 300 | 🟠 60 | 🔵 200 | 🔵 200 | 🟢 Free (Public Domain) | 1993 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| VC-1 | Developed by Microsoft and standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format. | ⚫ 105 | 🟡 65 | 🟢 100 | 🔵 110 | 🟡 Royalty-Bearing (Simple) | 2006 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| DivX | A popular proprietary codec based on MPEG-4 Part 2. Common in older hardware players from the 2000s. | ⚫ 120 | 🟡 70 | 🔵 110 | 🔵 115 | 🟠 Proprietary | 1999 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| Xvid | The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264. | ⚫ 115 | 🟡 70 | 🔵 110 | 🔵 115 | 🟢 Free (Permissive) | 2001 | 🔴 Poor | No | YUV 4:2:0 | 8 |
 
 ### Video // Intermediate
 
-| Name | Description | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Editing Performance | Alpha? | Color Model | Color Depth (bits) |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| Apple ProRes (422 HQ) | The dominant intermediate codec in Mac-centric professional workflows. | 🟢 25 | 🟡 70 | N/A | N/A | 🟠 Proprietary | 2007 | 🟢 Excellent | No | YUV 4:2:2 | 10 |
-| Apple ProRes (4444 XQ) | The highest-quality version of ProRes, supporting an alpha channel. | 🟡 55 | 🟠 60 | N/A | N/A | 🟠 Proprietary | 2007 | 🟢 Excellent | Yes | YUV 4:4:4 | 12 |
-| Avid DNxHR (HQX) | The cross-platform industry standard for professional editing, especially in broadcast. | 🟢 25 | 🟡 70 | N/A | N/A | 🟡 Royalty-Bearing (Simple) | 2014 | 🟢 Excellent | Yes | YUV 4:4:4 | 12 |
-| Avid DNxHR (LB) | A low-bandwidth version of DNxHR for offline editing and proxies. | 🟢 8 | 🟡 70 | N/A | N/A | 🟡 Royalty-Bearing (Simple) | 2014 | 🟢 Excellent | Yes | YUV 4:2:0 | 8 |
-| GoPro CineForm | A high-quality intermediate codec, popular in GoPro and VFX workflows. | 🟢 20 | 🟠 50 | N/A | N/A | 🟠 Proprietary | 2004 | 🟢 Excellent | Yes | YUV 4:4:4 | 12 |
-| Motion JPEG | A video format consisting of a sequence of individual JPEG images. Mostly used by cinemas and older cameras. | 🟢 40 | 🟠 60 | N/A | N/A | 🟢 Free (Public Domain) | 1995 | 🟢 Excellent | No | YCbCr | 8 |
+| Name | Description | Lossless Size (%) | Support (%) | License | Year | Editing Performance | Alpha? | Color Model | Color Depth (bits) |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| Apple ProRes (422 HQ) | The dominant intermediate codec in Mac-centric professional workflows. | 🟢 25 | 🟡 70 | 🟠 Proprietary | 2007 | 🟢 Excellent | No | YUV 4:2:2 | 10 |
+| Apple ProRes (4444 XQ) | The highest-quality version of ProRes, supporting an alpha channel. | 🟡 55 | 🟠 60 | 🟠 Proprietary | 2007 | 🟢 Excellent | Yes | YUV 4:4:4 | 12 |
+| Avid DNxHR (HQX) | The cross-platform industry standard for professional editing, especially in broadcast. | 🟢 25 | 🟡 70 | 🟡 Royalty-Bearing (Simple) | 2014 | 🟢 Excellent | Yes | YUV 4:4:4 | 12 |
+| Avid DNxHR (LB) | A low-bandwidth version of DNxHR for offline editing and proxies. | 🟢 8 | 🟡 70 | 🟡 Royalty-Bearing (Simple) | 2014 | 🟢 Excellent | Yes | YUV 4:2:0 | 8 |
+| GoPro CineForm | A high-quality intermediate codec, popular in GoPro and VFX workflows. | 🟢 20 | 🟠 50 | 🟠 Proprietary | 2004 | 🟢 Excellent | Yes | YUV 4:4:4 | 12 |
+| Motion JPEG | A video format consisting of a sequence of individual JPEG images. Mostly used by cinemas and older cameras. | 🟢 40 | 🟠 60 | 🟢 Free (Public Domain) | 1995 | 🟢 Excellent | No | YCbCr | 8 |
 
 ### Video // Archival
 
@@ -59,21 +59,21 @@
 
 ### Audio // Lossy
 
-| Name | Description | Lossy Size (%) | Support (%) | Decode Speed (%) | License | Year | Max Channels | Audio Depth (bits) | Latency |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| Opus | State-of-the-art codec for WebRTC, VoIP, and modern streaming. | 🟡 50 | 🟢 90 | 🟢 100 | 🟢 Free (Permissive) | 2012 | 255 | 32 | 🟢 Very Low |
-| MP3 | The legacy audio king, universal but inefficient. | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 Free (Public Domain) | 1993 | 2 | 16 | 🔴 High |
-| AAC | The standard for Apple devices, YouTube, and most modern streaming services. | 🟠 65 | 🟢 95 | 🟢 100 | 🟡 Royalty-Bearing (Simple) | 1997 | 48 | 24 | 🟠 Medium |
-| Vorbis | The original open-source alternative to MP3, used heavily by Spotify and game developers. | 🟠 80 | 🟡 75 | 🟢 100 | 🟢 Free (Permissive) | 2000 | 255 | 16 | 🔴 High |
+| Name | Description | Lossy Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Max Channels | Audio Depth (bits) | Latency |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| Opus | State-of-the-art codec for WebRTC, VoIP, and modern streaming. | 🟡 50 | 🟢 90 | 🟢 100 | 🔵 150 | 🟢 Free (Permissive) | 2012 | 255 | 32 | 🟢 Very Low |
+| MP3 | The legacy audio king, universal but inefficient. | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 100 | 🟢 Free (Public Domain) | 1993 | 2 | 16 | 🔴 High |
+| AAC | The standard for Apple devices and most modern streaming services. | 🟠 65 | 🟢 95 | 🟢 100 | 🟢 85 | 🟡 Royalty-Bearing (Simple) | 1997 | 48 | 24 | 🟠 Medium |
+| Vorbis | The original open-source alternative to MP3, used heavily by Spotify and game developers. | 🟠 80 | 🟡 75 | 🟢 90 | 🟡 70 | 🟢 Free (Permissive) | 2000 | 255 | 16 | 🔴 High |
 
 ### Audio // Lossless
 
-| Name | Description | Lossless Size (%) | Support (%) | Decode Speed (%) | License | Year | Max Channels | Audio Depth (bits) | Latency |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| WAV (Uncompressed) | The universal standard for uncompressed, raw PCM audio data, used as a baseline. | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 Free (Public Domain) | 1991 | 65536 | 32 | 🔴 High |
-| FLAC | The de facto open standard for copmressed lossless audio. Note: most existing decoders only support up to 24-bit decoding | 🟡 60 | 🟢 90 | 🟢 95 | 🟢 Free (Permissive) | 2001 | 8 | 32 | 🔴 High |
-| ALAC | Apple's native lossless format, open-sourced in 2011. | 🟠 65 | 🟠 60 | 🟢 95 | 🟢 Free (Permissive) | 2004 | 8 | 32 | 🔴 High |
-| Monkey's Audio | A proprietary codec known for its very high compression ratios, popular in niche audiophile circles. | 🟡 55 | 🔴 30 | 🟡 70 | 🟡 Free (Source Available) | 2001 | 32 | 24 | 🔴 High |
+| Name | Description | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Max Channels | Audio Depth (bits) | Latency |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| WAV (Uncompressed) | The universal standard for uncompressed, raw PCM audio data, used as a baseline. | 🔴 100 | 🟢 99 | 🔵 200 | 🔵 500 | 🟢 Free (Public Domain) | 1991 | 65536 | 32 | 🔴 High |
+| FLAC | The de facto open standard for compressed lossless audio. Note: most existing decoders only support up to 24-bit decoding | 🟡 60 | 🟢 90 | 🟢 95 | 🟢 90 | 🟢 Free (Permissive) | 2001 | 8 | 32 | 🔴 High |
+| ALAC | Apple's native lossless format, open-sourced in 2011. | 🟠 65 | 🟠 60 | 🟢 95 | 🔵 120 | 🟢 Free (Permissive) | 2004 | 8 | 32 | 🔴 High |
+| Monkey's Audio | A proprietary codec known for its very high compression ratios, popular in niche audiophile circles. | 🟡 55 | 🔴 30 | 🟡 80 | 🔴 30 | 🟡 Free (Source Available) | 2001 | 32 | 24 | 🔴 High |
 
 ### Image
 
@@ -90,12 +90,12 @@
 
 ### Animated Image
 
-| Name | Description | Lossy Size (%) | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Alpha? | Color Model | Color Depth (bits) |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| WebP (Animated) | Offers smaller file sizes than GIF with better color and alpha support. | 🟢 25 | 🟡 45 | 🟢 97 | 🟢 90 | N/A | 🟢 Free (Permissive) | 2010 | Yes | RGB | 8 |
-| AVIF (Animated) | State-of-the-art compression for animations, offering massive savings over GIF. | 🟢 15 | 🟢 40 | 🟢 85 | 🟡 70 | N/A | 🟢 Free (Permissive) | 2019 | Yes | YUV 4:4:4 | 12 |
-| GIF | The universal standard for short animations, limited to a 256-color palette. | N/A | 🔴 100 | 🟢 99 | 🟢 100 | N/A | 🟢 Free (Public Domain) | 1989 | Yes | Indexed | 8 |
-| APNG | An extension of PNG for lossless animations with full color and alpha support, used as a baseline. | N/A | 🟠 65 | 🟢 95 | 🟡 80 | N/A | 🟢 Free (Permissive) | 2004 | Yes | RGB | 8 |
+| Name | Description | Lossy Size (%) | Lossless Size (%) | Support (%) | Decode Speed (%) | License | Year | Alpha? | Color Model | Color Depth (bits) |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| WebP (Animated) | Offers smaller file sizes than GIF with better color and alpha support. | 🟢 25 | 🟡 45 | 🟢 97 | 🟢 90 | 🟢 Free (Permissive) | 2010 | Yes | RGB | 8 |
+| AVIF (Animated) | State-of-the-art compression for animations, offering massive savings over GIF. | 🟢 15 | 🟢 40 | 🟢 85 | 🟡 70 | 🟢 Free (Permissive) | 2019 | Yes | YUV 4:4:4 | 12 |
+| GIF | The universal standard for short animations, limited to a 256-color palette. | N/A | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 Free (Public Domain) | 1989 | Yes | Indexed | 8 |
+| APNG | An extension of PNG for lossless animations with full color and alpha support, used as a baseline. | N/A | 🟠 65 | 🟢 95 | 🟡 80 | 🟢 Free (Permissive) | 2004 | Yes | RGB | 8 |
 
 ### 3D Model
 
@@ -111,12 +111,13 @@
 
 ### Audio // Home Theater
 
-| Name | Description | Lossy Size (%) | Lossless Size (%) | Support (%) | Decode Speed (%) | License | Year | Max Channels | Audio Depth (bits) | Latency |
-|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| Dolby Digital | The standard for surround sound on DVDs and broadcast television. | 🔴 90 | N/A | 🟡 80 | 🟢 90 | 🟠 Proprietary | 1992 | 5.1 | 16 | 🔴 High |
-| Dolby Digital (Plus) | An enhanced version of AC-3 used by streaming services and as a core for TrueHD. | 🟠 80 | N/A | 🟡 70 | 🟢 95 | 🟠 Proprietary | 1992 | 15.1 | 24 | 🔴 High |
-| Dolby TrueHD | A lossless audio codec that directly competes with DTS-HD MA on Blu-ray discs. | N/A | 🟡 55 | 🟡 75 | 🟢 90 | 🟠 Proprietary | 2006 | 8 | 24 | 🔴 High |
-| Dolby TrueHD (Atmos) | Object-based immersive audio, typically delivered within a Dolby TrueHD stream on Blu-ray. | N/A | 🟡 58 | 🟡 65 | 🟢 85 | 🟠 Proprietary | 2006 | 7.1 + Objects | 24 | 🔴 High |
-| DTS (Core) | The standard lossy surround format from DTS, competing with Dolby Digital. Often used as a fallback track. | 🔴 95 | N/A | 🟡 75 | 🟢 90 | 🟠 Proprietary | 1993 | 5.1 | 24 | 🔴 High |
-| DTS-HD Master Audio | The primary lossless audio codec from DTS. The most common advanced format on Blu-ray. | N/A | 🟡 58 | 🟡 80 | 🟢 90 | 🟠 Proprietary | 2004 | 8 | 24 | 🔴 High |
-| DTS-HD Master Audio (DTS:X) | DTS's object-based immersive audio format, competing with Dolby Atmos. | N/A | 🟡 60 | 🟠 60 | 🟢 85 | 🟠 Proprietary | 2004 | 7.1 + Objects | 24 | 🔴 High |
+| Name | Description | Lossy Size (%) | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Max Channels | Audio Depth (bits) | Latency |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| Dolby Digital | The standard for surround sound on DVDs and broadcast television. | 🔴 90 | N/A | 🟡 80 | 🟢 90 | 🟡 75 | 🟠 Proprietary | 1992 | 5.1 | 16 | 🔴 High |
+| Dolby Digital (Plus) | An enhanced version of AC-3 used by streaming services and as a core for TrueHD. | 🟠 80 | N/A | 🟡 70 | 🟢 90 | 🟡 70 | 🟠 Proprietary | 1992 | 15.1 | 24 | 🔴 High |
+| Dolby TrueHD | A lossless audio codec that directly competes with DTS-HD MA on Blu-ray discs. | N/A | 🟡 55 | 🟡 75 | 🟢 85 | 🟠 60 | 🟠 Proprietary | 2006 | 8 | 24 | 🔴 High |
+| Dolby TrueHD (Atmos) | Object-based immersive audio, typically delivered within a Dolby TrueHD stream on Blu-ray. | N/A | 🟡 58 | 🟡 65 | 🟡 75 | 🟠 60 | 🟠 Proprietary | 2006 | 7.1 + Objects | 24 | 🔴 High |
+| DTS (Core) | The standard lossy surround format from DTS, competing with Dolby Digital. Often used as a fallback track. | 🔴 95 | N/A | 🟡 75 | 🟢 90 | 🟡 75 | 🟠 Proprietary | 1993 | 5.1 | 24 | 🔴 High |
+| DTS-HD Master Audio | The primary lossless audio codec from DTS. The most common advanced format on Blu-ray. | N/A | 🟡 58 | 🟡 80 | 🟢 85 | 🟡 65 | 🟠 Proprietary | 2004 | 8 | 24 | 🔴 High |
+| DTS-HD Master Audio (DTS:X) | DTS's object-based immersive audio format, competing with Dolby Atmos. | N/A | 🟡 60 | 🟠 60 | 🟡 75 | 🟡 65 | 🟠 Proprietary | 2004 | 7.1 + Objects | 24 | 🔴 High |
+

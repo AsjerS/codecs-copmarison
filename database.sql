@@ -33,11 +33,11 @@ CREATE TABLE licenses (
 INSERT INTO licenses (license_id, license_name, hex_colour, emoji) VALUES
     (1, 'Free (Public Domain)', '#63BE7B', '🟢'),
     (2, 'Free (Permissive)', '#70AD47', '🟢'),
-    (3, 'Royalty-Bearing (Simple)', '#FFC000', '🟡'),
-    (4, 'Royalty-Bearing', '#ED7D31', '🟠'),
-    (5, 'Royalty-Bearing (Complex)', '#C00000', '🔴'),
-    (6, 'Proprietary', '#ED7D31', '🟠'),
-    (7, 'Free (Source Available)', '#FFC000', '🟡');
+    (3, 'Royalty-Bearing (Simple)', '#CBDC81', '🟡'),
+    (4, 'Royalty-Bearing', '#FDC07C', '🟠'),
+    (5, 'Royalty-Bearing (Complex)', '#F8696B', '🔴'),
+    (6, 'Proprietary', '#FDC07C', '🟠'),
+    (7, 'Free (Source Available)', '#CBDC81', '🟡');
 
 CREATE TABLE qualitative_ratings (
     rating_id       INTEGER PRIMARY KEY,
@@ -325,14 +325,14 @@ INSERT INTO profiles (
 );
 
 --- Standard: Xvid (MPEG-4 Part 2) ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (210, 2, 2001);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (210, 'Xvid', 1);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (211, 2, 2001);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (211, 'Xvid', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    210, 'Default', 2, 'The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264.',
+    211, 'Default', 2, 'The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264.',
     70, 115, 110, 115,
     0, 8, 1, 4, 3
 );
@@ -528,11 +528,11 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (60, 2, 201
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (60, 'Opus', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossy,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     60, 'Default', 6, 'State-of-the-art codec for WebRTC, VoIP, and modern streaming.',
-    90, 100, 50,
+    90, 150, 100, 50,
     1, 32, '255', 1
 );
 
@@ -541,11 +541,11 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (61, 1, 199
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (61, 'MP3', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossy,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     61, 'Default', 6, 'The legacy audio king, universal but inefficient.',
-    99, 100, 100,
+    99, 100, 100, 100,
     4, 16, '2', 1
 );
 
@@ -554,11 +554,11 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (62, 3, 199
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (62, 'AAC', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossy,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     62, 'Default', 6, 'The standard for Apple devices and most modern streaming services.',
-    95, 100, 65,
+    95, 85, 100, 65,
     3, 24, '48', 1
 );
 
@@ -567,12 +567,12 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (63, 2, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (63, 'Vorbis', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossy,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     63, 'Default', 6, 'The original open-source alternative to MP3, used heavily by Spotify and game developers.',
-    75, 100, 80,
-    4, 16, '255', 1
+    75, 70, 90, 80,
+    4, 16, '255', 2
 );
 
 -- -----------------------------------------------------------------------------
@@ -584,10 +584,10 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (70, 1, 199
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (70, 'WAV', 1), (70, 'PCM', 0);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
 ) VALUES (
     70, 'Uncompressed', 7, 'The universal standard for uncompressed, raw PCM audio data, used as a baseline.',
-    99, 100, 100, 32, '65536', 4, 1
+    99, 500, 200, 100, 32, '65536', 4, 1
 );
 
 --- Standard: FLAC ---
@@ -595,10 +595,10 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (71, 2, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (71, 'FLAC', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
 ) VALUES (
-    71, 'Default', 7, 'The de facto open standard for copmressed lossless audio. Note: most existing decoders only support up to 24-bit decoding',
-    90, 95, 60, 32, '8', 4, 1
+    71, 'Default', 7, 'The de facto open standard for compressed lossless audio. Note: most existing decoders only support up to 24-bit decoding',
+    90, 90, 95, 60, 32, '8', 4, 1
 );
 
 --- Standard: ALAC ---
@@ -606,10 +606,10 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (72, 2, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (72, 'ALAC', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
 ) VALUES (
     72, 'Default', 7, 'Apple''s native lossless format, open-sourced in 2011.',
-    60, 95, 65, 32, '8', 4, 2
+    60, 120, 95, 65, 32, '8', 4, 2
 );
 
 --- Standard: Monkey's Audio ---
@@ -617,10 +617,10 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (73, 7, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (73, 'Monkey''s Audio', 1), (73, 'APE', 0);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
 ) VALUES (
     73, 'Default', 7, 'A proprietary codec known for its very high compression ratios, popular in niche audiophile circles.',
-    30, 70, 55, 24, '32', 4, 2
+    30, 30, 80, 55, 24, '32', 4, 3
 );
 
 -- -----------------------------------------------------------------------------
@@ -869,21 +869,21 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (64, 6, 199
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (64, 'Dolby Digital', 1), (64, 'AC-3', 0);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossy,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     64, 'Default', 11, 'The standard for surround sound on DVDs and broadcast television.',
-    80, 90, 90,
+    80, 75, 90, 90,
     4, 16, '5.1', 1
 );
 --- Profile: Dolby Digital Plus ---
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossy,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     64, 'Plus', 11, 'An enhanced version of AC-3 used by streaming services and as a core for TrueHD.',
-    70, 95, 80,
+    70, 70, 90, 80,
     4, 24, '15.1', 1
 );
 
@@ -892,21 +892,21 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (74, 6, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (74, 'Dolby TrueHD', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     74, 'Default', 11, 'A lossless audio codec that directly competes with DTS-HD MA on Blu-ray discs.',
-    75, 90, 55,
+    75, 60, 85, 55,
     4, 24, '8', 1
 );
 --- Profile: Dolby Atmos ---
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     74, 'Atmos', 11, 'Object-based immersive audio, typically delivered within a Dolby TrueHD stream on Blu-ray.',
-    65, 85, 58,
+    65, 60, 75, 58,
     4, 24, '7.1 + Objects', 1
 );
 
@@ -915,11 +915,11 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (75, 6, 199
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (75, 'DTS', 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossy,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     75, 'Core', 11, 'The standard lossy surround format from DTS, competing with Dolby Digital. Often used as a fallback track.',
-    75, 90, 95,
+    75, 75, 90, 95,
     4, 24, '5.1', 1
 );
 
@@ -928,21 +928,21 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (76, 6, 200
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (76, 'DTS-HD Master Audio', 1), (76, 'DTS-HD MA', 0);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     76, 'Default', 11, 'The primary lossless audio codec from DTS. The most common advanced format on Blu-ray.',
-    80, 90, 58,
+    80, 65, 85, 58,
     4, 24, '8', 1
 );
 --- Profile: DTS:X ---
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, decoding_speed, file_size_lossless,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     76, 'DTS:X', 11, 'DTS''s object-based immersive audio format, competing with Dolby Atmos.',
-    60, 85, 60,
+    60, 65, 75, 60,
     4, 24, '7.1 + Objects', 1
 );
 
