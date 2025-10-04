@@ -731,6 +731,19 @@ INSERT INTO profiles (
     1, 16, 4, 3
 );
 
+--- Standard: Camera RAW ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (88, 6, 2004);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (88, 'DNG', 1), (88, 'Camera RAW', 0);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, file_size_lossless,
+    has_alpha_channel, color_bit_depth, color_model_id, relevance
+) VALUES (
+    88, 'Default', 8, 'A "digital negative" containing unprocessed 12-16 bit data from a camera sensor. Offers maximum editing flexibility.',
+    50, 250,
+    0, 16, 4, 2
+);
+
 -- -----------------------------------------------------------------------------
 -- Category: Animated Image (ID: 9)
 -- -----------------------------------------------------------------------------
