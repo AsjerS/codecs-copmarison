@@ -116,7 +116,11 @@ INSERT INTO makers (maker_id, maker_name) VALUES
     (24, 'DivX, Inc.'),
     (25, 'Matthew T. Ashland'),
     (26, 'IBM'),
-    (27, 'The Community');
+    (27, 'The Community'),
+    (28, 'RealNetworks'),
+    (29, 'SoftSound'),
+    (30, 'Sorenson Media'),
+    (31, 'Sony');
 
 CREATE TABLE standard_makers (
     standard_id     INTEGER NOT NULL,
@@ -222,6 +226,13 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0104, 'AVI', 
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0104, 3);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES (0104, 'Default', 1, 'A legacy container, now outdated but still found in older archives.', 65, 3);
+
+--- Standard: Ogg ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0105, 2, 2002);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0105, 'Ogg', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0105, 4);
+INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
+    VALUES (0105, 'Default', 1, 'The container format for the Xiph.Org Foundation''s family of open-source codecs like Vorbis, Opus, and Theora.', 70, 1);
 
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
@@ -392,6 +403,48 @@ INSERT INTO profiles (
 ) VALUES (
     0211, 'Default', 2, 'The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264.',
     70, 115, 110, 115,
+    0, 8, 1, 4, 3
+);
+
+--- Standard: RealVideo ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0212, 6, 1997);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0212, 'RealVideo', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0212, 28);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0212, 'Default', 2, 'A dominant streaming video format in the late 90s/early 2000s, optimized for very low bitrates.',
+    40, 90, 90, 130,
+    0, 8, 1, 4, 3
+);
+
+--- Standard: H.263 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0213, 3, 1996);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0213, 'H.263', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0213, 10);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0213, 'Default', 2, 'The predecessor to H.264 for video conferencing and mobile video. Optimized for low bitrates.',
+    50, 140, 140, 150,
+    0, 8, 1, 4, 3
+);
+
+--- Standard: Sorenson Spark ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0214, 6, 1998);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0214, 'Sorenson Spark', 1), (0214, 'Sorenson Video 3', 0), (0214, 'SVQ3', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0214, 30);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0214, 'Default', 2, 'The dominant video codec of the early web, used in Adobe Flash Player and early versions of YouTube.',
+    45, 120, 115, 125,
     0, 8, 1, 4, 3
 );
 
@@ -644,6 +697,63 @@ INSERT INTO profiles (
     4, 16, '255', 2
 );
 
+--- Standard: MP2 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0604, 1, 1993);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0604, 'MP2', 1), (0604, 'MPEG-1 Audio Layer II', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0604, 9), (0604, 8);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    0604, 'Default', 6, 'The predecessor to MP3, used for Video CDs (VCDs) and digital broadcasting.',
+    60, 110, 105, 140,
+    4, 16, '2', 3
+);
+
+--- Standard: RealAudio ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0605, 6, 1995);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0605, 'RealAudio', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0605, 28);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    0605, 'Default', 6, 'A pioneering streaming audio format from the dial-up era, known for its high compression at low bitrates.',
+    40, 90, 95, 110,
+    4, 16, '2', 3
+);
+
+--- Standard: Windows Media Audio ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0606, 6, 1999);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0606, 'WMA', 1), (0606, 'Windows Media Audio', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0606, 3);
+--- Profile: WMA Standard ---
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    0606, 'Standard', 6, 'Microsoft''s proprietary competitor to MP3 and AAC, widely used in the Windows ecosystem.',
+    65, 90, 95, 85,
+    4, 16, '2', 2
+);
+
+--- Standard: ATRAC ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0607, 6, 1992);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0607, 'ATRAC', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0607, 31);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    0607, 'Default', 6, 'Sony''s proprietary audio codec, famous for the MiniDisc format. A major competitor to MP3 in its era.',
+    30, 95, 95, 90,
+    4, 16, '2', 3
+);
+
 -- -----------------------------------------------------------------------------
 -- Category: Audio // Lossless (ID: 7)
 -- -----------------------------------------------------------------------------
@@ -694,6 +804,27 @@ INSERT INTO profiles (
 ) VALUES (
     0703, 'Default', 7, 'A proprietary codec known for its very high compression ratios, popular in niche audiophile circles.',
     30, 30, 80, 55, 24, '32', 4, 3
+);
+
+--- Profile: WMA Lossless ---
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
+) VALUES (
+    0606, 'Lossless', 7, 'The lossless version of WMA, Microsoft''s proprietary codec, widely used in the Windows ecosystem.',
+    50, 80, 90, 62, 24, '8', 4, 3
+);
+
+--- Standard: Shorten ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0704, 7, 1992);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0704, 'Shorten', 1), (0704, 'SHN', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0704, 29);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
+) VALUES (
+    0704, 'Default', 7, 'An early lossless audio codec, popular in music trading communities before being superseded by FLAC.',
+    20, 70, 85, 70, 16, '2', 4, 3
 );
 
 -- -----------------------------------------------------------------------------
@@ -824,6 +955,34 @@ INSERT INTO profiles (
     0808, 'Default', 8, 'A "digital negative" containing unprocessed 12-16 bit data from a camera sensor. Offers maximum editing flexibility.',
     50, 250,
     0, 16, 4, 2
+);
+
+--- Standard: BMP ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0809, 6, 1990);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0809, 'BMP', 1), (0809, 'Bitmap', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0809, 3);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
+    has_alpha_channel, color_bit_depth, color_model_id, relevance
+) VALUES (
+    0809, 'Default', 8, 'The uncompressed bitmap image format native to Windows. Files are large but simple and widely supported.',
+    95, 200, 200, 130,
+    0, 8, 4, 3
+);
+
+--- Standard: JPEG 2000 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0810, 4, 2000);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0810, 'JPEG 2000', 1), (0810, 'JP2', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0810, 11);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy, file_size_lossless,
+    has_alpha_channel, color_bit_depth, color_model_id, relevance
+) VALUES (
+    0810, 'Default', 8, 'A technically superior successor to JPEG that failed to gain mainstream adoption. Now used in niche archival and medical imaging.',
+    30, 40, 50, 75, 80,
+    1, 16, 6, 3
 );
 
 -- -----------------------------------------------------------------------------
