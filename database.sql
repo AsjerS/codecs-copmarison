@@ -221,7 +221,7 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (0104, 1, 1
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0104, 'AVI', 1);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0104, 3);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
-    VALUES (0104, 'Default', 1, 'A legacy container from Microsoft, now outdated but still found in older archives.', 65, 3);
+    VALUES (0104, 'Default', 1, 'A legacy container, now outdated but still found in older archives.', 65, 3);
 
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
@@ -334,7 +334,7 @@ INSERT INTO profiles (
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0207, 'Default', 2, 'The original open-source video codec from the creators of Vorbis and FLAC. Now a legacy format, superseded by VP8/VP9.',
+    0207, 'Default', 2, 'The original open-source video codec. Now a legacy format, superseded by VP8/VP9.',
     40, 110, 120, 130,
     0, 8, 1, 4, 3
 );
@@ -362,7 +362,7 @@ INSERT INTO profiles (
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0209, 'Default', 2, 'Developed by Microsoft and standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format.',
+    0209, 'Default', 2, 'Standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format.',
     65, 110, 100, 105,
     0, 8, 1, 4, 3
 );
@@ -656,7 +656,7 @@ INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
 ) VALUES (
-    0700, 'Uncompressed', 7, 'The universal standard for uncompressed, raw PCM audio data, used as a baseline.',
+    0700, 'Uncompressed', 7, 'The universal standard for uncompressed, raw PCM audio data.',
     99, 500, 200, 100, 32, '6505036', 4, 1
 );
 
@@ -723,7 +723,7 @@ INSERT INTO profiles (
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossless,
     has_alpha_channel, color_bit_depth, color_model_id, relevance
 ) VALUES (
-    0801, 'Default', 8, 'The standard for lossless web graphics and transparency, used as a baseline.',
+    0801, 'Default', 8, 'The standard for lossless web graphics and transparency.',
     99, 30, 80, 100,
     1, 8, 4, 1
 );
@@ -779,7 +779,7 @@ INSERT INTO profiles (
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy, file_size_lossless,
     has_alpha_channel, color_bit_depth, color_model_id, relevance
 ) VALUES (
-    0805, 'Default', 8, 'The container format used by Apple devices, typically with an HEVC-encoded image.',
+    0805, 'Default', 8, 'The container format used by most modern smartphones, typically with an HEVC-encoded image.',
     65, 30, 90, 50, 70,
     1, 10, 2, 1
 );
@@ -853,7 +853,7 @@ INSERT INTO profiles (
     ecosystem_support, decoding_speed, file_size_lossless,
     has_alpha_channel, color_bit_depth, color_model_id, relevance
 ) VALUES (
-    0901, 'Default', 9, 'An extension of PNG for lossless animations with full color and alpha support, used as a baseline.',
+    0901, 'Default', 9, 'An extension of PNG for lossless animations with full color and alpha support.',
     95, 80, 65,
     1, 8, 4, 1
 );
