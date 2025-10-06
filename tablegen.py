@@ -13,7 +13,7 @@ HTML_OUTPUT_FILE = 'output.html'
 # what order. Simply reorder the column names to change the table layout.
 # Below that is a comment with all configuration options for reference.
 # ==============================================================================
-
+"""
 VIEW_CONFIG = {
     'Container': [
         'display_name',
@@ -57,12 +57,12 @@ VIEW_CONFIG = {
         'license_name',
         'has_alpha_channel',
     ],
-}
+}"""
 
 """ THEORETICAL FULL VIEW_CONFIG
 This commented-out block contains all possible columns for each category.
 You can copy and paste from here into the active VIEW_CONFIG above to customize
-the generated tables.
+the generated tables."""
 
 VIEW_CONFIG = {
     'Container': [
@@ -196,7 +196,7 @@ VIEW_CONFIG = {
         'latency',
     ],
 }
-"""
+
 
 
 
@@ -220,6 +220,37 @@ def get_emoji_for_percentage(value, interpretation='higher_is_better'):
         if value <= 100: return "🔴 ";
         return "⚫ "
     return ""
+
+def get_color_for_percentage(value, interpretation='higher_is_better'):
+    """Interpolates between red, yellow, and green for a percentage value."""
+    if not isinstance(value, (int, float)): return None
+
+    RED = (248, 105, 107)
+    YELLOW = (255, 235, 132)
+    GREEN = (99, 190, 123)
+
+    if interpretation == 'higher_is_better':
+        if value > 100: return "#63a0be"
+        value_norm = value / 100.0
+    else:
+        if value > 100: return "#666666"
+        value_norm = (100.0 - max(0, value)) / 100.0
+
+    value_norm = min(1.0, max(0.0, value_norm))
+
+    if value_norm <= 0.5:
+        start_color, end_color = RED, YELLOW
+        t = value_norm * 2
+    else:
+        start_color, end_color = YELLOW, GREEN
+        t = (value_norm - 0.5) * 2
+
+    r = int(start_color[0] * (1 - t) + end_color[0] * t)
+    g = int(start_color[1] * (1 - t) + end_color[1] * t)
+    b = int(start_color[2] * (1 - t) + end_color[2] * t)
+
+    return f'#{r:02x}{g:02x}{b:02x}'
+
 
 def get_text_color_for_bg(hex_color):
     if not hex_color or len(hex_color) < 7: return "#000000"
@@ -322,7 +353,7 @@ def render_as_markdown(all_data, tooltip_style=None):
     return full_markdown
 
 def render_as_html(all_data, use_colors=False):
-    html_parts = ["""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Codec Comparison Guide</title><style>body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 2em; color: #333; } h1, h3 { color: #111; } table { border-collapse: collapse; width: 100%; margin-bottom: 2em; box-shadow: 0 2px 3px rgba(0,0,0,0.1); } th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; vertical-align: top; } thead { background-color: #f2f2f2; font-weight: bold; } tbody tr:nth-child(even) { background-color: #f9f9f9; } abbr { text-decoration: underline dotted; cursor: help; }</style></head><body><h1>Codec Comparison Guide</h1>"""]
+    html_parts = ["""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 2em; color: #333; } h1, h3 { color: #111; } table { border-collapse: collapse; width: 100%; margin-bottom: 2em; box-shadow: 0 2px 3px rgba(0,0,0,0.1); } th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; vertical-align: top; } thead { background-color: #f2f2f2; font-weight: bold; } tbody tr:nth-child(even) { background-color: #f9f9f9; } abbr { text-decoration: underline dotted; cursor: help; }</style></head><body>"""]
 
     for category_name, rows in all_data.items():
         active_columns = VIEW_CONFIG.get(category_name, [])
@@ -343,16 +374,23 @@ def render_as_html(all_data, use_colors=False):
 
                 style_str = ""
                 emoji_prefix = ""
-                if use_colors and col_name in COLOR_MAP:
-                    hex_color_col = COLOR_MAP[col_name]
-                    hex_color = row.get(hex_color_col)
+                hex_color = None
+
+                if use_colors:
+                    if col_name in COLOR_MAP:
+                        hex_color = row.get(COLOR_MAP[col_name])
+                    elif col_name in PERCENTAGE_COLUMNS:
+                        hex_color = get_color_for_percentage(cell_value, PERCENTAGE_COLUMNS[col_name])
+                    
                     if hex_color:
                         text_color = get_text_color_for_bg(hex_color)
                         style_str = f' style="background-color: {hex_color}; color: {text_color};"'
-                elif col_name in EMOJI_MAP and row.get(EMOJI_MAP[col_name]):
-                    emoji_prefix = f"{row[EMOJI_MAP[col_name]]} "
-                elif col_name in PERCENTAGE_COLUMNS:
-                    emoji_prefix = get_emoji_for_percentage(cell_value, PERCENTAGE_COLUMNS[col_name])
+
+                if not style_str:
+                    if col_name in EMOJI_MAP and row.get(EMOJI_MAP[col_name]):
+                        emoji_prefix = f"{row[EMOJI_MAP[col_name]]} "
+                    elif col_name in PERCENTAGE_COLUMNS:
+                        emoji_prefix = get_emoji_for_percentage(cell_value, PERCENTAGE_COLUMNS[col_name])
                 
                 if col_name == 'has_alpha_channel' or col_name == 'subtitle_is_image':
                     if col_name == 'subtitle_is_image': cell_value = 'Image' if cell_value == 1 else 'Text'

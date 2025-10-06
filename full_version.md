@@ -6,7 +6,7 @@
 | MKV | A flexible container that can hold virtually any track type, prized by enthusiasts. | 🟡 75 | 🟢 Free (Permissive) | 2002 |
 | WebM | A container specifically designed for royalty-free web codecs like VP9 and AV1. | 🟢 90 | 🟢 Free (Permissive) | 2010 |
 | MOV | Apple's container format, a standard in professional video production. | 🟡 80 | 🟠 Proprietary | 1991 |
-| AVI | A legacy container from Microsoft, now outdated but still found in older archives. | 🟡 65 | 🟢 Free (Public Domain) | 1992 |
+| AVI | A legacy container, now outdated but still found in older archives. | 🟡 65 | 🟢 Free (Public Domain) | 1992 |
 
 ### Video // Delivery
 
@@ -19,9 +19,9 @@
 | H.266 / VVC | A successor to HEVC, its adoption is limited by licensing and the rise of AV1. | 🟢 35 | 🔴 5 | 🔴 40 | 🔴 2 | 🟠 Royalty-Bearing | 2020 | 🔴 Poor | No | YUV 4:4:4 | 10 |
 | MPEG-2 | The workhorse of standard-definition digital video (DVDs, DVB). | ⚫ 180 | 🟡 70 | 🔵 150 | 🔵 150 | 🟢 Free (Public Domain) | 1995 | 🔴 Poor | No | YUV 4:2:2 | 8 |
 | VP8 | The original royalty-free codec for WebM, now primarily used as a baseline for WebRTC. | ⚫ 115 | 🟡 70 | 🔵 130 | 🔵 120 | 🟢 Free (Permissive) | 2008 | 🔴 Poor | Yes | YUV 4:2:0 | 8 |
-| Theora | The original open-source video codec from the creators of Vorbis and FLAC. Now a legacy format, superseded by VP8/VP9. | ⚫ 130 | 🔴 40 | 🔵 120 | 🔵 110 | 🟢 Free (Permissive) | 2004 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| Theora | The original open-source video codec. Now a legacy format, superseded by VP8/VP9. | ⚫ 130 | 🔴 40 | 🔵 120 | 🔵 110 | 🟢 Free (Permissive) | 2004 | 🔴 Poor | No | YUV 4:2:0 | 8 |
 | MPEG-1 | The original standard for digital video, famous for Video CDs (VCDs). Now completely obsolete due to its very poor compression. | ⚫ 300 | 🟠 60 | 🔵 200 | 🔵 200 | 🟢 Free (Public Domain) | 1993 | 🔴 Poor | No | YUV 4:2:0 | 8 |
-| VC-1 | Developed by Microsoft and standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format. | ⚫ 105 | 🟡 65 | 🟢 100 | 🔵 110 | 🟡 Royalty-Bearing (Simple) | 2006 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| VC-1 | Standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format. | ⚫ 105 | 🟡 65 | 🟢 100 | 🔵 110 | 🟡 Royalty-Bearing (Simple) | 2006 | 🔴 Poor | No | YUV 4:2:0 | 8 |
 | DivX | A popular proprietary codec based on MPEG-4 Part 2. Common in older hardware players from the 2000s. | ⚫ 120 | 🟡 70 | 🔵 110 | 🔵 115 | 🟠 Proprietary | 1999 | 🔴 Poor | No | YUV 4:2:0 | 8 |
 | Xvid | The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264. | ⚫ 115 | 🟡 70 | 🔵 110 | 🔵 115 | 🟢 Free (Permissive) | 2001 | 🔴 Poor | No | YUV 4:2:0 | 8 |
 
@@ -70,7 +70,7 @@
 
 | Name | Description | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Max Channels | Audio Depth (bits) | Latency |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| WAV (Uncompressed) | The universal standard for uncompressed, raw PCM audio data, used as a baseline. | 🔴 100 | 🟢 99 | 🔵 200 | 🔵 500 | 🟢 Free (Public Domain) | 1991 | 65536 | 32 | 🔴 High |
+| WAV (Uncompressed) | The universal standard for uncompressed, raw PCM audio data. | 🔴 100 | 🟢 99 | 🔵 200 | 🔵 500 | 🟢 Free (Public Domain) | 1991 | 6505036 | 32 | 🔴 High |
 | FLAC | The de facto open standard for compressed lossless audio. Note: most existing decoders only support up to 24-bit decoding | 🟡 60 | 🟢 90 | 🟢 95 | 🟢 90 | 🟢 Free (Permissive) | 2001 | 8 | 32 | 🔴 High |
 | ALAC | Apple's native lossless format, open-sourced in 2011. | 🟠 65 | 🟠 60 | 🟢 95 | 🔵 120 | 🟢 Free (Permissive) | 2004 | 8 | 32 | 🔴 High |
 | Monkey's Audio | A proprietary codec known for its very high compression ratios, popular in niche audiophile circles. | 🟡 55 | 🔴 30 | 🟡 80 | 🔴 30 | 🟡 Free (Source Available) | 2001 | 32 | 24 | 🔴 High |
@@ -80,13 +80,14 @@
 | Name | Description | Lossy Size (%) | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Alpha? | Color Model | Color Depth (bits) |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | JPEG | The universal standard for photographic images on the web. | 🔴 100 | ⚫ 200 | 🟢 99 | 🟢 100 | 🟢 100 | 🟢 Free (Public Domain) | 1992 | No | YCbCr | 8 |
-| PNG | The standard for lossless web graphics and transparency, used as a baseline. | N/A | 🔴 100 | 🟢 99 | 🟡 80 | 🔴 30 | 🟢 Free (Permissive) | 1996 | Yes | RGB | 8 |
+| PNG | The standard for lossless web graphics and transparency. | N/A | 🔴 100 | 🟢 99 | 🟡 80 | 🔴 30 | 🟢 Free (Permissive) | 1996 | Yes | RGB | 8 |
 | WebP | Google's versatile format to replace JPEG and PNG, offering better compression. | 🟠 70 | 🟠 75 | 🟢 97 | 🟢 100 | 🟢 90 | 🟢 Free (Permissive) | 2010 | Yes | YUV 4:2:0 | 8 |
 | AVIF | State-of-the-art compression based on AV1, offering superior quality and features. | 🟡 50 | 🟠 70 | 🟢 85 | 🟡 70 | 🔴 10 | 🟢 Free (Permissive) | 2019 | Yes | YUV 4:4:4 | 12 |
 | JPEG XL | A technically superior next-gen format, but its adoption was stalled by browser politics. | 🟢 40 | 🟠 65 | 🔴 10 | 🟢 100 | 🟢 90 | 🟢 Free (Permissive) | 2020 | Yes | XYB | 16 |
-| HEIF | The container format used by Apple devices, typically with an HEVC-encoded image. | 🟡 50 | 🟠 70 | 🟡 65 | 🟢 90 | 🔴 30 | 🔴 Royalty-Bearing (Complex) | 2015 | Yes | YUV 4:2:2 | 10 |
+| HEIF | The container format used by most modern smartphones, typically with an HEVC-encoded image. | 🟡 50 | 🟠 70 | 🟡 65 | 🟢 90 | 🔴 30 | 🔴 Royalty-Bearing (Complex) | 2015 | Yes | YUV 4:2:2 | 10 |
 | SVG | An XML-based vector format. Performance and file size are not directly comparable to raster formats. | N/A | N/A | 🟢 98 | N/A | N/A | 🟢 Free (Permissive) | 2001 | Yes | Vector | 8 |
 | TIFF | The standard for high-quality print, archiving, and professional photography masters. | N/A | ⚫ 110 | 🟠 60 | 🟡 70 | 🔴 20 | 🟠 Proprietary | 1986 | Yes | RGB | 16 |
+| DNG | A "digital negative" containing unprocessed 12-16 bit data from a camera sensor. Offers maximum editing flexibility. | N/A | ⚫ 250 | 🟠 50 | N/A | N/A | 🟠 Proprietary | 2004 | No | RGB | 16 |
 
 ### Animated Image
 
@@ -95,19 +96,19 @@
 | WebP (Animated) | Offers smaller file sizes than GIF with better color and alpha support. | 🟢 25 | 🟡 45 | 🟢 97 | 🟢 90 | 🟢 Free (Permissive) | 2010 | Yes | RGB | 8 |
 | AVIF (Animated) | State-of-the-art compression for animations, offering massive savings over GIF. | 🟢 15 | 🟢 40 | 🟢 85 | 🟡 70 | 🟢 Free (Permissive) | 2019 | Yes | YUV 4:4:4 | 12 |
 | GIF | The universal standard for short animations, limited to a 256-color palette. | N/A | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 Free (Public Domain) | 1989 | Yes | Indexed | 8 |
-| APNG | An extension of PNG for lossless animations with full color and alpha support, used as a baseline. | N/A | 🟠 65 | 🟢 95 | 🟡 80 | 🟢 Free (Permissive) | 2004 | Yes | RGB | 8 |
+| APNG | An extension of PNG for lossless animations with full color and alpha support. | N/A | 🟠 65 | 🟢 95 | 🟡 80 | 🟢 Free (Permissive) | 2004 | Yes | RGB | 8 |
 
 ### 3D Model
 
 | Name | Description | Lossless Size (%) | Support (%) | License | Year |
 |:---|:---|:---|:---|:---|:---|
-| glTF | Highly optimized binary format (GLB) for web delivery; often the smallest for geometry. | 🟢 35 | 🟢 85 | 🟢 Free (Permissive) | 2015 |
-| FBX | Binary format with scene overhead; efficient but not as compact as web-focused formats for pure geometry. | 🟡 60 | 🟢 95 | 🟠 Proprietary | 2006 |
-| OBJ | Text-based and verbose; files are significantly larger than binary equivalents for the same geometry. | ⚫ 140 | 🟢 98 | 🟢 Free (Permissive) | 1990 |
-| USD | "The HTML of the Metaverse," a framework for composing and collaborating on complex 3D scenes. | 🟡 60 | 🟠 50 | 🟢 Free (Permissive) | 2016 |
 | STL (Binary) | The most used, though inefficient, standard for 3D printing. | 🔴 100 | 🟢 99 | 🟢 Free (Public Domain) | 1987 |
 | STL (ASCII) | A human-readable but inefficient text-based version of the STL format. | ⚫ 400 | 🟢 99 | 🟢 Free (Public Domain) | 1987 |
+| OBJ | Text-based and verbose; files are significantly larger than binary equivalents for the same geometry. | ⚫ 140 | 🟢 98 | 🟢 Free (Permissive) | 1990 |
 | 3MF | Uses ZIP compression, resulting in much smaller files than STL for the same model. | 🟢 40 | 🟠 60 | 🟢 Free (Permissive) | 2015 |
+| glTF | Highly optimized binary format (GLB) for web delivery; often the smallest for geometry. | 🟢 35 | 🟢 85 | 🟢 Free (Permissive) | 2015 |
+| FBX | Binary format with scene overhead; efficient but not as compact as web-focused formats for pure geometry. | 🟡 60 | 🟢 95 | 🟠 Proprietary | 2006 |
+| USD | "The HTML of the Metaverse," a framework for composing and collaborating on complex 3D scenes. | 🟡 60 | 🟠 50 | 🟢 Free (Permissive) | 2016 |
 
 ### Audio // Home Theater
 

@@ -68,7 +68,7 @@ There is a version with all codecs existing in the database named `full_version.
 
 | Name | Lossless Size (%) | Support (%) | Decode Speed (%) | License | Max Channels |
 |:---|:---|:---|:---|:---|:---|
-| [WAV (Uncompressed)](# "The universal standard for uncompressed, raw PCM audio data, used as a baseline.") | 🔴 100 | 🟢 99 | 🔵 200 | 🟢 Free (Public Domain) | 65536 |
+| [WAV (Uncompressed)](# "The universal standard for uncompressed, raw PCM audio data.") | 🔴 100 | 🟢 99 | 🔵 200 | 🟢 Free (Public Domain) | 6505036 |
 | [FLAC](# "The de facto open standard for compressed lossless audio. Note: most existing decoders only support up to 24-bit decoding") | 🟡 60 | 🟢 90 | 🟢 95 | 🟢 Free (Permissive) | 8 |
 | [ALAC](# "Apple's native lossless format, open-sourced in 2011.") | 🟠 65 | 🟠 60 | 🟢 95 | 🟢 Free (Permissive) | 8 |
 
@@ -77,8 +77,9 @@ There is a version with all codecs existing in the database named `full_version.
 | Name | Lossy Size (%) | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Alpha? |
 |:---|:---|:---|:---|:---|:---|:---|:---|
 | [JPEG](# "The universal standard for photographic images on the web.") | 🔴 100 | ⚫ 200 | 🟢 99 | 🟢 100 | 🟢 100 | 🟢 Free (Public Domain) | No |
-| [PNG](# "The standard for lossless web graphics and transparency, used as a baseline.") | N/A | 🔴 100 | 🟢 99 | 🟡 80 | 🔴 30 | 🟢 Free (Permissive) | Yes |
+| [PNG](# "The standard for lossless web graphics and transparency.") | N/A | 🔴 100 | 🟢 99 | 🟡 80 | 🔴 30 | 🟢 Free (Permissive) | Yes |
 | [WebP](# "Google's versatile format to replace JPEG and PNG, offering better compression.") | 🟠 70 | 🟠 75 | 🟢 97 | 🟢 100 | 🟢 90 | 🟢 Free (Permissive) | Yes |
 | [AVIF](# "State-of-the-art compression based on AV1, offering superior quality and features.") | 🟡 50 | 🟠 70 | 🟢 85 | 🟡 70 | 🔴 10 | 🟢 Free (Permissive) | Yes |
-| [HEIF](# "The container format used by Apple devices, typically with an HEVC-encoded image.") | 🟡 50 | 🟠 70 | 🟡 65 | 🟢 90 | 🔴 30 | 🔴 Royalty-Bearing (Complex) | Yes |
+| [HEIF](# "The container format used by most modern smartphones, typically with an HEVC-encoded image.") | 🟡 50 | 🟠 70 | 🟡 65 | 🟢 90 | 🔴 30 | 🔴 Royalty-Bearing (Complex) | Yes |
 | [SVG](# "An XML-based vector format. Performance and file size are not directly comparable to raster formats.") | N/A | N/A | 🟢 98 | N/A | N/A | 🟢 Free (Permissive) | Yes |
+| [DNG](# "A &quot;digital negative&quot; containing unprocessed 12-16 bit data from a camera sensor. Offers maximum editing flexibility.") | N/A | ⚫ 250 | 🟠 50 | N/A | N/A | 🟠 Proprietary | No |

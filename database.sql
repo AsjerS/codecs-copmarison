@@ -31,13 +31,13 @@ CREATE TABLE licenses (
     emoji           TEXT
 );
 INSERT INTO licenses (license_id, license_name, hex_colour, emoji) VALUES
-    (1, 'Free (Public Domain)', '#63BE7B', '🟢'),
-    (2, 'Free (Permissive)', '#70AD47', '🟢'),
-    (3, 'Royalty-Bearing (Simple)', '#CBDC81', '🟡'),
-    (4, 'Royalty-Bearing', '#FDC07C', '🟠'),
-    (5, 'Royalty-Bearing (Complex)', '#F8696B', '🔴'),
-    (6, 'Proprietary', '#FDC07C', '🟠'),
-    (7, 'Free (Source Available)', '#CBDC81', '🟡');
+    (1, 'Free (Public Domain)', '#63be7b', '🟢'),
+    (2, 'Free (Permissive)', '#b1d47f', '🟢'),
+    (3, 'Royalty-Bearing (Simple)', '#ffeb84', '🟡'),
+    (4, 'Royalty-Bearing', '#fbaa77', '🟠'),
+    (5, 'Royalty-Bearing (Complex)', '#f8696b', '🔴'),
+    (6, 'Proprietary', '#fbaa77', '🟠'),
+    (7, 'Free (Source Available)', '#ffeb84', '🟡');
 
 CREATE TABLE qualitative_ratings (
     rating_id       INTEGER PRIMARY KEY,
@@ -47,10 +47,10 @@ CREATE TABLE qualitative_ratings (
     sort_order      INTEGER
 );
 INSERT INTO qualitative_ratings (rating_id, rating_name, hex_colour, emoji, sort_order) VALUES
-    (1, 'Excellent', '#63BE7B', '🟢', 1),
-    (2, 'Good', '#CBDC81', '🟡', 2),
-    (3, 'Normal', '#FDC07C', '🟠', 3),
-    (4, 'Poor', '#F8696B', '🔴', 4);
+    (1, 'Excellent', '#63be7b', '🟢', 1),
+    (2, 'Good', '#cbdc81', '🟡', 2),
+    (3, 'Normal', '#fdc07c', '🟠', 3),
+    (4, 'Poor', '#f8696b', '🔴', 4);
 
 CREATE TABLE level_ratings (
     level_id        INTEGER PRIMARY KEY,
@@ -62,12 +62,12 @@ CREATE TABLE level_ratings (
 );
 INSERT INTO level_ratings (level_id, level_name, interpretation, hex_colour, emoji, sort_order) VALUES
     (1, 'Very Low', 'DESC', '#63BE7B', '🟢', 1),
-    (2, 'Low', 'DESC', '#CBDC81', '🟡', 2),
-    (3, 'Medium', 'DESC', '#FDC07C', '🟠', 3),
-    (4, 'High', 'DESC', '#F8696B', '🔴', 4),
-    (5, 'Very Low', 'ASC', '#F8696B', '🔴', 1),
-    (6, 'Low', 'ASC', '#FDC07C', '🟠', 2),
-    (7, 'Medium', 'ASC', '#CBDC81', '🟡', 3),
+    (2, 'Low', 'DESC', '#cbdc81', '🟡', 2),
+    (3, 'Medium', 'DESC', '#fdc07c', '🟠', 3),
+    (4, 'High', 'DESC', '#f8696b', '🔴', 4),
+    (5, 'Very Low', 'ASC', '#f8696b', '🔴', 1),
+    (6, 'Low', 'ASC', '#fdc07c', '🟠', 2),
+    (7, 'Medium', 'ASC', '#cbdc81', '🟡', 3),
     (8, 'High', 'ASC', '#63BE7B', '🟢', 4);
 
 CREATE TABLE color_models (
@@ -115,8 +115,8 @@ INSERT INTO makers (maker_id, maker_name) VALUES
     (23, 'CompuServe'),
     (24, 'DivX, Inc.'),
     (25, 'Matthew T. Ashland'),
-    (26, 'IBM');
-    (27, 'The Community'),
+    (26, 'IBM'),
+    (27, 'The Community');
 
 CREATE TABLE standard_makers (
     standard_id     INTEGER NOT NULL,
@@ -384,7 +384,7 @@ INSERT INTO profiles (
 --- Standard: Xvid (MPEG-4 Part 2) ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0211, 2, 2001);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0211, 'Xvid', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0500, 27);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0211, 27);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
@@ -555,7 +555,7 @@ INSERT INTO profiles (
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0500, 1, 1999);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0500, 'SRT', 1);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0500, 27);
-INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, subtitle_is_image, relevance);
+INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, subtitle_is_image, relevance)
     VALUES (0500, 'Default', 5, 'The most universal and basic text-based subtitle format.', 99, 0, 1);
 
 --- Standard: ASS ---
