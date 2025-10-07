@@ -549,6 +549,20 @@ INSERT INTO profiles (
     0, 8, 1, 1, 1
 );
 
+--- Standard: Advanced Professional Video (APV) ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0305, 2, 2024);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0305, 'APV', 1), (0305, 'Advanced Professional Video', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0305, 32);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0305, 'Default', 3, 'An ASWF open standard from Samsung. Designed to replace both DNxHR and ProRes as a more efficient and open codec.',
+    40, 80,
+    1, 16, 3, 1, 2
+);
+
 -- -----------------------------------------------------------------------------
 -- Category: Video // Archival (ID: 4)
 -- -----------------------------------------------------------------------------
