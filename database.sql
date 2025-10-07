@@ -458,20 +458,20 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0300, 'Apple 
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0300, 2);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, file_size_lossless,
+    ecosystem_support, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0300, '422 HQ', 3, 'The dominant intermediate codec in Mac-centric professional workflows.',
-    70, 25,
+    0300, '422 HQ', 3, 'A dominant visually lossless codec in Mac-centric professional workflows. Directly competes with DNxHR HQX.',
+    70, 100,
     0, 10, 2, 1, 1
 );
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, file_size_lossless,
+    ecosystem_support, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0300, '4444 XQ', 3, 'The highest-quality version of ProRes, supporting an alpha channel.',
-    60, 55,
+    0300, '4444 XQ', 3, 'The highest-quality version of ProRes, supporting 12-bit color and an alpha channel.',
+    60, 220,
     1, 12, 3, 1, 1
 );
 
@@ -481,20 +481,20 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0301, 'Avid D
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0301, 13);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, file_size_lossless,
+    ecosystem_support, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0301, 'HQX', 3, 'The cross-platform industry standard for professional editing, especially in broadcast.',
-    70, 25,
+    0301, 'HQX', 3, 'The cross-platform industry standard for high-quality online editing.',
+    70, 100,
     1, 12, 3, 1, 1
 );
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, file_size_lossless,
+    ecosystem_support, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0301, 'LB', 3, 'A low-bandwidth version of DNxHR for offline editing and proxies.',
-    70, 8,
+    0301, 'LB', 3, 'A low-bandwidth "offline" proxy version of DNxHR, designed for fast performance on lower-spec systems.',
+    70, 20,
     1, 8, 1, 1, 1
 );
 
@@ -504,12 +504,12 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0302, 'GoPro 
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0302, 14);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, file_size_lossless,
+    ecosystem_support, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0302, 'Default', 3, 'A high-quality intermediate codec, popular in GoPro and VFX workflows.',
-    50, 20,
-    1, 12, 3, 1, 1
+    50, 90,
+    1, 12, 3, 1, 2
 );
 
 --- Standard: Motion JPEG ---
@@ -518,12 +518,35 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0303, 'Motion
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0303, 11);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
-    ecosystem_support, file_size_lossless,
+    ecosystem_support, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0303, 'Default', 3, 'A video format consisting of a sequence of individual JPEG images. Mostly used by cinemas and older cameras.',
-    60, 40,
-    0, 8, 6, 1, 2
+    0303, 'Default', 3, 'A video format consisting of individual JPEG images. Very inefficient but extremely easy to edit.',
+    60, 250,
+    0, 8, 6, 1, 3
+);
+
+--- Standard: Avid DNxHD ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0304, 3, 2004);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0304, 'Avid DNxHD', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0304, 13);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0304, '175x', 3, 'The predecessor to DNxHR, limited to HD resolutions.',
+    65, 100,
+    0, 10, 2, 1, 1
+);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0304, '36', 3, 'A very low-bitrate 8-bit proxy version of DNxHD.',
+    65, 20,
+    0, 8, 1, 1, 1
 );
 
 -- -----------------------------------------------------------------------------
