@@ -13,7 +13,7 @@ HTML_OUTPUT_FILE = 'output.html'
 # what order. Simply reorder the column names to change the table layout.
 # Below that is a comment with all configuration options for reference.
 # ==============================================================================
-"""
+
 VIEW_CONFIG = {
     'Container': [
         'display_name',
@@ -57,12 +57,12 @@ VIEW_CONFIG = {
         'license_name',
         'has_alpha_channel',
     ],
-}"""
+}
 
 """ THEORETICAL FULL VIEW_CONFIG
 This commented-out block contains all possible columns for each category.
 You can copy and paste from here into the active VIEW_CONFIG above to customize
-the generated tables."""
+the generated tables.
 
 VIEW_CONFIG = {
     'Container': [
@@ -196,7 +196,7 @@ VIEW_CONFIG = {
         'latency',
     ],
 }
-
+"""
 
 
 
@@ -343,9 +343,7 @@ def render_as_markdown(all_data, tooltip_style=None):
                 if col_name == 'display_name' and tooltip_style and 'notes' not in active_columns and row.get('notes'):
                     safe_notes = row['notes'].replace('"', '&quot;')
                     if tooltip_style == 'html':
-                        processed_cell = f'<abbr title="{safe_notes}">{processed_cell}</abbr>'
-                    elif tooltip_style == 'github':
-                        processed_cell = f'[{processed_cell}](# "{safe_notes}")'
+                        processed_cell = f'<span title="{safe_notes}">{processed_cell}</span>'
                 
                 row_data.append(f"{emoji_prefix}{processed_cell}")
             full_markdown += "| " + " | ".join(row_data) + " |\n"
@@ -353,7 +351,7 @@ def render_as_markdown(all_data, tooltip_style=None):
     return full_markdown
 
 def render_as_html(all_data, use_colors=False):
-    html_parts = ["""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 2em; color: #333; } h1, h3 { color: #111; } table { border-collapse: collapse; width: 100%; margin-bottom: 2em; box-shadow: 0 2px 3px rgba(0,0,0,0.1); } th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; vertical-align: top; } thead { background-color: #f2f2f2; font-weight: bold; } tbody tr:nth-child(even) { background-color: #f9f9f9; } abbr { text-decoration: underline dotted; cursor: help; }</style></head><body>"""]
+    html_parts = ["""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 2em; color: #333; } h1, h3 { color: #111; } table { border-collapse: collapse; width: 100%; margin-bottom: 2em; box-shadow: 0 2px 3px rgba(0,0,0,0.1); } th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; vertical-align: top; } thead { background-color: #f2f2f2; font-weight: bold; } tbody tr:nth-child(even) { background-color: #f9f9f9; } span { text-decoration: underline dotted; cursor: help; }</style></head><body>"""]
 
     for category_name, rows in all_data.items():
         active_columns = VIEW_CONFIG.get(category_name, [])
@@ -399,7 +397,7 @@ def render_as_html(all_data, use_colors=False):
                 processed_cell = str(cell_value) if cell_value is not None else 'N/A'
                 if col_name == 'display_name' and 'notes' not in active_columns and row.get('notes'):
                     safe_notes = row['notes'].replace('"', '&quot;')
-                    processed_cell = f'<abbr title="{safe_notes}">{processed_cell}</abbr>'
+                    processed_cell = f'<span title="{safe_notes}">{processed_cell}</span>'
                 
                 html_parts.append(f"<td{style_str}>{emoji_prefix}{processed_cell}</td>")
             html_parts.append("</tr>")
@@ -419,12 +417,11 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '-f', '--format',
-        choices=['simple-md', 'tooltip-md', 'tooltip-github-md', 'html', 'color-html'],
+        choices=['simple-md', 'tooltip-md', 'html', 'color-html'],
         default='simple-md',
         help="The output format to generate:\n"
              "  simple-md:         Plain Markdown, no tooltips (default).\n"
-             "  tooltip-md:        Markdown with HTML <abbr> tooltips.\n"
-             "  tooltip-github-md: Markdown with GitHub-specific link tooltips.\n"
+             "  tooltip-md:        Markdown with HTML <span> tooltips.\n"
              "  html:              A standalone HTML page with emojis.\n"
              "  color-html:        A standalone HTML page with colored cells."
     )
@@ -455,11 +452,6 @@ if __name__ == "__main__":
             output = render_as_markdown(all_category_data, tooltip_style='html')
             with open(MD_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
             print(f"Success! Tooltip Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
-        
-        elif args.format == 'tooltip-github-md':
-            output = render_as_markdown(all_category_data, tooltip_style='github')
-            with open(MD_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
-            print(f"Success! GitHub Tooltip Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
             
         elif args.format == 'html':
             output = render_as_html(all_category_data, use_colors=False)

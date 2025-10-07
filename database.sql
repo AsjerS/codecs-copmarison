@@ -737,7 +737,7 @@ INSERT INTO profiles (
 ) VALUES (
     0606, 'Standard', 6, 'Microsoft''s proprietary competitor to MP3 and AAC, widely used in the Windows ecosystem.',
     65, 90, 95, 85,
-    4, 16, '2', 2
+    4, 16, '2', 3
 );
 
 --- Standard: ATRAC ---

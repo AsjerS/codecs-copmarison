@@ -7,6 +7,7 @@
 | WebM | A container specifically designed for royalty-free web codecs like VP9 and AV1. | 🟢 90 | 🟢 Free (Permissive) | 2010 |
 | MOV | Apple's container format, a standard in professional video production. | 🟡 80 | 🟠 Proprietary | 1991 |
 | AVI | A legacy container, now outdated but still found in older archives. | 🟡 65 | 🟢 Free (Public Domain) | 1992 |
+| Ogg | The container format for the Xiph.Org Foundation's family of open-source codecs like Vorbis, Opus, and Theora. | 🟡 70 | 🟢 Free (Permissive) | 2002 |
 
 ### Video // Delivery
 
@@ -24,6 +25,9 @@
 | VC-1 | Standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format. | ⚫ 105 | 🟡 65 | 🟢 100 | 🔵 110 | 🟡 Royalty-Bearing (Simple) | 2006 | 🔴 Poor | No | YUV 4:2:0 | 8 |
 | DivX | A popular proprietary codec based on MPEG-4 Part 2. Common in older hardware players from the 2000s. | ⚫ 120 | 🟡 70 | 🔵 110 | 🔵 115 | 🟠 Proprietary | 1999 | 🔴 Poor | No | YUV 4:2:0 | 8 |
 | Xvid | The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264. | ⚫ 115 | 🟡 70 | 🔵 110 | 🔵 115 | 🟢 Free (Permissive) | 2001 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| RealVideo | A dominant streaming video format in the late 90s/early 2000s, optimized for very low bitrates. | ⚫ 130 | 🔴 40 | 🟢 90 | 🟢 90 | 🟠 Proprietary | 1997 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| H.263 | The predecessor to H.264 for video conferencing and mobile video. Optimized for low bitrates. | ⚫ 150 | 🟠 50 | 🔵 140 | 🔵 140 | 🟡 Royalty-Bearing (Simple) | 1996 | 🔴 Poor | No | YUV 4:2:0 | 8 |
+| Sorenson Spark | The dominant video codec of the early web, used in Adobe Flash Player and early versions of YouTube. | ⚫ 125 | 🟠 45 | 🔵 115 | 🔵 120 | 🟠 Proprietary | 1998 | 🔴 Poor | No | YUV 4:2:0 | 8 |
 
 ### Video // Intermediate
 
@@ -65,15 +69,21 @@
 | MP3 | The legacy audio king, universal but inefficient. | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 100 | 🟢 Free (Public Domain) | 1993 | 2 | 16 | 🔴 High |
 | AAC | The standard for Apple devices and most modern streaming services. | 🟠 65 | 🟢 95 | 🟢 100 | 🟢 85 | 🟡 Royalty-Bearing (Simple) | 1997 | 48 | 24 | 🟠 Medium |
 | Vorbis | The original open-source alternative to MP3, used heavily by Spotify and game developers. | 🟠 80 | 🟡 75 | 🟢 90 | 🟡 70 | 🟢 Free (Permissive) | 2000 | 255 | 16 | 🔴 High |
+| MP2 | The predecessor to MP3, used for Video CDs (VCDs) and digital broadcasting. | ⚫ 140 | 🟠 60 | 🔵 105 | 🔵 110 | 🟢 Free (Public Domain) | 1993 | 2 | 16 | 🔴 High |
+| RealAudio | A pioneering streaming audio format from the dial-up era, known for its high compression at low bitrates. | ⚫ 110 | 🔴 40 | 🟢 95 | 🟢 90 | 🟠 Proprietary | 1995 | 2 | 16 | 🔴 High |
+| WMA (Standard) | Microsoft's proprietary competitor to MP3 and AAC, widely used in the Windows ecosystem. | 🔴 85 | 🟡 65 | 🟢 95 | 🟢 90 | 🟠 Proprietary | 1999 | 2 | 16 | 🔴 High |
+| ATRAC | Sony's proprietary audio codec, famous for the MiniDisc format. A major competitor to MP3 in its era. | 🔴 90 | 🔴 30 | 🟢 95 | 🟢 95 | 🟠 Proprietary | 1992 | 2 | 16 | 🔴 High |
 
 ### Audio // Lossless
 
 | Name | Description | Lossless Size (%) | Support (%) | Decode Speed (%) | Encode Speed (%) | License | Year | Max Channels | Audio Depth (bits) | Latency |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| WMA (Lossless) | The lossless version of WMA, Microsoft's proprietary codec, widely used in the Windows ecosystem. | 🟠 62 | 🟠 50 | 🟢 90 | 🟡 80 | 🟠 Proprietary | 1999 | 8 | 24 | 🔴 High |
 | WAV (Uncompressed) | The universal standard for uncompressed, raw PCM audio data. | 🔴 100 | 🟢 99 | 🔵 200 | 🔵 500 | 🟢 Free (Public Domain) | 1991 | 6505036 | 32 | 🔴 High |
 | FLAC | The de facto open standard for compressed lossless audio. Note: most existing decoders only support up to 24-bit decoding | 🟡 60 | 🟢 90 | 🟢 95 | 🟢 90 | 🟢 Free (Permissive) | 2001 | 8 | 32 | 🔴 High |
 | ALAC | Apple's native lossless format, open-sourced in 2011. | 🟠 65 | 🟠 60 | 🟢 95 | 🔵 120 | 🟢 Free (Permissive) | 2004 | 8 | 32 | 🔴 High |
 | Monkey's Audio | A proprietary codec known for its very high compression ratios, popular in niche audiophile circles. | 🟡 55 | 🔴 30 | 🟡 80 | 🔴 30 | 🟡 Free (Source Available) | 2001 | 32 | 24 | 🔴 High |
+| Shorten | An early lossless audio codec, popular in music trading communities before being superseded by FLAC. | 🟠 70 | 🔴 20 | 🟢 85 | 🟡 70 | 🟡 Free (Source Available) | 1992 | 2 | 16 | 🔴 High |
 
 ### Image
 
@@ -88,6 +98,8 @@
 | SVG | An XML-based vector format. Performance and file size are not directly comparable to raster formats. | N/A | N/A | 🟢 98 | N/A | N/A | 🟢 Free (Permissive) | 2001 | Yes | Vector | 8 |
 | TIFF | The standard for high-quality print, archiving, and professional photography masters. | N/A | ⚫ 110 | 🟠 60 | 🟡 70 | 🔴 20 | 🟠 Proprietary | 1986 | Yes | RGB | 16 |
 | DNG | A "digital negative" containing unprocessed 12-16 bit data from a camera sensor. Offers maximum editing flexibility. | N/A | ⚫ 250 | 🟠 50 | N/A | N/A | 🟠 Proprietary | 2004 | No | RGB | 16 |
+| BMP | The uncompressed bitmap image format native to Windows. Files are large but simple and widely supported. | N/A | ⚫ 130 | 🟢 95 | 🔵 200 | 🔵 200 | 🟠 Proprietary | 1990 | No | RGB | 8 |
+| JPEG 2000 | A technically superior successor to JPEG that failed to gain mainstream adoption. Now used in niche archival and medical imaging. | 🟠 75 | 🟠 80 | 🔴 30 | 🟠 50 | 🔴 40 | 🟠 Royalty-Bearing | 2000 | Yes | YCbCr | 16 |
 
 ### Animated Image
 
@@ -121,4 +133,3 @@
 | DTS (Core) | The standard lossy surround format from DTS, competing with Dolby Digital. Often used as a fallback track. | 🔴 95 | N/A | 🟡 75 | 🟢 90 | 🟡 75 | 🟠 Proprietary | 1993 | 5.1 | 24 | 🔴 High |
 | DTS-HD Master Audio | The primary lossless audio codec from DTS. The most common advanced format on Blu-ray. | N/A | 🟡 58 | 🟡 80 | 🟢 85 | 🟡 65 | 🟠 Proprietary | 2004 | 8 | 24 | 🔴 High |
 | DTS-HD Master Audio (DTS:X) | DTS's object-based immersive audio format, competing with Dolby Atmos. | N/A | 🟡 60 | 🟠 60 | 🟡 75 | 🟡 65 | 🟠 Proprietary | 2004 | 7.1 + Objects | 24 | 🔴 High |
-
