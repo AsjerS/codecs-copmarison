@@ -34,6 +34,8 @@ Note: this is a heavily stripped down version of the comparison, only containing
 
 There is a version with all codecs existing in the database named `full_version.md`, though this is mostly just for easily previewing what data there is in the database without installing anything.
 
+(you can hover over most of the codec names to get a small description about them)
+
 ### Container
 
 | Name | Description | Support (%) | License | Year |
@@ -63,7 +65,6 @@ There is a version with all codecs existing in the database named `full_version.
 | <span title="The legacy audio king, universal but inefficient.">MP3</span> | 🔴 100 | 🟢 99 | 🟢 100 | 🟢 Free (Public Domain) | 2 | 🔴 High |
 | <span title="The standard for Apple devices and most modern streaming services.">AAC</span> | 🟠 65 | 🟢 95 | 🟢 100 | 🟡 Royalty-Bearing (Simple) | 48 | 🟠 Medium |
 | <span title="The original open-source alternative to MP3, used heavily by Spotify and game developers.">Vorbis</span> | 🟠 80 | 🟡 75 | 🟢 90 | 🟢 Free (Permissive) | 255 | 🔴 High |
-| <span title="Microsoft's proprietary competitor to MP3 and AAC, widely used in the Windows ecosystem.">WMA (Standard)</span> | 🔴 85 | 🟡 65 | 🟢 95 | 🟠 Proprietary | 2 | 🔴 High |
 
 ### Audio // Lossless
 
