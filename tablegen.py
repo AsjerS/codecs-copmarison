@@ -67,6 +67,7 @@ the generated tables.
 VIEW_CONFIG = {
     'Container': [
         'display_name',
+        'maker_names',
         'notes',
         'ecosystem_support',
         'license_name',
@@ -74,6 +75,7 @@ VIEW_CONFIG = {
     ],
     'Video // Delivery': [
         'display_name',
+        'maker_names',
         'notes',
         'file_size_lossy',
         'ecosystem_support',
@@ -88,6 +90,7 @@ VIEW_CONFIG = {
     ],
     'Video // Intermediate': [
         'display_name',
+        'maker_names',
         'notes',
         'file_size_lossless',
         'ecosystem_support',
@@ -100,6 +103,7 @@ VIEW_CONFIG = {
     ],
     'Video // Archival': [
         'display_name',
+        'maker_names',
         'notes',
         'file_size_lossless',
         'ecosystem_support',
@@ -114,6 +118,7 @@ VIEW_CONFIG = {
     ],
     'Subtitle': [
         'display_name',
+        'maker_names',
         'notes',
         'ecosystem_support',
         'license_name',
@@ -122,6 +127,7 @@ VIEW_CONFIG = {
     ],
     'Audio // Lossy': [
         'display_name',
+        'maker_names',
         'notes',
         'file_size_lossy',
         'ecosystem_support',
@@ -135,6 +141,7 @@ VIEW_CONFIG = {
     ],
     'Audio // Lossless': [
         'display_name',
+        'maker_names',
         'notes',
         'file_size_lossless',
         'ecosystem_support',
@@ -148,6 +155,7 @@ VIEW_CONFIG = {
     ],
     'Image': [
         'display_name',
+        'maker_names',
         'notes',
         'file_size_lossy',
         'file_size_lossless',
@@ -162,6 +170,7 @@ VIEW_CONFIG = {
     ],
     'Animated Image': [
         'display_name',
+        'maker_names',
         'notes',
         'file_size_lossy',
         'file_size_lossless',
@@ -175,6 +184,7 @@ VIEW_CONFIG = {
     ],
     '3D Model': [
         'display_name',
+        'maker_names',
         'notes',
         'file_size_lossless',
         'ecosystem_support',
@@ -183,6 +193,7 @@ VIEW_CONFIG = {
     ],
     'Audio // Home Theater': [
         'display_name',
+        'maker_names',
         'notes',
         'file_size_lossy',
         'file_size_lossless',
@@ -200,7 +211,7 @@ VIEW_CONFIG = {
 
 
 
-HEADER_MAPPING = { 'display_name': 'Name', 'notes': 'Description', 'license_name': 'License', 'release_year': 'Year', 'ecosystem_support': 'Support (%)', 'encoding_speed': 'Encode Speed (%)', 'decoding_speed': 'Decode Speed (%)', 'has_alpha_channel': 'Alpha?', 'color_bit_depth': 'Color Depth (bits)', 'audio_bit_depth': 'Audio Depth (bits)', 'color_model_name': 'Color Model', 'file_size_lossy': 'Lossy Size (%)', 'file_size_lossless': 'Lossless Size (%)', 'latency': 'Latency', 'editing_performance': 'Editing Performance', 'max_audio_channels': 'Max Channels', 'subtitle_is_image': 'Type' }
+HEADER_MAPPING = { 'display_name': 'Name', 'maker_names': 'Maker(s)', 'notes': 'Description', 'license_name': 'License', 'release_year': 'Year', 'ecosystem_support': 'Support (%)', 'encoding_speed': 'Encode Speed (%)', 'decoding_speed': 'Decode Speed (%)', 'has_alpha_channel': 'Alpha?', 'color_bit_depth': 'Color Depth (bits)', 'audio_bit_depth': 'Audio Depth (bits)', 'color_model_name': 'Color Model', 'file_size_lossy': 'Lossy Size (%)', 'file_size_lossless': 'Lossless Size (%)', 'latency': 'Latency', 'editing_performance': 'Editing Performance', 'max_audio_channels': 'Max Channels', 'subtitle_is_image': 'Type' }
 EMOJI_MAP = {'license_name': 'license_emoji', 'editing_performance': 'editing_performance_emoji', 'latency': 'latency_emoji'}
 COLOR_MAP = {'license_name': 'license_hex', 'editing_performance': 'editing_performance_hex', 'latency': 'latency_hex'}
 PERCENTAGE_COLUMNS = {'ecosystem_support': 'higher_is_better', 'encoding_speed': 'higher_is_better', 'decoding_speed': 'higher_is_better', 'file_size_lossy': 'lower_is_better', 'file_size_lossless': 'lower_is_better'}
@@ -275,16 +286,15 @@ def get_data_for_categories(relevance_threshold=3, show_all_aliases=False):
     cursor = conn.cursor()
     processed_data = {}
 
-    if show_all_aliases:
-        alias_subquery = "(SELECT GROUP_CONCAT(name, ' / ') FROM format_aliases fa WHERE fa.standard_id = s.standard_id ORDER BY fa.is_primary DESC)"
-    else:
-        alias_subquery = "(SELECT GROUP_CONCAT(name, ' / ') FROM format_aliases fa WHERE fa.standard_id = s.standard_id AND fa.is_primary = 1)"
+    alias_subquery = "(SELECT GROUP_CONCAT(name, ' / ') FROM format_aliases fa WHERE fa.standard_id = s.standard_id ORDER BY fa.is_primary DESC)" if show_all_aliases else "(SELECT GROUP_CONCAT(name, ' / ') FROM format_aliases fa WHERE fa.standard_id = s.standard_id AND fa.is_primary = 1)"
+
+    maker_subquery = "(SELECT GROUP_CONCAT(m.maker_name, ', ') FROM standard_makers sm JOIN makers m ON sm.maker_id = m.maker_id WHERE sm.standard_id = s.standard_id)"
 
     for category_name, active_columns in VIEW_CONFIG.items():
         if not active_columns: continue
 
         query = f"""
-            SELECT s.release_year, {alias_subquery} AS display_aliases, p.*, 
+            SELECT s.release_year, {alias_subquery} AS display_aliases, {maker_subquery} as maker_names, p.*, 
                    l.license_name, l.emoji AS license_emoji, l.hex_colour AS license_hex,
                    cm.color_model_name, 
                    lr.level_name AS latency, lr.emoji AS latency_emoji, lr.hex_colour AS latency_hex,
@@ -296,21 +306,21 @@ def get_data_for_categories(relevance_threshold=3, show_all_aliases=False):
             LEFT JOIN color_models cm ON p.color_model_id = cm.color_model_id
             WHERE c.category_name = ? AND p.relevance <= ? ORDER BY s.standard_id, p.profile_id
         """
-        
+
         cursor.execute(query, (category_name, relevance_threshold))
         rows = [dict(row) for row in cursor.fetchall()]
-        
+
         if not rows: continue
-        
+
         for row in rows:
             display_name = row['display_aliases']
             profile_name = row['profile_name']
             if profile_name and profile_name.lower() != 'default':
                 display_name += f" ({profile_name})"
             row['display_name'] = display_name
-        
+
         processed_data[category_name] = rows
-    
+
     conn.close()
     return processed_data
 
