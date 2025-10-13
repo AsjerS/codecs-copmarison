@@ -837,7 +837,7 @@ INSERT INTO profiles (
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
 ) VALUES (
     0700, 'Uncompressed', 7, 'The universal standard for uncompressed, raw PCM audio data.',
-    99, 500, 200, 100, 32, '6505036', 4, 1
+    99, 1000, 1000, 100, 32, '65536', 4, 1
 );
 
 --- Standard: FLAC ---
