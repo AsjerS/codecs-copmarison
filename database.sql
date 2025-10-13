@@ -799,6 +799,31 @@ INSERT INTO profiles (
     4, 16, '2', 3
 );
 
+--- Standard: Adaptive Multi-Rate (AMR) ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0608, 3, 1999);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0608, 'AMR', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0608, 32);
+--- Profile: AMR Narrowband ---
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    0608, 'Narrowband (AMR-NB)', 6, 'The standard speech codec for 2G/3G mobile networks. Optimized for voice intelligibility at extremely low bitrates.',
+    80, 300, 300, 15,
+    1, 16, '1', 3
+);
+--- Profile: AMR Wideband ---
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    0608, 'Wideband (AMR-WB)', 6, 'The "HD Voice" codec used in modern mobile networks (VoLTE). Offers significantly better speech quality than AMR-NB.',
+    75, 250, 250, 25,
+    1, 16, '1', 3
+);
+
 -- -----------------------------------------------------------------------------
 -- Category: Audio // Lossless (ID: 7)
 -- -----------------------------------------------------------------------------
