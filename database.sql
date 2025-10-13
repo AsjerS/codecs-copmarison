@@ -120,7 +120,8 @@ INSERT INTO makers (maker_id, maker_name) VALUES
     (28, 'RealNetworks'),
     (29, 'SoftSound'),
     (30, 'Sorenson Media'),
-    (31, 'Sony');
+    (31, 'Sony'),
+    (32, '3GPP');
 
 CREATE TABLE standard_makers (
     standard_id     INTEGER NOT NULL,
@@ -197,7 +198,7 @@ INSERT INTO standards (standard_id, license_id, release_year) VALUES (0100, 2, 2
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0100, 'MP4', 1), (0100, 'M4A', 0);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0100, 11);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
-    VALUES (0100, 'Default', 1, 'The most compatible and widely used container format for digital video.', 99, 1);
+    VALUES (0100, 'Default', 1, 'The most compatible and widely used container format for digital video. Often uses .M4A for audio-only, usually containing AAC.', 99, 1);
 
 --- Standard: MKV ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0101, 2, 2002);
@@ -233,6 +234,13 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0105, 'Ogg', 
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0105, 4);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES (0105, 'Default', 1, 'The container format for the Xiph.Org Foundation''s family of open-source codecs like Vorbis, Opus, and Theora.', 70, 1);
+
+--- Standard: 3GP ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0106, 2, 2001);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0106, '3GP', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0106, 32);
+INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
+    VALUES (0106, 'Default', 1, 'A simplified version of the MP4 container, designed for early 3G mobile phones and MMS messaging.', 50, 3);
 
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
