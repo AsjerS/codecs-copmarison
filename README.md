@@ -5,7 +5,22 @@ A detailed comparison of most major codecs for video, audio, image, and more. So
 ## File Explanation
 
 - **`database.sql`**: The script used to generate the database in SQLite, where all the data is stored initially.
-- **`table_generators/markdown.py`**: The script that generates a customizable Markdown version of the comparison from `codecs.db`.
+- **`tablegen.py`**: The script that generates a customizable version of the comparison with the data from `codecs.db`.
+
+## `database.sql` Formatting Explanation
+
+Sections:
+
+- **Enumilations**: contains tables acting as enumerations to use in the main data tables, to improve consistency and move logic away from table generator scripts.
+- **Core data tables**: where the tables are defined, which will later be populated with the actual codec data.
+    - If a column in a table has `--enum` after it, that column has a foreign key to one of the tables defined under Enumilations.
+- **Data population**: the place where all the data is inserted in the tables, grouped by category and codec.
+    - Most entries are formatted in a certain way:
+        - everything until `notes` is on the first row (has what every entry should have);
+        - everything until `file_size_*` is on the second row (has what almost every entry should have);
+        - everything until `relevance` is on the third row (mostly has category-specific data).
+    - There are exceptions made for very simple categories (at this point only `Container`), that are still readable without many line breaks. Those have (almost) everything on the same row.
+
 
 ## Build Your Own
 
