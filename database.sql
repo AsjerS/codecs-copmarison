@@ -234,6 +234,13 @@ INSERT INTO standard_makers (standard_id, maker_id) VALUES (0105, 4);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES (0105, 'Default', 1, 'The container format for the Xiph.Org Foundation''s family of open-source codecs like Vorbis, Opus, and Theora.', 70, 1);
 
+--- Standard: IAMF (Immersive Audio Model and Format) ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0106, 2, 2023);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0106, 'IAMF', 1), (0106, 'Immersive Audio Model and Format');
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0106, 5);
+INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
+    VALUES (0106, 'Default', 1, 'A specialized open container format for delivering immersive and object-based audio.', 20, 3);
+
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
 -- -----------------------------------------------------------------------------
@@ -1247,6 +1254,20 @@ INSERT INTO profiles (
     1103, 'DTS:X', 11, 'DTS''s object-based immersive audio format, competing with Dolby Atmos.',
     60, 65, 75, 60,
     4, 24, '7.1 + Objects', 1
+);
+
+--- Standard: DTS Express ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (1104, 6, 2006);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (1104, 'DTS Express', 1), (1104, 'DTSE', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (1104, 7);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    1104, 'Default', 11, 'A low-bitrate DTS codec used for secondary audio (e.g., commentaries, menus) on Blu-ray discs.',
+    70, 110, 100, 70,
+    4, 16, '5.1', 2
 );
 
 
