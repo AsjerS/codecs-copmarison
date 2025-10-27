@@ -251,11 +251,11 @@ INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_s
     VALUES ( 0107, 'Default', 1, 'A container format for CDMA2000 mobile networks, a sibling to the more common 3GP format.', 40, 3);
 
 --- Standard: IAMF (Immersive Audio Model and Format) ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0106, 2, 2023);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0106, 'IAMF', 1), (0106, 'Immersive Audio Model and Format');
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0106, 5);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0108, 2, 2023);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0108, 'IAMF', 1), (0108, 'Immersive Audio Model and Format');
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0108, 5);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
-    VALUES (0106, 'Default', 1, 'A specialized open container format for delivering immersive and object-based audio.', 20, 3);
+    VALUES (0108, 'Default', 1, 'A specialized open container format for delivering immersive and object-based audio.', 20, 3);
 
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
