@@ -317,156 +317,170 @@ INSERT INTO profiles (
     1, 12, 3, 4, 1
 );
 
---- Standard: H.266 ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0204, 4, 2020);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0204, 'H.266', 1), (0204, 'VVC', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0204, 10), (0204, 11);
+--- Standard: AV2 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0204, 2, 2024);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0204, 'AV2', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0204, 5);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0204, 'Default', 2, 'A successor to HEVC, its adoption is limited by licensing and the rise of AV1.',
+    0204, 'Default', 2, 'An in-development successor to AV1. Performance numbers are preliminary and based on early, unoptimized reference software.',
+    0, 1, 10, 30,
+    1, 12, 3, 4, 3
+);
+
+--- Standard: H.266 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0205, 4, 2020);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0205, 'H.266', 1), (0205, 'VVC', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0205, 10), (0205, 11);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0205, 'Default', 2, 'A successor to HEVC, its adoption is limited by licensing and the rise of AV1.',
     5, 2, 40, 35,
     0, 10, 3, 4, 3
 );
 
 --- Standard: MPEG-2 ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0205, 1, 1995);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0205, 'MPEG-2', 1), (0205, 'H.262', 0);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0205, 9);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0206, 1, 1995);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0206, 'MPEG-2', 1), (0206, 'H.262', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0206, 9);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0205, 'Default', 2, 'The workhorse of standard-definition digital video (DVDs, DVB).',
+    0206, 'Default', 2, 'The workhorse of standard-definition digital video (DVDs, DVB).',
     70, 150, 150, 180,
     0, 8, 2, 4, 2
 );
 
 --- Standard: VP8 ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0206, 2, 2008);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0206, 'VP8', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0206, 1);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0207, 2, 2008);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0207, 'VP8', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0207, 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0206, 'Default', 2, 'The original royalty-free codec for WebM, now primarily used as a baseline for WebRTC.',
+    0207, 'Default', 2, 'The original royalty-free codec for WebM, now primarily used as a baseline for WebRTC.',
     70, 120, 130, 115,
     1, 8, 1, 4, 2
 );
 
 --- Standard: Theora ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0207, 2, 2004);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0207, 'Theora', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0207, 4);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0208, 2, 2004);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0208, 'Theora', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0208, 4);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0207, 'Default', 2, 'The original open-source video codec. Now a legacy format, superseded by VP8/VP9.',
+    0208, 'Default', 2, 'The original open-source video codec. Now a legacy format, superseded by VP8/VP9.',
     40, 110, 120, 130,
     0, 8, 1, 4, 3
 );
 
 --- Standard: MPEG-1 ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0208, 1, 1993);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0208, 'MPEG-1', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0208, 9);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0209, 1, 1993);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0209, 'MPEG-1', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0209, 9);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0208, 'Default', 2, 'The original standard for digital video, famous for Video CDs (VCDs). Now completely obsolete due to its very poor compression.',
+    0209, 'Default', 2, 'The original standard for digital video, famous for Video CDs (VCDs). Now completely obsolete due to its very poor compression.',
     60, 200, 200, 300,
     0, 8, 1, 4, 3
 );
 
 --- Standard: VC-1 ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0209, 3, 2006);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0209, 'VC-1', 1), (0209, 'WMV9', 0);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0209, 3);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0210, 3, 2006);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0209, 'VC-1', 1), (0210, 'WMV9', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0210, 3);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0209, 'Default', 2, 'Standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format.',
+    0210, 'Default', 2, 'Standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format.',
     65, 110, 100, 105,
     0, 8, 1, 4, 3
 );
 
 --- Standard: DivX (MPEG-4 Part 2) ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0210, 6, 1999);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0210, 'DivX', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0210, 24);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0211, 6, 1999);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0211, 'DivX', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0211, 24);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0210, 'Default', 2, 'A popular proprietary codec based on MPEG-4 Part 2. Common in older hardware players from the 2000s.',
+    0211, 'Default', 2, 'A popular proprietary codec based on MPEG-4 Part 2. Common in older hardware players from the 2000s.',
     70, 115, 110, 120,
     0, 8, 1, 4, 3
 );
 
 --- Standard: Xvid (MPEG-4 Part 2) ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0211, 2, 2001);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0211, 'Xvid', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0211, 27);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0212, 2, 2001);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0212, 'Xvid', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0212, 27);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0211, 'Default', 2, 'The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264.',
+    0212, 'Default', 2, 'The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264.',
     70, 115, 110, 115,
     0, 8, 1, 4, 3
 );
 
 --- Standard: RealVideo ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0212, 6, 1997);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0212, 'RealVideo', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0212, 28);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0213, 6, 1997);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0213, 'RealVideo', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0213, 28);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0212, 'Default', 2, 'A dominant streaming video format in the late 90s/early 2000s, optimized for very low bitrates.',
+    0213, 'Default', 2, 'A dominant streaming video format in the late 90s/early 2000s, optimized for very low bitrates.',
     40, 90, 90, 130,
     0, 8, 1, 4, 3
 );
 
 --- Standard: H.263 ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0213, 3, 1996);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0213, 'H.263', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0213, 10);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0214, 3, 1996);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0214, 'H.263', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0214, 10);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0213, 'Default', 2, 'The predecessor to H.264 for video conferencing and mobile video. Optimized for low bitrates.',
+    0214, 'Default', 2, 'The predecessor to H.264 for video conferencing and mobile video. Optimized for low bitrates.',
     50, 140, 140, 150,
     0, 8, 1, 4, 3
 );
 
 --- Standard: Sorenson Spark ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0214, 6, 1998);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0214, 'Sorenson Spark', 1), (0214, 'Sorenson Video 3', 0), (0214, 'SVQ3', 0);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0214, 30);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0215, 6, 1998);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0215, 'Sorenson Spark', 1), (0214, 'Sorenson Video 3', 0), (0214, 'SVQ3', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0215, 30);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
-    0214, 'Default', 2, 'The dominant video codec of the early web, used in Adobe Flash Player and early versions of YouTube.',
+    0215, 'Default', 2, 'The dominant video codec of the early web, used in Adobe Flash Player and early versions of YouTube.',
     45, 120, 115, 125,
     0, 8, 1, 4, 3
 );
