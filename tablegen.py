@@ -1,11 +1,14 @@
 import sqlite3
 import os
 import argparse
+import csv
+import io
 
 # --- Configuration ---
 DB_FILE = 'codecs.db'
 MD_OUTPUT_FILE = 'output.md'
 HTML_OUTPUT_FILE = 'output.html'
+CSV_OUTPUT_DIR = 'output'
 
 # ==============================================================================
 # VIEW CONFIGURATION
@@ -59,12 +62,14 @@ VIEW_CONFIG = {
     ],
 }
 
-""" THEORETICAL FULL VIEW_CONFIG
-This commented-out block contains all possible columns for each category.
-You can copy and paste from here into the active VIEW_CONFIG above to customize
-the generated tables.
+"""
+THEORETICAL FULL VIEW_CONFIG
+This block contains all possible columns for each category.
+You can copy and paste from here into the active VIEW_CONFIG above
+and delete whatever you want to customize the generated tables.
+"""
 
-VIEW_CONFIG = {
+VIEW_CONFIG_FULL = {
     'Container': [
         'display_name',
         'maker_names',
@@ -207,7 +212,6 @@ VIEW_CONFIG = {
         'latency',
     ],
 }
-"""
 
 
 
@@ -328,10 +332,10 @@ def get_data_for_categories(relevance_threshold=3, show_all_aliases=False):
 # RENDERING
 # ==============================================================================
 
-def render_as_markdown(all_data, tooltip_style=None):
+def render_as_markdown(all_data, view_config, tooltip_style=None):
     full_markdown = ""
     for category_name, rows in all_data.items():
-        active_columns = VIEW_CONFIG.get(category_name)
+        active_columns = view_config.get(category_name)
         if not active_columns: continue
         full_markdown += f"### {category_name}\n\n"
         if not rows: full_markdown += "_No data available for this category._\n\n"; continue
@@ -360,11 +364,11 @@ def render_as_markdown(all_data, tooltip_style=None):
         full_markdown += "\n"
     return full_markdown
 
-def render_as_html(all_data, use_colors=False):
+def render_as_html(all_data, view_config, use_colors=False):
     html_parts = ["""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 2em; color: #333; } h1, h3 { color: #111; } table { border-collapse: collapse; width: 100%; margin-bottom: 2em; box-shadow: 0 2px 3px rgba(0,0,0,0.1); } th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; vertical-align: top; } thead { background-color: #f2f2f2; font-weight: bold; } tbody tr:nth-child(even) { background-color: #f9f9f9; } span { text-decoration: underline dotted; cursor: help; }</style></head><body>"""]
 
     for category_name, rows in all_data.items():
-        active_columns = VIEW_CONFIG.get(category_name, [])
+        active_columns = view_config.get(category_name, [])
         html_parts.append(f"<h3>{category_name}</h3>")
         if not rows:
             html_parts.append("<p><em>No data available for this category.</em></p>")
@@ -416,6 +420,26 @@ def render_as_html(all_data, use_colors=False):
     html_parts.append("</body></html>")
     return "\n".join(html_parts)
 
+def render_as_csv(rows, category_name, view_config, delimiter=','):
+    if not rows:
+        return None
+
+    active_columns = view_config.get(category_name, [])
+    if not active_columns:
+        return None
+
+    output = io.StringIO()
+    writer = csv.writer(output, delimiter=delimiter, quoting=csv.QUOTE_MINIMAL)
+
+    headers = [HEADER_MAPPING.get(col, col) for col in active_columns]
+    writer.writerow(headers)
+
+    for row in rows:
+        row_data = [row.get(col_name) for col_name in active_columns]
+        writer.writerow(row_data)
+
+    return output.getvalue()
+
 # ==============================================================================
 # EXECUTION
 # ==============================================================================
@@ -427,13 +451,17 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         '-f', '--format',
-        choices=['simple-md', 'tooltip-md', 'html', 'color-html'],
+        choices=['simple-md', 'tooltip-md', 'html', 'color-html', 'single-us-csv', 'multi-us-csv', 'single-eu-csv', 'multi-eu-csv'],
         default='simple-md',
         help="The output format to generate:\n"
              "  simple-md:         Plain Markdown, no tooltips (default).\n"
-             "  tooltip-md:        Markdown with HTML <span> tooltips.\n"
+             "  tooltip-md:        Markdown with HTML <abbr> tooltips.\n"
              "  html:              A standalone HTML page with emojis.\n"
-             "  color-html:        A standalone HTML page with colored cells."
+             "  color-html:        A standalone HTML page with colored cells.\n"
+             "  single-us-csv:     All tables in one US-style CSV file.\n"
+             "  multi-us-csv:      Each table in a separate US-style CSV file.\n"
+             "  single-eu-csv:     All tables in one EU-style CSV file.\n"
+             "  multi-eu-csv:      Each table in a separate EU-style CSV file."
     )
     parser.add_argument(
         '-r', '--relevance',
@@ -445,6 +473,16 @@ if __name__ == "__main__":
         action='store_true',
         help="Show all non-primary aliases in the 'Name' column."
     )
+    parser.add_argument(
+        '--full',
+        action='store_true',
+        help="Use the full, detailed set of columns for each table."
+    )
+    parser.add_argument(
+        '--full-debug',
+        action='store_true',
+        help="Show ALL available data columns, ignoring configs (overrides --full)."
+    )
     args = parser.parse_args()
 
     try:
@@ -453,25 +491,83 @@ if __name__ == "__main__":
             show_all_aliases=args.show_aliases
         )
 
-        if args.format == 'simple-md':
-            output = render_as_markdown(all_category_data, tooltip_style=None)
-            with open(MD_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
-            print(f"Success! Simple Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
+        effective_view_config = {}
+        if args.full_debug:
+            print("Running in --full-debug mode: showing all available columns.")
+            for category_name, rows in all_category_data.items():
+                if rows:
+                    effective_view_config[category_name] = list(rows[0].keys())
+        elif args.full:
+            print("Running in --full mode: using VIEW_CONFIG_FULL.")
+            effective_view_config = VIEW_CONFIG_FULL
+        else:
+            effective_view_config = VIEW_CONFIG
 
-        elif args.format == 'tooltip-md':
-            output = render_as_markdown(all_category_data, tooltip_style='html')
-            with open(MD_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
-            print(f"Success! Tooltip Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
-            
-        elif args.format == 'html':
-            output = render_as_html(all_category_data, use_colors=False)
-            with open(HTML_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
-            print(f"Success! HTML guide with emojis written to '{HTML_OUTPUT_FILE}' (Relevance: {args.relevance}).")
-            
-        elif args.format == 'color-html':
-            output = render_as_html(all_category_data, use_colors=True)
-            with open(HTML_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
-            print(f"Success! HTML guide with colors written to '{HTML_OUTPUT_FILE}' (Relevance: {args.relevance}).")
+
+        if 'csv' in args.format:
+            is_single_file = 'single' in args.format
+            delimiter = ',' if 'us' in args.format else ';'
+
+            if is_single_file:
+                full_csv_output = []
+                for category_name, rows in all_category_data.items():
+                    if not rows: continue
+
+                    csv_output = render_as_csv(rows, category_name, effective_view_config, delimiter=delimiter)
+                    if csv_output:
+                        full_csv_output.append(csv_output)
+
+                max_cols = max(len(effective_view_config.get(cat, [])) for cat in all_category_data.keys() if effective_view_config.get(cat))
+                separator_line = delimiter * (max_cols - 1) if max_cols > 1 else ""
+
+                final_output = f"\n{separator_line}\n".join(full_csv_output)
+                
+                output_filename = f"all_tables_{'us' if 'us' in args.format else 'eu'}.csv"
+                with open(output_filename, 'w', encoding='utf-8', newline='') as f:
+                    f.write(final_output)
+                print(f"Success! All tables written to single file '{output_filename}'.")
+
+            else:
+                if not os.path.exists(CSV_OUTPUT_DIR):
+                    os.makedirs(CSV_OUTPUT_DIR)
+                
+                file_count = 0
+                for category_name, rows in all_category_data.items():
+                    if not rows: continue
+                    
+                    csv_output = render_as_csv(rows, category_name, effective_view_config, delimiter=delimiter)
+                    if not csv_output: continue
+                    
+                    safe_filename = category_name.replace(' // ', '_').replace(' ', '_').lower()
+                    output_path = os.path.join(CSV_OUTPUT_DIR, f"{safe_filename}.csv")
+
+                    with open(output_path, 'w', encoding='utf-8', newline='') as f:
+                        f.write(csv_output)
+                    print(f"Success! Wrote {category_name} data to '{output_path}'.")
+                    file_count += 1
+                
+                print(f"\nFinished generating {file_count} CSV files.")
+
+        else:
+            if args.format == 'simple-md':
+                output = render_as_markdown(all_category_data, effective_view_config, tooltip_style=None)
+                with open(MD_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
+                print(f"Success! Simple Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
+
+            elif args.format == 'tooltip-md':
+                output = render_as_markdown(all_category_data, effective_view_config, tooltip_style='html')
+                with open(MD_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
+                print(f"Success! Tooltip Markdown guide written to '{MD_OUTPUT_FILE}' (Relevance: {args.relevance}).")
+
+            elif args.format == 'html':
+                output = render_as_html(all_category_data, effective_view_config, use_colors=False)
+                with open(HTML_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
+                print(f"Success! HTML guide with emojis written to '{HTML_OUTPUT_FILE}' (Relevance: {args.relevance}).")
+
+            elif args.format == 'color-html':
+                output = render_as_html(all_data, effective_view_config, use_colors=True)
+                with open(HTML_OUTPUT_FILE, 'w', encoding='utf-8') as f: f.write(output)
+                print(f"Success! HTML guide with colors written to '{HTML_OUTPUT_FILE}' (Relevance: {args.relevance}).")
 
     except Exception as e:
         print(f"An error occurred: {e}")

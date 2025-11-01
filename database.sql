@@ -246,13 +246,13 @@ INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_s
 --- Standard: 3G2 ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0107, 2, 2002);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0107, '3G2', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0107, 34);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0107, 33);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES ( 0107, 'Default', 1, 'A container format for CDMA2000 mobile networks, a sibling to the more common 3GP format.', 40, 3);
 
 --- Standard: IAMF (Immersive Audio Model and Format) ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0108, 2, 2023);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0108, 'IAMF', 1), (0108, 'Immersive Audio Model and Format');
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0108, 'IAMF', 1), (0108, 'Immersive Audio Model and Format', 0);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0108, 5);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES (0108, 'Default', 1, 'A specialized open container format for delivering immersive and object-based audio.', 20, 3);
@@ -403,7 +403,7 @@ INSERT INTO profiles (
 
 --- Standard: VC-1 ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0210, 3, 2006);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0209, 'VC-1', 1), (0210, 'WMV9', 0);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0210, 'VC-1', 1), (0210, 'WMV9', 0);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0210, 3);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,

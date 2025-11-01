@@ -35,11 +35,16 @@ To make your own version of the table, follow these steps:
     - for a simple Markdown table: `--format simple-md` (or `-f simple-md`)
     - for a Markdown version with HTML tooltips: `--format tooltip-md`
     - for an HTML table: `--format html`
+    - for a colourful HTML table: `--format color-html`
+    - for an American-style CSV: `--format single-us-csv`, or `--format multi-us-csv` for multiple CSVs
+    - for a European-style CSV: `--format single-eu-csv`, or `--format multi-eu-csv` for multiple CSVs
 - Selecting the amount of data:
     - for just the essential data: `--relevance 1` (or `-r 1`)
     - for all the data you're most likely to encounter: `--relevance 2`
     - for everything in the database, including extremely niche data: `--relevance 3`
 - Choosing whether you want to show all aliases of codecs: `--show-aliases` (or `-a`)
+- Using (almost) all the columns from the database: `--full`
+- Using really all the columns from the database, for debugging: `--full-debug`
 
 There is a ton of data in the database that's unused in the version on this page, so you could make your own table however you'd like. When I find the time for it I might also make a GUI application for generating these tables.
 
@@ -55,7 +60,7 @@ There is a version with all codecs existing in the database named `full_version.
 
 | Name | Description | Support (%) | License | Year |
 |:---|:---|:---|:---|:---|
-| MP4 | The most compatible and widely used container format for digital video. | 🟢 99 | 🟢 Free (Permissive) | 2001 |
+| MP4 | The most compatible and widely used container format for digital video. Often uses .M4A for audio-only, usually containing AAC. | 🟢 99 | 🟢 Free (Permissive) | 2001 |
 | MKV | A flexible container that can hold virtually any track type, prized by enthusiasts. | 🟡 75 | 🟢 Free (Permissive) | 2002 |
 | WebM | A container specifically designed for royalty-free web codecs like VP9 and AV1. | 🟢 90 | 🟢 Free (Permissive) | 2010 |
 | MOV | Apple's container format, a standard in professional video production. | 🟡 80 | 🟠 Proprietary | 1991 |
@@ -85,7 +90,7 @@ There is a version with all codecs existing in the database named `full_version.
 
 | Name | Lossless Size (%) | Support (%) | Decode Speed (%) | License | Max Channels |
 |:---|:---|:---|:---|:---|:---|
-| <span title="The universal standard for uncompressed, raw PCM audio data.">WAV (Uncompressed)</span> | 🔴 100 | 🟢 99 | 🔵 200 | 🟢 Free (Public Domain) | 6505036 |
+| <span title="The universal standard for uncompressed, raw PCM audio data.">WAV (Uncompressed)</span> | 🔴 100 | 🟢 99 | 🔵 1000 | 🟢 Free (Public Domain) | 65536 |
 | <span title="The de facto open standard for compressed lossless audio. Note: most existing decoders only support up to 24-bit decoding">FLAC</span> | 🟡 60 | 🟢 90 | 🟢 95 | 🟢 Free (Permissive) | 8 |
 | <span title="Apple's native lossless format, open-sourced in 2011.">ALAC</span> | 🟠 65 | 🟠 60 | 🟢 95 | 🟢 Free (Permissive) | 8 |
 
