@@ -281,7 +281,7 @@ def get_text_color_for_bg(hex_color):
 # DATA FETCHING
 # ==============================================================================
 
-def get_data_for_categories(relevance_threshold=3, show_all_aliases=False):
+def get_data_for_categories(view_config, relevance_threshold=3, show_all_aliases=False):
     if not os.path.exists(DB_FILE):
         raise FileNotFoundError(f"Error: Database file '{DB_FILE}' not found.")
 
@@ -294,7 +294,7 @@ def get_data_for_categories(relevance_threshold=3, show_all_aliases=False):
 
     maker_subquery = "(SELECT GROUP_CONCAT(m.maker_name, ', ') FROM standard_makers sm JOIN makers m ON sm.maker_id = m.maker_id WHERE sm.standard_id = s.standard_id)"
 
-    for category_name, active_columns in VIEW_CONFIG.items():
+    for category_name, active_columns in view_config.items():
         if not active_columns: continue
 
         query = f"""
@@ -486,23 +486,26 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
-        all_category_data = get_data_for_categories(
-            relevance_threshold=args.relevance, 
-            show_all_aliases=args.show_aliases
-        )
-
         effective_view_config = {}
         if args.full_debug:
-            print("Running in --full-debug mode: showing all available columns.")
-            for category_name, rows in all_category_data.items():
-                if rows:
-                    effective_view_config[category_name] = list(rows[0].keys())
+            pass 
         elif args.full:
-            print("Running in --full mode: using VIEW_CONFIG_FULL.")
             effective_view_config = VIEW_CONFIG_FULL
         else:
             effective_view_config = VIEW_CONFIG
 
+        all_category_data = get_data_for_categories(
+            view_config=effective_view_config,
+            relevance_threshold=args.relevance, 
+            show_all_aliases=args.show_aliases
+        )
+
+        if args.full_debug:
+            print("Running in --full-debug mode: showing all available columns.")
+            effective_view_config = {}
+            for category_name, rows in all_category_data.items():
+                if rows:
+                    effective_view_config[category_name] = list(rows[0].keys())
 
         if 'csv' in args.format:
             is_single_file = 'single' in args.format
