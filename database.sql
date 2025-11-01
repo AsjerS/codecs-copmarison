@@ -122,7 +122,8 @@ INSERT INTO makers (maker_id, maker_name) VALUES
     (30, 'Sorenson Media'),
     (31, 'Sony'),
     (32, '3GPP'),
-    (33, '3GPP2');
+    (33, '3GPP2'),
+    (34, 'Matroska project');
 
 CREATE TABLE standard_makers (
     standard_id     INTEGER NOT NULL,
@@ -195,7 +196,7 @@ CREATE TABLE profiles (
 -- -----------------------------------------------------------------------------
 
 --- Standard: MP4 ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0100, 2, 2001);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0100, 3, 2001);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0100, 'MP4', 1), (0100, 'M4A', 0), (0100, 'M4P', 0), (0100, 'MP4P', 0);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0100, 11);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
@@ -204,7 +205,7 @@ INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_s
 --- Standard: MKV ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0101, 2, 2002);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0101, 'MKV', 1), (0101, 'MKA', 0), (0101, 'Matroska', 0);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0101, 4);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0101, 34);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES (0101, 'Default', 1, 'A flexible container that can hold virtually any track type, prized by enthusiasts.', 75, 1);
 
@@ -272,7 +273,7 @@ INSERT INTO profiles (
 ) VALUES (
     0200, 'Default', 2, 'The universal compatibility king for over a decade.',
     99, 100, 100, 100,
-    0, 10, 1, 4, 1
+    0, 10, 3, 4, 1
 );
 
 --- Standard: H.265 ---
@@ -286,7 +287,7 @@ INSERT INTO profiles (
 ) VALUES (
     0201, 'Default', 2, 'Dominant in premium 4K media, but with complex licensing.',
     75, 20, 80, 50,
-    0, 10, 3, 4, 1
+    0, 12, 3, 4, 1
 );
 
 --- Standard: VP9 ---
@@ -313,7 +314,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0203, 'Default', 2, 'The royalty-free future of web video, backed by major tech companies.',
-    70, 5, 60, 40,
+    70, 15, 60, 40,
     1, 12, 3, 4, 1
 );
 
@@ -638,7 +639,7 @@ INSERT INTO profiles (
 ) VALUES (
     0200, 'Lossless', 4, 'Lossless profile of H.264. Support for this specific profile is mostly software-based.',
     60, 120, 80, 42,
-    0, 10, 2, 4, 1
+    0, 10, 3, 4, 1
 );
 
 --- Profile: H.265 Lossless ---
@@ -649,7 +650,7 @@ INSERT INTO profiles (
 ) VALUES (
     0201, 'Lossless', 4, 'Lossless profile of H.265. Offers good compression with mostly software-based decoding.',
     50, 50, 60, 40,
-    0, 10, 3, 4, 1
+    0, 12, 3, 4, 1
 );
 
 --- Profile: VP9 Lossless ---
