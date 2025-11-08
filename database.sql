@@ -123,7 +123,10 @@ INSERT INTO makers (maker_id, maker_name) VALUES
     (31, 'Sony'),
     (32, '3GPP'),
     (33, '3GPP2'),
-    (34, 'Matroska project');
+    (34, 'Matroska project'),
+    (35, 'Intel'),
+    (36, 'SuperMac Technologies'),
+    (37, 'Skype');
 
 CREATE TABLE standard_makers (
     standard_id     INTEGER NOT NULL,
@@ -258,6 +261,13 @@ INSERT INTO standard_makers (standard_id, maker_id) VALUES (0108, 5);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES (0108, 'Default', 1, 'A specialized open container format for delivering immersive and object-based audio.', 20, 3);
 
+--- Standard: FLV (Flash Video) ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0109, 6, 2002);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0109, 'FLV', 1), (0109, 'Flash Video', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0109, 12);
+INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance, format_type_id)
+    VALUES (0109, 'Default', 1, 'The container format for Adobe Flash Player, which powered most web video in the mid-2000s.', 40, 3, 2);
+
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
 -- -----------------------------------------------------------------------------
@@ -384,7 +394,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0208, 'Default', 2, 'The original open-source video codec. Now a legacy format, superseded by VP8/VP9.',
-    40, 110, 120, 130,
+    20, 110, 120, 130,
     0, 8, 1, 4, 3
 );
 
@@ -398,7 +408,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0209, 'Default', 2, 'The original standard for digital video, famous for Video CDs (VCDs). Now completely obsolete due to its very poor compression.',
-    60, 200, 200, 300,
+    40, 200, 200, 300,
     0, 8, 1, 4, 3
 );
 
@@ -412,7 +422,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0210, 'Default', 2, 'Standardized for Blu-ray. A direct competitor to H.264, but saw less adoption and is now a legacy format.',
-    65, 110, 100, 105,
+    50, 110, 100, 105,
     0, 8, 1, 4, 3
 );
 
@@ -426,7 +436,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0211, 'Default', 2, 'A popular proprietary codec based on MPEG-4 Part 2. Common in older hardware players from the 2000s.',
-    70, 115, 110, 120,
+    40, 115, 110, 120,
     0, 8, 1, 4, 3
 );
 
@@ -440,7 +450,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0212, 'Default', 2, 'The open-source equivalent of DivX. Was the dominant format for video sharing online before the rise of H.264.',
-    70, 115, 110, 115,
+    40, 115, 110, 115,
     0, 8, 1, 4, 3
 );
 
@@ -454,7 +464,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0213, 'Default', 2, 'A dominant streaming video format in the late 90s/early 2000s, optimized for very low bitrates.',
-    40, 90, 90, 130,
+    20, 90, 90, 130,
     0, 8, 1, 4, 3
 );
 
@@ -468,7 +478,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0214, 'Default', 2, 'The predecessor to H.264 for video conferencing and mobile video. Optimized for low bitrates.',
-    50, 140, 140, 150,
+    30, 140, 140, 150,
     0, 8, 1, 4, 3
 );
 
@@ -482,7 +492,49 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
 ) VALUES (
     0215, 'Default', 2, 'The dominant video codec of the early web, used in Adobe Flash Player and early versions of YouTube.',
-    45, 120, 115, 125,
+    25, 120, 115, 125,
+    0, 8, 1, 4, 3
+);
+
+--- Standard: VP6 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0216, 6, 2003);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0216, 'VP6', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0216, 35);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0216, 'Default', 2, 'A highly efficient codec for its time, used in Flash Player 8 and later. It was the successor to Sorenson Spark for web video.',
+    30, 110, 115, 110,
+    1, 8, 1, 4, 3
+);
+
+--- Standard: Indeo ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0217, 6, 1992);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0217, 'Indeo', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0217, 35);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0217, 'Default', 2, 'One of the first mainstream video codecs for PCs, bundled with Windows. Widely used in 90s CD-ROM games.',
+    20, 150, 150, 180,
+    0, 8, 1, 4, 3
+);
+
+--- Standard: Cinepak ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0218, 6, 1991);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0218, 'Cinepak', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0218, 36);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0218, 'Default', 2, 'A dominant video codec of the early 90s, standard in early QuickTime and Windows. Famous for its very fast playback on slow CPUs.',
+    20, 50, 200, 200,
     0, 8, 1, 4, 3
 );
 
@@ -796,7 +848,7 @@ INSERT INTO profiles (
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     0605, 'Default', 6, 'A pioneering streaming audio format from the dial-up era, known for its high compression at low bitrates.',
-    40, 90, 95, 110,
+    20, 90, 95, 110,
     4, 16, '2', 3
 );
 
@@ -825,7 +877,7 @@ INSERT INTO profiles (
     latency_level_id, audio_bit_depth, max_audio_channels, relevance
 ) VALUES (
     0607, 'Default', 6, 'Sony''s proprietary audio codec, famous for the MiniDisc format. A major competitor to MP3 in its era.',
-    30, 95, 95, 90,
+    15, 95, 95, 90,
     4, 16, '2', 3
 );
 
@@ -851,6 +903,34 @@ INSERT INTO profiles (
 ) VALUES (
     0608, 'Wideband (AMR-WB)', 6, 'The "HD Voice" codec used in modern mobile networks (VoLTE). Offers significantly better speech quality than AMR-NB.',
     75, 250, 250, 25,
+    1, 16, '1', 3
+);
+
+--- Standard: Speex ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0609, 2, 2002);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0609, 'Speex', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0609, 4);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    0609, 'Default', 6, 'The predecessor to Opus from the Xiph.Org Foundation. Was the standard open-source speech codec for VoIP for many years.',
+    40, 200, 200, 20,
+    1, 16, '1', 3
+);
+
+--- Standard: SILK ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0610, 2, 2009);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0610, 'SILK', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0610, 38);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    0610, 'Default', 6, 'The speech codec developed for Skype, designed for voice clarity on unstable networks. Later merged with CELT to create Opus.',
+    40, 300, 300, 10,
     1, 16, '1', 3
 );
 
@@ -1081,7 +1161,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, relevance
 ) VALUES (
     0810, 'Default', 8, 'A technically superior successor to JPEG that failed to gain mainstream adoption. Now used in niche archival and medical imaging.',
-    30, 40, 50, 75, 80,
+    15, 40, 50, 75, 80,
     1, 16, 6, 3
 );
 
@@ -1324,6 +1404,20 @@ INSERT INTO profiles (
     1104, 'Default', 11, 'A low-bitrate DTS codec used for secondary audio (e.g., commentaries, menus) on Blu-ray discs.',
     70, 110, 100, 70,
     4, 16, '5.1', 2
+);
+
+--- Standard: AC-4 ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (1106, 6, 2014);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (1106, 'AC-4', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (1106, 6);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    1106, 'Default', 11, 'Dolby''s next-generation audio codec for broadcast and streaming, designed for efficiency and immersive audio features.',
+    40, 60, 70, 65,
+    4, 24, '7.1.4', 2
 );
 
 
