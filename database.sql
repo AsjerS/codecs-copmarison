@@ -265,8 +265,8 @@ INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_s
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0109, 6, 2002);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0109, 'FLV', 1), (0109, 'Flash Video', 0);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0109, 12);
-INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance, format_type_id)
-    VALUES (0109, 'Default', 1, 'The container format for Adobe Flash Player, which powered most web video in the mid-2000s.', 40, 3, 2);
+INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
+    VALUES (0109, 'Default', 1, 'The container format for Adobe Flash Player, which powered most web video in the mid-2000s.', 40, 3);
 
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
@@ -499,7 +499,7 @@ INSERT INTO profiles (
 --- Standard: VP6 ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0216, 6, 2003);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0216, 'VP6', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0216, 35);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0216, 1);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
@@ -923,7 +923,7 @@ INSERT INTO profiles (
 --- Standard: SILK ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0610, 2, 2009);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0610, 'SILK', 1);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0610, 38);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0610, 37);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
