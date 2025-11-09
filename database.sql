@@ -37,7 +37,8 @@ INSERT INTO licenses (license_id, license_name, hex_colour, emoji) VALUES
     (4, 'Royalty-Bearing', '#fbaa77', '🟠'),
     (5, 'Royalty-Bearing (Complex)', '#f8696b', '🔴'),
     (6, 'Proprietary', '#fbaa77', '🟠'),
-    (7, 'Free (Source Available)', '#ffeb84', '🟡');
+    (7, 'Free (Source Available)', '#ffeb84', '🟡'),
+    (8, 'Open Specification', '#b1d47f', '🟢');
 
 CREATE TABLE qualitative_ratings (
     rating_id       INTEGER PRIMARY KEY,
@@ -329,7 +330,7 @@ INSERT INTO profiles (
 );
 
 --- Standard: AV2 ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0204, 2, 2024);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0204, 2, 2025);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0204, 'AV2', 1);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0204, 5);
 INSERT INTO profiles (
@@ -741,7 +742,7 @@ INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_s
 --- Standard: ASS ---
 INSERT INTO standards (standard_id, license_id, release_year) VALUES (0501, 2, 2002);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0501, 'ASS', 1), (0501, 'SSA', 0);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0501, 4);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0501, 27);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, subtitle_is_image, relevance)
     VALUES (0501, 'Default', 5, 'A powerful text format offering advanced styling, positioning, and effects.', 70, 0, 1);
 
@@ -1102,15 +1103,15 @@ INSERT INTO standard_makers (standard_id, maker_id) VALUES (0806, 16);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support,
-    has_alpha_channel, color_bit_depth, color_model_id, relevance
+    has_alpha_channel, color_model_id, relevance
 ) VALUES (
     0806, 'Default', 8, 'An XML-based vector format. Performance and file size are not directly comparable to raster formats.',
     98,
-    1, 8, 8, 2
+    1, 8, 2
 );
 
 --- Standard: TIFF ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0807, 6, 1986);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0807, 8, 1986);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0807, 'TIFF', 1);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0807, 12);
 INSERT INTO profiles (
@@ -1124,7 +1125,7 @@ INSERT INTO profiles (
 );
 
 --- Standard: Camera RAW ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0808, 6, 2004);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0808, 8, 2004);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0808, 'DNG', 1), (0808, 'Camera RAW', 0);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0808, 12);
 INSERT INTO profiles (
@@ -1138,7 +1139,7 @@ INSERT INTO profiles (
 );
 
 --- Standard: BMP ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0809, 6, 1990);
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0809, 8, 1990);
 INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0809, 'BMP', 1), (0809, 'Bitmap', 0);
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0809, 3);
 INSERT INTO profiles (
