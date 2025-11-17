@@ -126,7 +126,8 @@ INSERT INTO makers (maker_id, maker_name) VALUES
     (34, 'Matroska project'),
     (35, 'Intel'),
     (36, 'SuperMac Technologies'),
-    (37, 'Skype');
+    (37, 'Skype'),
+    (38, 'Interactive Multimedia Association');
 
 CREATE TABLE standard_makers (
     standard_id     INTEGER NOT NULL,
@@ -267,6 +268,13 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0109, 'FLV', 
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0109, 12);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES (0109, 'Default', 1, 'The container format for Adobe Flash Player, which powered most web video in the mid-2000s.', 40, 3);
+
+--- Standard: WAV ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0110, 1, 1991);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0110, 'WAV', 1), (0110, 'WAVE', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0110, 3), (0110, 26);
+INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
+    VALUES (0110, 'Default', 1, 'An audio container format most commonly used to store uncompressed PCM audio.', 99, 1);
 
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
@@ -934,19 +942,32 @@ INSERT INTO profiles (
     1, 16, '1', 3
 );
 
+--- Standard: ADPCM ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0611, 1, 1992);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0611, 'ADPCM', 1), (0611, 'IMA ADPCM', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0611, 38);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    latency_level_id, audio_bit_depth, max_audio_channels, relevance
+) VALUES (
+    0611, 'Default', 6, 'A simple, very fast form of lossy compression. Widely used in 90s/2000s game consoles and as a compressed format within .wav files.',
+    50, 400, 400, 110,
+    1, 16, '2', 3
+);
+
 -- -----------------------------------------------------------------------------
 -- Category: Audio // Lossless (ID: 7)
 -- -----------------------------------------------------------------------------
 
---- Standard: WAV ---
-INSERT INTO standards (standard_id, license_id, release_year) VALUES (0700, 1, 1991);
-INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0700, 'WAV', 1), (0700, 'PCM', 0);
-INSERT INTO standard_makers (standard_id, maker_id) VALUES (0700, 3), (0700, 26);
+--- Standard: Uncompressed PCM ---
+INSERT INTO standards (standard_id, release_year) VALUES (0705, 1952);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0705, 'Uncompressed PCM', 1), (0705, 'LPCM', 0), (0705, 'PCM', 0);
 INSERT INTO profiles (
     standard_id, profile_name, category_id, notes,
     ecosystem_support, encoding_speed, decoding_speed, file_size_lossless, audio_bit_depth, max_audio_channels, latency_level_id, relevance
 ) VALUES (
-    0700, 'Uncompressed', 7, 'The universal standard for uncompressed, raw PCM audio data.',
+    0705, 'Default', 7, 'The raw, uncompressed representation of digital audio. Commonly stored in WAV or AIFF containers.',
     99, 1000, 1000, 100, 32, '65536', 4, 1
 );
 
