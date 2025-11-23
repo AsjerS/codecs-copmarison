@@ -195,7 +195,7 @@ CREATE TABLE profiles (
                                                 --^-- 1 = essential, 2 = common, 3 = all
 
     FOREIGN KEY (standard_id) REFERENCES standards (standard_id),
-    FOREIGN KEY (category_id) REFERENCES categories (category_id)
+    FOREIGN KEY (category_id) REFERENCES categories (category_id),
     FOREIGN KEY (color_model_id) REFERENCES color_models (color_model_id),
     FOREIGN KEY (latency_level_id) REFERENCES level_ratings (level_id),
     FOREIGN KEY (editing_performance_id) REFERENCES qualitative_ratings (rating_id)
@@ -297,119 +297,6 @@ INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0110, 'WAV', 
 INSERT INTO standard_makers (standard_id, maker_id) VALUES (0110, 3), (0110, 26);
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES (0110, 'Default', 1, 'An audio container format most commonly used to store uncompressed PCM audio.', 99, 1);
-
-
---- !!!!!!!!!!!! WARNING: STILL INCOMPLETE, SHOULD NOT BE USED IN FINAL TABLE YET !!!!!!!!!!!! ---
-INSERT INTO container_codec_support (container_id, codec_id, support_level_id) VALUES
-    -- MP4 (0100)
-    (0100, 0200, 1), -- H.264 (Official)
-    (0100, 0201, 1), -- H.265 (Official)
-    (0100, 0203, 1), -- AV1 (Official)
-    (0100, 0205, 1), -- MPEG-2 (Official)
-    (0100, 0210, 1), -- MPEG-4 Part 2 (Official)
-    (0100, 0304, 2), -- DNxHD/DNxHR (Common)
-    (0100, 0602, 1), -- AAC (Official)
-    (0100, 0702, 1), -- ALAC (Official)
-    (0100, 0701, 1), -- FLAC (Official)
-    (0100, 0600, 1), -- Opus (Official)
-    (0100, 1100, 1), -- Dolby Digital/AC-3 (Official)
-    (0100, 1101, 1), -- Dolby TrueHD (Official)
-    (0100, 1102, 2), -- DTS Core (Common)
-    (0100, 1103, 2), -- DTS-HD (Common)
-    (0100, 0601, 2), -- MP3 (Common)
-    (0100, 0502, 1), -- WebVTT (Official)
-    (0100, 0503, 2), -- VobSub (Common)
-    (0100, 0504, 2), -- PGS (Common)
-    (0100, 0603, 3), -- Vorbis (Non-Standard)
-
-    -- MKV (0101)
-    (0101, 0200, 2), -- H.264 (Common)
-    (0101, 0201, 2), -- H.265 (Common)
-    (0101, 0202, 2), -- VP9 (Common)
-    (0101, 0203, 2), -- AV1 (Common)
-    (0101, 0205, 2), -- MPEG-2 (Common)
-    (0101, 0206, 2), -- VP8 (Common)
-    (0101, 0207, 2), -- Theora (Common)
-    (0101, 0210, 2), -- DivX (Common)
-    (0101, 0211, 2), -- Xvid (Common)
-    (0101, 0401, 2), -- FFV1 (Common)
-    (0101, 0300, 2), -- ProRes (Common)
-    (0101, 0600, 2), -- Opus (Common)
-    (0101, 0603, 2), -- Vorbis (Common)
-    (0101, 0701, 2), -- FLAC (Common)
-    (0101, 0601, 2), -- MP3 (Common)
-    (0101, 0602, 2), -- AAC (Common)
-    (0101, 1100, 2), -- Dolby Digital/AC-3 (Common)
-    (0101, 1101, 2), -- Dolby TrueHD (Common)
-    (0101, 1102, 2), -- DTS Core (Common)
-    (0101, 1103, 2), -- DTS-HD MA (Common)
-    (0101, 0705, 2), -- Uncompressed PCM (Common)
-    (0101, 0500, 2), -- SRT (Common)
-    (0101, 0501, 2), -- ASS/SSA (Common)
-    (0101, 0503, 2), -- VobSub (Common)
-    (0101, 0504, 2), -- PGS (Common)
-
-    -- WebM (0102)
-    (0102, 0206, 1), -- VP8 (Official)
-    (0102, 0202, 1), -- VP9 (Official)
-    (0102, 0203, 1), -- AV1 (Official)
-    (0102, 0603, 1), -- Vorbis (Official)
-    (0102, 0600, 1), -- Opus (Official)
-    (0102, 0502, 1), -- WebVTT (Official)
-
-    -- MOV (0103)
-    (0103, 0300, 1), -- ProRes (Official)
-    (0103, 0705, 1), -- Uncompressed PCM (Official)
-    (0103, 0602, 1), -- AAC (Official)
-    (0103, 0702, 1), -- ALAC (Official)
-    (0103, 0218, 1), -- Cinepak (Official)
-    (0103, 0303, 1), -- MJPEG (Official)
-    (0103, 0214, 1), -- Sorenson Spark (Official)
-    (0103, 0200, 2), -- H.264 (Common)
-    (0103, 0201, 2), -- H.265 (Common)
-    (0103, 0301, 2), -- DNxHD/DNxHR (Common)
-    (0103, 0302, 2), -- CineForm (Common)
-
-    -- AVI (0104)
-    (0104, 0210, 2), -- DivX (Common)
-    (0104, 0211, 2), -- Xvid (Common)
-    (0104, 0217, 1), -- Indeo (Official)
-    (0104, 0218, 1), -- Cinepak (Official)
-    (0104, 0601, 1), -- MP3 (Official)
-    (0104, 0705, 1), -- Uncompressed PCM (Official)
-    (0104, 0611, 1), -- ADPCM (Official)
-    (0104, 0303, 2), -- MJPEG (Common)
-    (0104, 0200, 3), -- H.264 (Non-Standard)
-
-    -- Ogg (0105)
-    (0105, 0207, 1), -- Theora (Official)
-    (0105, 0603, 1), -- Vorbis (Official)
-    (0105, 0600, 1), -- Opus (Official)
-    (0105, 0701, 1), -- FLAC (Official)
-    (0105, 0609, 1), -- Speex (Official)
-    
-    -- 3GP (0106)
-    (0106, 0213, 1), -- H.263 (Official)
-    (0106, 0210, 1), -- MPEG-4 Part 2 (Official)
-    (0106, 0608, 1), -- AMR (Official)
-    (0106, 0602, 1), -- AAC (Official)
-
-    -- 3G2 (0107)
-    (0107, 0213, 1), -- H.263 (Official)
-    (0107, 0210, 1), -- MPEG-4 Part 2 (Official)
-    (0107, 0608, 1), -- AMR (Official)
-    (0107, 0602, 1), -- AAC (Official)
-    
-    -- FLV (0109)
-    (0109, 0214, 1), -- Sorenson Spark (Official)
-    (0109, 0216, 1), -- VP6 (Official)
-    (0109, 0200, 1), -- H.264 (Official)
-    (0109, 0601, 1), -- MP3 (Official)
-    (0109, 0602, 1), -- AAC (Official)
-    
-    -- WAV (0110)
-    (0110, 0705, 1), -- Uncompressed PCM (Official)
-    (0110, 0611, 1); -- ADPCM (Official)
 
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
@@ -1576,5 +1463,148 @@ INSERT INTO profiles (
     4, 24, '7.1.4', 2
 );
 
+--- !!!!!!!!!!!! WARNING: STILL INCOMPLETE, SHOULD NOT BE USED IN FINAL TABLE YET !!!!!!!!!!!! ---
+INSERT INTO container_codec_support (container_id, codec_id, support_level_id) VALUES
+    -- MP4 (0100)
+    (0100, 0200, 1), -- H.264
+    (0100, 0201, 1), -- H.265
+    (0100, 0203, 1), -- AV1
+    (0100, 0206, 1), -- MPEG-2
+    (0100, 0211, 1), -- DivX (MPEG-4 Part 2)
+    (0100, 0212, 1), -- Xvid (MPEG-4 Part 2)
+    (0100, 0209, 1), -- MPEG-1
+    (0100, 0210, 1), -- VC-1
+    (0100, 0303, 1), -- MJPEG
+    (0100, 0602, 1), -- AAC
+    (0100, 0702, 1), -- ALAC
+    (0100, 0701, 1), -- FLAC
+    (0100, 0600, 1), -- Opus
+    (0100, 1100, 1), -- Dolby Digital
+    (0100, 1101, 1), -- Dolby TrueHD
+    (0100, 1102, 1), -- DTS
+    (0100, 1103, 1), -- DTS-HD MA
+    (0100, 1106, 1), -- AC-4
+    (0100, 0601, 1), -- MP3
+    (0100, 0502, 1), -- WebVTT
+    (0100, 0202, 3), -- VP9
+    (0100, 0207, 3), -- VP8
+    (0100, 0603, 3), -- Vorbis
+
+    -- MKV (0101)
+    (0101, 0200, 2), -- H.264
+    (0101, 0201, 2), -- H.265
+    (0101, 0202, 2), -- VP9
+    (0101, 0203, 2), -- AV1
+    (0101, 0207, 2), -- VP8
+    (0101, 0208, 2), -- Theora
+    (0101, 0206, 2), -- MPEG-2
+    (0101, 0209, 2), -- MPEG-1
+    (0101, 0210, 2), -- VC-1
+    (0101, 0211, 2), -- DivX
+    (0101, 0212, 2), -- Xvid
+    (0101, 0213, 3), -- RealVideo
+    (0101, 0300, 2), -- ProRes
+    (0101, 0301, 2), -- DNxHR
+    (0101, 0401, 2), -- FFV1
+    (0101, 0600, 2), -- Opus
+    (0101, 0603, 2), -- Vorbis
+    (0101, 0701, 2), -- FLAC
+    (0101, 0601, 2), -- MP3
+    (0101, 0602, 2), -- AAC
+    (0101, 0702, 2), -- ALAC
+    (0101, 0705, 2), -- PCM
+    (0101, 1100, 2), -- Dolby Digital
+    (0101, 1101, 2), -- Dolby TrueHD
+    (0101, 1102, 2), -- DTS
+    (0101, 1103, 2), -- DTS-HD MA
+    (0101, 0606, 2), -- WMA
+    (0101, 0500, 2), -- SRT
+    (0101, 0501, 2), -- ASS
+    (0101, 0503, 2), -- VobSub
+    (0101, 0504, 2), -- PGS
+    (0101, 0502, 2), -- WebVTT
+
+    -- WebM (0102)
+    (0102, 0207, 1), -- VP8
+    (0102, 0202, 1), -- VP9
+    (0102, 0203, 1), -- AV1
+    (0102, 0603, 1), -- Vorbis
+    (0102, 0600, 1), -- Opus
+    (0102, 0502, 1), -- WebVTT
+
+    -- MOV (0103)
+    (0103, 0300, 1), -- ProRes
+    (0103, 0301, 1), -- DNxHR
+    (0103, 0302, 1), -- CineForm
+    (0103, 0200, 1), -- H.264
+    (0103, 0201, 1), -- H.265
+    (0103, 0206, 1), -- MPEG-2
+    (0103, 0218, 1), -- Cinepak
+    (0103, 0303, 1), -- MJPEG
+    (0103, 0705, 1), -- PCM
+    (0103, 0602, 1), -- AAC
+    (0103, 0702, 1), -- ALAC
+    (0103, 0601, 1), -- MP3
+    (0103, 0202, 3), -- VP9
+
+    -- AVI (0104)
+    (0104, 0211, 1), -- DivX
+    (0104, 0212, 1), -- Xvid
+    (0104, 0217, 1), -- Indeo
+    (0104, 0218, 1), -- Cinepak
+    (0104, 0303, 1), -- MJPEG
+    (0104, 0304, 1), -- DNxHD
+    (0104, 0401, 2), -- FFV1
+    (0104, 0400, 1), -- Uncompressed Video
+    (0104, 0601, 1), -- MP3
+    (0104, 0705, 1), -- PCM
+    (0104, 0611, 1), -- ADPCM
+    (0104, 0606, 3), -- WMA
+    (0104, 0200, 3), -- H.264
+
+    -- Ogg (0105)
+    (0105, 0208, 1), -- Theora
+    (0105, 0603, 1), -- Vorbis
+    (0105, 0600, 1), -- Opus
+    (0105, 0701, 1), -- FLAC
+    (0105, 0609, 1), -- Speex
+    (0105, 0705, 1), -- PCM
+    (0105, 0203, 3), -- AV1
+
+    -- 3GP (0106)
+    (0106, 0214, 1), -- H.263
+    (0106, 0211, 1), -- DivX
+    (0106, 0200, 1), -- H.264
+    (0106, 0608, 1), -- AMR
+    (0106, 0602, 1), -- AAC
+
+    -- 3G2 (0107)
+    (0107, 0214, 1), -- H.263
+    (0107, 0211, 1), -- DivX
+    (0107, 0200, 1), -- H.264
+    (0107, 0608, 1), -- AMR
+    (0107, 0602, 1), -- AAC
+    (0107, 0606, 3), -- WMA
+
+    -- IAMF (0108)
+    (0108, 0602, 1), -- AAC
+    (0108, 0600, 1), -- Opus
+    (0108, 0701, 1), -- FLAC
+    (0108, 0705, 1), -- PCM
+
+    -- FLV (0109)
+    (0109, 0215, 1), -- Sorenson Spark
+    (0109, 0216, 1), -- VP6
+    (0109, 0200, 1), -- H.264
+    (0109, 0601, 1), -- MP3
+    (0109, 0602, 1), -- AAC
+    (0109, 0705, 1), -- PCM
+    (0109, 0611, 1), -- ADPCM
+
+    -- WAV (0110)
+    (0110, 0705, 1), -- PCM
+    (0110, 0611, 1), -- ADPCM
+    (0110, 0601, 3), -- MP3
+    (0110, 0606, 3); -- WMA
 
 COMMIT;
