@@ -298,6 +298,13 @@ INSERT INTO standard_makers (standard_id, maker_id) VALUES (0110, 3), (0110, 26)
 INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
     VALUES (0110, 'Default', 1, 'An audio container format most commonly used to store uncompressed PCM audio.', 99, 1);
 
+--- Standard: AIFF ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0111, 2, 1988);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0111, 'AIFF', 1), (0111, 'Audio Interchange File Format', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0111, 2);
+INSERT INTO profiles (standard_id, profile_name, category_id, notes, ecosystem_support, relevance)
+    VALUES (0111, 'Default', 1, 'Apple''s standard uncompressed audio container, functionally similar to WAV. Widely used in professional audio on macOS.', 90, 2);
+
 -- -----------------------------------------------------------------------------
 -- Category: Video // Delivery (ID: 2)
 -- -----------------------------------------------------------------------------
@@ -1605,6 +1612,10 @@ INSERT INTO container_codec_support (container_id, codec_id, support_level_id) V
     (0110, 0705, 1), -- PCM
     (0110, 0611, 1), -- ADPCM
     (0110, 0601, 3), -- MP3
-    (0110, 0606, 3); -- WMA
+    (0110, 0606, 3), -- WMA
+
+    -- AIFF (0111)
+    (0111, 0705, 1), -- PCM
+    (0111, 0705, 1); -- ADPCM
 
 COMMIT;
