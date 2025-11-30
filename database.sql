@@ -1616,6 +1616,6 @@ INSERT INTO container_codec_support (container_id, codec_id, support_level_id) V
 
     -- AIFF (0111)
     (0111, 0705, 1), -- PCM
-    (0111, 0705, 1); -- ADPCM
+    (0111, 0611, 1); -- ADPCM
 
 COMMIT;
