@@ -128,7 +128,8 @@ INSERT INTO makers (maker_id, maker_name) VALUES
     (35, 'Intel'),
     (36, 'SuperMac Technologies'),
     (37, 'Skype'),
-    (38, 'Interactive Multimedia Association');
+    (38, 'Interactive Multimedia Association'),
+    (39, 'Epic Games');
 
 CREATE TABLE standard_makers (
     standard_id     INTEGER NOT NULL,
@@ -573,6 +574,20 @@ INSERT INTO profiles (
     0218, 'Default', 2, 'A dominant video codec of the early 90s, standard in early QuickTime and Windows. Famous for its very fast playback on slow CPUs.',
     20, 50, 200, 200,
     0, 8, 1, 4, 3
+);
+
+--- Standard: Bink Video ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0219, 6, 1999);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0219, 'Bink Video', 1), (0219, 'bik', 0);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0219, 39);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0219, 'Default', 2, 'Made for video in games, with extremely fast CPU decoding to leave resources for the game itself. Decoders were almost always bundled with games it was used in.',
+    10, 80, 200, 200,
+    1, 8, 1, 4, 3
 );
 
 -- -----------------------------------------------------------------------------
