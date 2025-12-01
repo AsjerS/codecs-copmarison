@@ -690,6 +690,20 @@ INSERT INTO profiles (
     1, 16, 3, 1, 2
 );
 
+--- Standard: JPEG XS ---
+INSERT INTO standards (standard_id, license_id, release_year) VALUES (0306, 3, 2019);
+INSERT INTO format_aliases (standard_id, name, is_primary) VALUES (0306, 'JPEG XS', 1);
+INSERT INTO standard_makers (standard_id, maker_id) VALUES (0306, 11);
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, file_size_lossy,
+    has_alpha_channel, color_bit_depth, color_model_id, editing_performance_id, relevance
+) VALUES (
+    0306, 'Default', 3, 'Designed for live broadcast and Video-over-IP. Offers ultra-low latency/computations and visually lossless quality with low generation loss.',
+    20, 150,
+    1, 12, 3, 1, 3
+);
+
 -- -----------------------------------------------------------------------------
 -- Category: Video // Archival (ID: 4)
 -- -----------------------------------------------------------------------------
@@ -1254,7 +1268,7 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, relevance
 ) VALUES (
     0802, 'Animated', 9, 'Offers smaller file sizes than GIF with better color and alpha support.',
-    97, 90, 25, 45,
+    97, 90, 25, 85,
     1, 8, 4, 1
 );
 
@@ -1265,8 +1279,19 @@ INSERT INTO profiles (
     has_alpha_channel, color_bit_depth, color_model_id, relevance
 ) VALUES (
     0803, 'Animated', 9, 'State-of-the-art compression for animations, offering massive savings over GIF.',
-    85, 70, 15, 40,
+    85, 70, 20, 80,
     1, 12, 3, 1
+);
+
+--- Profile: Animated JPEG XL ---
+INSERT INTO profiles (
+    standard_id, profile_name, category_id, notes,
+    ecosystem_support, encoding_speed, decoding_speed, file_size_lossy, file_size_lossless,
+    has_alpha_channel, color_bit_depth, color_model_id, relevance
+) VALUES (
+    0804, 'Animated', 9, 'A technically superior next-gen format, but its adoption was stalled by browser politics.',
+    10, 85, 100, 30, 50,
+    1, 16, 7, 3
 );
 
 -- -----------------------------------------------------------------------------
